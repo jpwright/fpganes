@@ -1,0 +1,2105 @@
+// --------------------------------------------------------------------
+// Copyright (c) 2005 by Terasic Technologies Inc. 
+// --------------------------------------------------------------------
+//
+// Permission:
+//
+//   Terasic grants permission to use and modify this code for use
+//   in synthesis for all Terasic Development Boards and Altera Development 
+//   Kits made by Terasic.  Other use of this code, including the selling 
+//   ,duplication, or modification of any portion is strictly prohibited.
+//
+// Disclaimer:
+//
+//   This VHDL/Verilog or C/C++ source code is intended as a design reference
+//   which illustrates how these types of functions can be implemented.
+//   It is the user's responsibility to verify their design for
+//   consistency and functionality through the use of formal
+//   verification methods.  Terasic provides no warranty regarding the use 
+//   or functionality of this code.
+//
+// --------------------------------------------------------------------
+//           
+//                     Terasic Technologies Inc
+//                     356 Fu-Shin E. Rd Sec. 1. JhuBei City,
+//                     HsinChu County, Taiwan
+//                     302
+//
+//                     web: http://www.terasic.com/
+//                     email: support@terasic.com
+//
+// --------------------------------------------------------------------
+// Major Functions:	DE2 TV Box
+// --------------------------------------------------------------------
+//
+// Revision History :
+// --------------------------------------------------------------------
+//   Ver  :| Author            :| Mod. Date :| Changes Made:
+//   V1.0 :| Joe Yang	       :| 05/07/05  :| Initial Revision
+//   V1.1 :| Johnny Chen       :| 05/09/05  :| Changed YCbCr2RGB Block,
+//											   RGB output 8 Bits => 10 Bits
+//   V1.2 :| Johnny Chen	   :| 05/10/05  :| H_SYNC & V_SYNC Timing fixed.
+//   V1.3 :| Johnny Chen       :| 05/11/16  :| Added FLASH Address FL_ADDR[21:20]
+//   V1.4 :| Joe Yang	       :| 06/07/20  :| Modify Output Color
+//	 V2.0 :| Johnny Chen	   :| 06/11/20	:| New Version for DE2 v2.X PCB.
+// --------------------------------------------------------------------
+
+module DE2_TV
+	(
+		////////////////////	Clock Input	 	////////////////////	 
+		OSC_27,							//	27 MHz
+		OSC_50,							//	50 MHz
+		EXT_CLOCK,						//	External Clock
+		////////////////////	Push Button		////////////////////
+		KEY,							//	Button[3:0]
+		////////////////////	DPDT Switch		////////////////////
+		DPDT_SW,						//	DPDT Switch[17:0]
+		////////////////////	7-SEG Dispaly	////////////////////
+		HEX0,							//	Seven Segment Digital 0
+		HEX1,							//	Seven Segment Digital 1
+		HEX2,							//	Seven Segment Digital 2
+		HEX3,							//	Seven Segment Digital 3
+		HEX4,							//	Seven Segment Digital 4
+		HEX5,							//	Seven Segment Digital 5
+		HEX6,							//	Seven Segment Digital 6
+		HEX7,							//	Seven Segment Digital 7
+		////////////////////////	LED		////////////////////////
+		LED_GREEN,						//	LED Green[8:0]
+		LED_RED,						//	LED Red[17:0]
+		////////////////////////	UART	////////////////////////
+		UART_TXD,						//	UART Transmitter
+		UART_RXD,						//	UART Receiver
+		////////////////////////	IRDA	////////////////////////
+		IRDA_TXD,						//	IRDA Transmitter
+		IRDA_RXD,						//	IRDA Receiver
+		/////////////////////	SDRAM Interface		////////////////
+		DRAM_DQ,						//	SDRAM Data bus 16 Bits
+		DRAM_ADDR,						//	SDRAM Address bus 12 Bits
+		DRAM_LDQM,						//	SDRAM Low-byte Data Mask 
+		DRAM_UDQM,						//	SDRAM High-byte Data Mask
+		DRAM_WE_N,						//	SDRAM Write Enable
+		DRAM_CAS_N,						//	SDRAM Column Address Strobe
+		DRAM_RAS_N,						//	SDRAM Row Address Strobe
+		DRAM_CS_N,						//	SDRAM Chip Select
+		DRAM_BA_0,						//	SDRAM Bank Address 0
+		DRAM_BA_1,						//	SDRAM Bank Address 0
+		DRAM_CLK,						//	SDRAM Clock
+		DRAM_CKE,						//	SDRAM Clock Enable
+		////////////////////	Flash Interface		////////////////
+		FL_DQ,							//	FLASH Data bus 8 Bits
+		FL_ADDR,						//	FLASH Address bus 22 Bits
+		FL_WE_N,						//	FLASH Write Enable
+		FL_RST_N,						//	FLASH Reset
+		FL_OE_N,						//	FLASH Output Enable
+		FL_CE_N,						//	FLASH Chip Enable
+		////////////////////	SRAM Interface		////////////////
+		SRAM_DQ,						//	SRAM Data bus 16 Bits
+		SRAM_ADDR,						//	SRAM Adress bus 18 Bits
+		SRAM_UB_N,						//	SRAM High-byte Data Mask 
+		SRAM_LB_N,						//	SRAM Low-byte Data Mask 
+		SRAM_WE_N,						//	SRAM Write Enable
+		SRAM_CE_N,						//	SRAM Chip Enable
+		SRAM_OE_N,						//	SRAM Output Enable
+		////////////////////	ISP1362 Interface	////////////////
+		OTG_DATA,						//	ISP1362 Data bus 16 Bits
+		OTG_ADDR,						//	ISP1362 Address 2 Bits
+		OTG_CS_N,						//	ISP1362 Chip Select
+		OTG_RD_N,						//	ISP1362 Write
+		OTG_WR_N,						//	ISP1362 Read
+		OTG_RST_N,						//	ISP1362 Reset
+		OTG_FSPEED,						//	USB Full Speed,	0 = Enable, Z = Disable
+		OTG_LSPEED,						//	USB Low Speed, 	0 = Enable, Z = Disable
+		OTG_INT0,						//	ISP1362 Interrupt 0
+		OTG_INT1,						//	ISP1362 Interrupt 1
+		OTG_DREQ0,						//	ISP1362 DMA Request 0
+		OTG_DREQ1,						//	ISP1362 DMA Request 1
+		OTG_DACK0_N,					//	ISP1362 DMA Acknowledge 0
+		OTG_DACK1_N,					//	ISP1362 DMA Acknowledge 1
+		////////////////////	LCD Module 16X2		////////////////
+		LCD_ON,							//	LCD Power ON/OFF
+		LCD_BLON,						//	LCD Back Light ON/OFF
+		LCD_RW,							//	LCD Read/Write Select, 0 = Write, 1 = Read
+		LCD_EN,							//	LCD Enable
+		LCD_RS,							//	LCD Command/Data Select, 0 = Command, 1 = Data
+		LCD_DATA,						//	LCD Data bus 8 bits
+		////////////////////	SD_Card Interface	////////////////
+		SD_DAT,							//	SD Card Data
+		SD_DAT3,						//	SD Card Data 3
+		SD_CMD,							//	SD Card Command Signal
+		SD_CLK,							//	SD Card Clock
+		////////////////////	USB JTAG link	////////////////////
+		TDI,  							// CPLD -> FPGA (data in)
+		TCK,  							// CPLD -> FPGA (clk)
+		TCS,  							// CPLD -> FPGA (CS)
+	    TDO,  							// FPGA -> CPLD (data out)
+		////////////////////	I2C		////////////////////////////
+		I2C_SDAT,						//	I2C Data
+		I2C_SCLK,						//	I2C Clock
+		////////////////////	PS2		////////////////////////////
+		PS2_DAT,						//	PS2 Data
+		PS2_CLK,						//	PS2 Clock
+		////////////////////	VGA		////////////////////////////
+		VGA_CLK,   						//	VGA Clock
+		VGA_HS,							//	VGA H_SYNC
+		VGA_VS,							//	VGA V_SYNC
+		VGA_BLANK,						//	VGA BLANK
+		VGA_SYNC,						//	VGA SYNC
+		VGA_R,   						//	VGA Red[9:0]
+		VGA_G,	 						//	VGA Green[9:0]
+		VGA_B,  						//	VGA Blue[9:0]
+		////////////	Ethernet Interface	////////////////////////
+		ENET_DATA,						//	DM9000A DATA bus 16Bits
+		ENET_CMD,						//	DM9000A Command/Data Select, 0 = Command, 1 = Data
+		ENET_CS_N,						//	DM9000A Chip Select
+		ENET_WR_N,						//	DM9000A Write
+		ENET_RD_N,						//	DM9000A Read
+		ENET_RST_N,						//	DM9000A Reset
+		ENET_INT,						//	DM9000A Interrupt
+		ENET_CLK,						//	DM9000A Clock 25 MHz
+		////////////////	Audio CODEC		////////////////////////
+		AUD_ADCLRCK,					//	Audio CODEC ADC LR Clock
+		AUD_ADCDAT,						//	Audio CODEC ADC Data
+		AUD_DACLRCK,					//	Audio CODEC DAC LR Clock
+		AUD_DACDAT,						//	Audio CODEC DAC Data
+		AUD_BCLK,						//	Audio CODEC Bit-Stream Clock
+		AUD_XCK,						//	Audio CODEC Chip Clock
+		////////////////	TV Decoder		////////////////////////
+		TD_DATA,    					//	TV Decoder Data bus 8 bits
+		TD_HS,							//	TV Decoder H_SYNC
+		TD_VS,							//	TV Decoder V_SYNC
+		TD_RESET,						//	TV Decoder Reset
+		TD_CLK,							//	TV Decoder Line Locked Clock
+		////////////////////	GPIO	////////////////////////////
+		GPIO_0,							//	GPIO Connection 0
+		GPIO_1							//	GPIO Connection 1
+	);
+
+////////////////////////	Clock Input	 	////////////////////////
+input			OSC_27;					//	27 MHz
+input			OSC_50;					//	50 MHz
+input			EXT_CLOCK;				//	External Clock
+////////////////////////	Push Button		////////////////////////
+input	[3:0]	KEY;					//	Button[3:0]
+////////////////////////	DPDT Switch		////////////////////////
+input	[17:0]	DPDT_SW;				//	DPDT Switch[17:0]
+////////////////////////	7-SEG Dispaly	////////////////////////
+output	[6:0]	HEX0;					//	Seven Segment Digital 0
+output	[6:0]	HEX1;					//	Seven Segment Digital 1
+output	[6:0]	HEX2;					//	Seven Segment Digital 2
+output	[6:0]	HEX3;					//	Seven Segment Digital 3
+output	[6:0]	HEX4;					//	Seven Segment Digital 4
+output	[6:0]	HEX5;					//	Seven Segment Digital 5
+output	[6:0]	HEX6;					//	Seven Segment Digital 6
+output	[6:0]	HEX7;					//	Seven Segment Digital 7
+////////////////////////////	LED		////////////////////////////
+output	[8:0]	LED_GREEN;				//	LED Green[8:0]
+output	[17:0]	LED_RED;				//	LED Red[17:0]
+////////////////////////////	UART	////////////////////////////
+output			UART_TXD;				//	UART Transmitter
+input			UART_RXD;				//	UART Receiver
+////////////////////////////	IRDA	////////////////////////////
+output			IRDA_TXD;				//	IRDA Transmitter
+input			IRDA_RXD;				//	IRDA Receiver
+///////////////////////		SDRAM Interface	////////////////////////
+inout	[15:0]	DRAM_DQ;				//	SDRAM Data bus 16 Bits
+output	[11:0]	DRAM_ADDR;				//	SDRAM Address bus 12 Bits
+output			DRAM_LDQM;				//	SDRAM Low-byte Data Mask 
+output			DRAM_UDQM;				//	SDRAM High-byte Data Mask
+output			DRAM_WE_N;				//	SDRAM Write Enable
+output			DRAM_CAS_N;				//	SDRAM Column Address Strobe
+output			DRAM_RAS_N;				//	SDRAM Row Address Strobe
+output			DRAM_CS_N;				//	SDRAM Chip Select
+output			DRAM_BA_0;				//	SDRAM Bank Address 0
+output			DRAM_BA_1;				//	SDRAM Bank Address 0
+output			DRAM_CLK;				//	SDRAM Clock
+output			DRAM_CKE;				//	SDRAM Clock Enable
+////////////////////////	Flash Interface	////////////////////////
+inout	[7:0]	FL_DQ;					//	FLASH Data bus 8 Bits
+output	[21:0]	FL_ADDR;				//	FLASH Address bus 22 Bits
+output			FL_WE_N;				//	FLASH Write Enable
+output			FL_RST_N;				//	FLASH Reset
+output			FL_OE_N;				//	FLASH Output Enable
+output			FL_CE_N;				//	FLASH Chip Enable
+////////////////////////	SRAM Interface	////////////////////////
+inout	[15:0]	SRAM_DQ;				//	SRAM Data bus 16 Bits
+output	[17:0]	SRAM_ADDR;				//	SRAM Address bus 18 Bits
+output			SRAM_UB_N;				//	SRAM High-byte Data Mask 
+output			SRAM_LB_N;				//	SRAM Low-byte Data Mask 
+output			SRAM_WE_N;				//	SRAM Write Enable
+output			SRAM_CE_N;				//	SRAM Chip Enable
+output			SRAM_OE_N;				//	SRAM Output Enable
+////////////////////	ISP1362 Interface	////////////////////////
+inout	[15:0]	OTG_DATA;				//	ISP1362 Data bus 16 Bits
+output	[1:0]	OTG_ADDR;				//	ISP1362 Address 2 Bits
+output			OTG_CS_N;				//	ISP1362 Chip Select
+output			OTG_RD_N;				//	ISP1362 Write
+output			OTG_WR_N;				//	ISP1362 Read
+output			OTG_RST_N;				//	ISP1362 Reset
+output			OTG_FSPEED;				//	USB Full Speed,	0 = Enable, Z = Disable
+output			OTG_LSPEED;				//	USB Low Speed, 	0 = Enable, Z = Disable
+input			OTG_INT0;				//	ISP1362 Interrupt 0
+input			OTG_INT1;				//	ISP1362 Interrupt 1
+input			OTG_DREQ0;				//	ISP1362 DMA Request 0
+input			OTG_DREQ1;				//	ISP1362 DMA Request 1
+output			OTG_DACK0_N;			//	ISP1362 DMA Acknowledge 0
+output			OTG_DACK1_N;			//	ISP1362 DMA Acknowledge 1
+////////////////////	LCD Module 16X2	////////////////////////////
+inout	[7:0]	LCD_DATA;				//	LCD Data bus 8 bits
+output			LCD_ON;					//	LCD Power ON/OFF
+output			LCD_BLON;				//	LCD Back Light ON/OFF
+output			LCD_RW;					//	LCD Read/Write Select, 0 = Write, 1 = Read
+output			LCD_EN;					//	LCD Enable
+output			LCD_RS;					//	LCD Command/Data Select, 0 = Command, 1 = Data
+////////////////////	SD Card Interface	////////////////////////
+inout			SD_DAT;					//	SD Card Data
+inout			SD_DAT3;				//	SD Card Data 3
+inout			SD_CMD;					//	SD Card Command Signal
+output			SD_CLK;					//	SD Card Clock
+////////////////////////	I2C		////////////////////////////////
+inout			I2C_SDAT;				//	I2C Data
+output			I2C_SCLK;				//	I2C Clock
+////////////////////////	PS2		////////////////////////////////
+input		 	PS2_DAT;				//	PS2 Data
+input			PS2_CLK;				//	PS2 Clock
+////////////////////	USB JTAG link	////////////////////////////
+input  			TDI;					// CPLD -> FPGA (data in)
+input  			TCK;					// CPLD -> FPGA (clk)
+input  			TCS;					// CPLD -> FPGA (CS)
+output 			TDO;					// FPGA -> CPLD (data out)
+////////////////////////	VGA			////////////////////////////
+output			VGA_CLK;   				//	VGA Clock
+output			VGA_HS;					//	VGA H_SYNC
+output			VGA_VS;					//	VGA V_SYNC
+output			VGA_BLANK;				//	VGA BLANK
+output			VGA_SYNC;				//	VGA SYNC
+output	[9:0]	VGA_R;   				//	VGA Red[9:0]
+output	[9:0]	VGA_G;	 				//	VGA Green[9:0]
+output	[9:0]	VGA_B;   				//	VGA Blue[9:0]
+////////////////	Ethernet Interface	////////////////////////////
+inout	[15:0]	ENET_DATA;				//	DM9000A DATA bus 16Bits
+output			ENET_CMD;				//	DM9000A Command/Data Select, 0 = Command, 1 = Data
+output			ENET_CS_N;				//	DM9000A Chip Select
+output			ENET_WR_N;				//	DM9000A Write
+output			ENET_RD_N;				//	DM9000A Read
+output			ENET_RST_N;				//	DM9000A Reset
+input			ENET_INT;				//	DM9000A Interrupt
+output			ENET_CLK;				//	DM9000A Clock 25 MHz
+////////////////////	Audio CODEC		////////////////////////////
+inout			AUD_ADCLRCK;			//	Audio CODEC ADC LR Clock
+input			AUD_ADCDAT;				//	Audio CODEC ADC Data
+inout			AUD_DACLRCK;			//	Audio CODEC DAC LR Clock
+output			AUD_DACDAT;				//	Audio CODEC DAC Data
+inout			AUD_BCLK;				//	Audio CODEC Bit-Stream Clock
+output			AUD_XCK;				//	Audio CODEC Chip Clock
+////////////////////	TV Devoder		////////////////////////////
+input	[7:0]	TD_DATA;    			//	TV Decoder Data bus 8 bits
+input			TD_HS;					//	TV Decoder H_SYNC
+input			TD_VS;					//	TV Decoder V_SYNC
+output			TD_RESET;				//	TV Decoder Reset
+input			TD_CLK;					//	TV Decoder Line Locked Clock
+////////////////////////	GPIO	////////////////////////////////
+inout	[35:0]	GPIO_0;					//	GPIO Connection 0
+inout	[35:0]	GPIO_1;					//	GPIO Connection 1
+////////////////////////////////////////////////////////////////////
+
+//	Enable TV Decoder
+// assign	TD_RESET	=	KEY[0];
+
+//	For Audio CODEC
+wire		AUD_CTRL_CLK;	//	For Audio Controller
+assign		AUD_XCK	=	AUD_CTRL_CLK;
+
+//assign	LED_GREEN	=	VGA_Y;
+//assign	LED_RED		=	VGA_X;
+
+
+//	7 segment LUT
+SEG7_LUT_8 			u0	(	.oSEG0(HEX0),
+							.oSEG1(HEX1),
+							.oSEG2(HEX2),
+							.oSEG3(HEX3),
+							.oSEG4(HEX4),
+							.oSEG5(HEX5),
+							.oSEG6(HEX6),
+							.oSEG7(HEX7),
+							.iDIG(DPDT_SW) );
+
+//	Audio CODEC and video decoder setting
+I2C_AV_Config 		u1	(	//	Host Side
+							.iCLK(OSC_50),
+							.iRST_N(KEY[0]),
+							//	I2C Side
+							.I2C_SCLK(I2C_SCLK),
+							.I2C_SDAT(I2C_SDAT)	);
+
+//	TV Decoder Stable Check
+TD_Detect			u2	(	.oTD_Stable(TD_Stable),
+							.iTD_VS(TD_VS),
+							.iTD_HS(TD_HS),
+							.iRST_N(KEY[0])	);
+
+//	Reset Delay Timer
+Reset_Delay			u3	(	.iCLK(OSC_50),
+							.iRST(TD_Stable),
+							.oRST_0(DLY0),
+							.oRST_1(DLY1),
+							.oRST_2(DLY2));
+
+//	ITU-R 656 to YUV 4:2:2
+ITU_656_Decoder		u4	(	//	TV Decoder Input
+							.iTD_DATA(TD_DATA),
+							//	Position Output
+							.oTV_X(TV_X),
+							//	YUV 4:2:2 Output
+							.oYCbCr(YCbCr),
+							.oDVAL(TV_DVAL),
+							//	Control Signals
+							.iSwap_CbCr(Quotient[0]),
+							.iSkip(Remain==4'h0),
+							.iRST_N(DLY1),
+							.iCLK_27(TD_CLK)	);
+
+//	For Down Sample 720 to 640
+DIV 				u5	(	.aclr(!DLY0),	
+							.clock(TD_CLK),
+							.denom(4'h9),
+							.numer(TV_X),
+							.quotient(Quotient),
+							.remain(Remain));
+
+//	SDRAM frame buffer
+Sdram_Control_4Port	u6	(	//	HOST Side
+						    .REF_CLK(OSC_27),
+							.CLK_18(AUD_CTRL_CLK),
+						    .RESET_N(1'b1),
+							//	FIFO Write Side 1
+						    .WR1_DATA(YCbCr),
+							.WR1(TV_DVAL),
+							.WR1_FULL(WR1_FULL),
+							.WR1_ADDR(0),
+							.WR1_MAX_ADDR(640*507),		//	525-18
+							.WR1_LENGTH(9'h80),
+							.WR1_LOAD(!DLY0),
+							.WR1_CLK(TD_CLK),
+							//	FIFO Read Side 1
+						    .RD1_DATA(m1YCbCr),
+				        	.RD1(m1VGA_Read),
+				        	.RD1_ADDR(640*13),			//	Read odd field and bypess blanking
+							.RD1_MAX_ADDR(640*253),
+							.RD1_LENGTH(9'h80),
+				        	.RD1_LOAD(!DLY0),
+							.RD1_CLK(OSC_27),
+							//	FIFO Read Side 2
+						    .RD2_DATA(m2YCbCr),
+				        	.RD2(m2VGA_Read),
+				        	.RD2_ADDR(640*267),			//	Read even field and bypess blanking
+							.RD2_MAX_ADDR(640*507),
+							.RD2_LENGTH(9'h80),
+				        	.RD2_LOAD(!DLY0),
+							.RD2_CLK(OSC_27),
+							//	SDRAM Side
+						    .SA(DRAM_ADDR),
+						    .BA({DRAM_BA_1,DRAM_BA_0}),
+						    .CS_N(DRAM_CS_N),
+						    .CKE(DRAM_CKE),
+						    .RAS_N(DRAM_RAS_N),
+				            .CAS_N(DRAM_CAS_N),
+				            .WE_N(DRAM_WE_N),
+						    .DQ(DRAM_DQ),
+				            .DQM({DRAM_UDQM,DRAM_LDQM}),
+							.SDR_CLK(DRAM_CLK)	);
+
+//	YUV 4:2:2 to YUV 4:4:4
+YUV422_to_444		u7	(	//	YUV 4:2:2 Input
+							.iYCbCr(mYCbCr),
+							//	YUV	4:4:4 Output
+							.oY(mY),
+							.oCb(mCb),
+							.oCr(mCr),
+							//	Control Signals
+							.iX(VGA_X),
+							.iCLK(OSC_27),
+							.iRST_N(DLY0));
+
+//	YCbCr 8-bit to RGB-10 bit 
+YCbCr2RGB 			u8	(	//	Output Side
+							.Red(mRed),
+							.Green(mGreen),
+							.Blue(mBlue),
+							.oDVAL(mDVAL),
+							//	Input Side
+							.iY(mY),
+							.iCb(mCb),
+							.iCr(mCr),
+							.iDVAL(VGA_Read),
+							//	Control Signal
+							.iRESET(!DLY2),
+							.iCLK(OSC_27));
+
+//	VGA Controller
+VGA_Ctrl			u9	(	//	Host Side
+							.iRed(mRed),
+							.iGreen(mGreen),
+							.iBlue(mBlue),
+							.oCurrent_X(VGA_X),
+							.oCurrent_Y(VGA_Y),
+							.oRequest(VGA_Read),
+							//	VGA Side
+							.oVGA_R(VGA_R),
+							.oVGA_G(VGA_G),
+							.oVGA_B(VGA_B),
+							.oVGA_HS(VGA_HS),
+							.oVGA_VS(VGA_VS),
+							.oVGA_SYNC(VGA_SYNC),
+							.oVGA_BLANK(VGA_BLANK),
+							.oVGA_CLOCK(VGA_CLK),
+							//	Control Signal
+							.iCLK(OSC_27),
+							.iRST_N(DLY2)	);
+
+//	For ITU-R 656 Decoder
+wire	[15:0]	YCbCr;
+wire	[9:0]	TV_X;
+wire			TV_DVAL;
+
+//	For VGA Controller
+wire	[9:0]	mRed;
+wire	[9:0]	mGreen;
+wire	[9:0]	mBlue;
+wire	[10:0]	VGA_X;
+wire	[10:0]	VGA_Y;
+wire			VGA_Read;	//	VGA data request
+wire			m1VGA_Read;	//	Read odd field
+wire			m2VGA_Read;	//	Read even field
+
+//	For YUV 4:2:2 to YUV 4:4:4
+wire	[7:0]	mY;
+wire	[7:0]	mCb;
+wire	[7:0]	mCr;
+
+//	For field select
+wire	[15:0]	mYCbCr;
+wire	[15:0]	mYCbCr_d;
+wire	[15:0]	m1YCbCr;
+wire	[15:0]	m2YCbCr;
+wire	[15:0]	m3YCbCr;
+
+//	For Delay Timer
+wire			TD_Stable;
+wire			DLY0;
+wire			DLY1;
+wire			DLY2;
+
+//	For Down Sample
+wire	[3:0]	Remain;
+wire	[9:0]	Quotient;
+
+assign	m1VGA_Read	=	VGA_Y[0]		?	1'b0		:	VGA_Read	;
+assign	m2VGA_Read	=	VGA_Y[0]		?	VGA_Read	:	1'b0		;
+assign	mYCbCr_d	=	!VGA_Y[0]		?	m1YCbCr		:
+											m2YCbCr		;
+assign	mYCbCr		=	m5YCbCr;
+
+wire			mDVAL;
+
+//	Line buffer, delay one line
+Line_Buffer u10	(	.clken(VGA_Read),
+					.clock(OSC_27),
+					.shiftin(mYCbCr_d),
+					.shiftout(m3YCbCr));
+
+Line_Buffer u11	(	.clken(VGA_Read),
+					.clock(OSC_27),
+					.shiftin(m3YCbCr),
+					.shiftout(m4YCbCr));
+
+wire	[15:0]	m4YCbCr;
+wire	[15:0]	m5YCbCr;
+wire	[8:0]	Tmp1,Tmp2;
+wire	[7:0]	Tmp3,Tmp4;
+
+assign	Tmp1	=	m4YCbCr[7:0]+mYCbCr_d[7:0];
+assign	Tmp2	=	m4YCbCr[15:8]+mYCbCr_d[15:8];
+assign	Tmp3	=	Tmp1[8:2]+m3YCbCr[7:1];
+assign	Tmp4	=	Tmp2[8:2]+m3YCbCr[15:9];
+assign	m5YCbCr	=	{Tmp4,Tmp3};
+
+assign	TD_RESET	=	1'b1;	//	Allow 27 MHz
+
+//AUDIO_DAC 	u12	(	//	Audio Side
+//					.oAUD_BCK(AUD_BCLK),
+//					.oAUD_DATA(AUD_DACDAT),
+//					.oAUD_LRCK(AUD_DACLRCK),
+//					//	Control Signals
+//					.iSrc_Select(2'b01),
+//			        .iCLK_18_4(AUD_CTRL_CLK),
+//					.iRST_N(DLY1)	);
+
+//VGA_Audio_PLL 		p1	(	.areset(~DLY0),.inclk0(OSC_27),.c0(VGA_CTRL_CLK),.c1(AUD_CTRL_CLK)); ///,.c2(VGA_CLK)	);
+
+AUDIO_DAC_ADC 			u12	(	//	Audio Side
+							.oAUD_BCK(AUD_BCLK),
+							.oAUD_DATA(AUD_DACDAT),
+							.oAUD_LRCK(AUD_DACLRCK),
+							.oAUD_inL(audio_inL), // audio data from ADC 
+							.oAUD_inR(audio_inR), // audio data from ADC 
+							.iAUD_ADCDAT(AUD_ADCDAT),
+							.iAUD_extL(audio_outL), // audio data to DAC
+							.iAUD_extR(audio_outR), // audio data to DAC
+							//	Control Signals
+				           		 .iCLK_18_4(AUD_CTRL_CLK),
+							.iRST_N(DLY0)
+							);
+							
+parameter x_start = 10'd0, x_end = 10'd39, y_start = 9'd320, y_end = 9'd479;
+	
+reg [9:0] x;
+reg [8:0] y;
+
+//always @ (posedge VGA_CLK)
+//begin
+//	if(new)
+//		begin
+//			x <= x_start;
+//			y <= y_start;
+//			Cstate <= 0;
+//		end
+//	else
+//		begin
+//			case (Cstate)
+//			0:
+//			begin
+//				if(mGreen > 10'hff && mRed < 10'h80 && mBlue < 10'h80)
+//					begin
+//						countC <= countC + 1;
+//					end
+//					
+//				if(x == x_end && y == y_end)
+//					begin
+//						x <= x_start;
+//						y <= y_start;
+//						
+//					end
+//				else if(x == x_end)
+//					begin
+//						x <= x_start;
+//						y <= y + 1;
+//					end
+//				else
+//					begin
+//						x <= x + 1;
+//					end
+//					
+//				Cstate <= 1;
+//			end
+//			1:
+//			begin
+//				if(countC > 11'd1600) // Green present, string played
+//					begin
+//						playC <= 1;
+//						countC <= 0;
+//						Cstate <= 0;
+//					end
+//			end
+//			endcase
+//		end
+//end			
+
+reg flag, pre_flag;
+reg playC;
+reg [12:0] countC;	
+reg [2:0] Cstate;		
+
+//assign	LED_GREEN	=	VGA_Y;
+//assign	LED_RED		=	VGA_X;
+
+assign	LED_GREEN	=	flag;
+assign	LED_RED		=	countC;
+				
+always @ (posedge VGA_CLK)
+begin
+	if(VGA_X < 10'd39 && VGA_Y > 9'd360)
+		begin
+			if(VGA_Y < 9'd478)
+				begin
+					if(mGreen > 10'h99 && mRed < 10'h80 && mBlue < 10'h80)
+						begin
+							countC <= countC + 1;
+						end
+				end
+			else //if(VGA_Y > 9'd477)
+						begin
+							case (Cstate)
+							0:
+							begin
+								if(countC > 11'd120) // Green present, play string
+									begin
+										if(!pre_flag && !plucked)
+											begin
+												flag <= 1;
+												playC <= 1;
+											end
+										else
+											begin
+												flag <= 1;
+												if(!plucked)
+													playC <= 0;
+											end
+									end
+								else // Green not present, do not play string
+									begin
+										flag <= 0;
+										if(!plucked)
+											playC <= 0;
+									end
+								Cstate <= 1;
+							end
+							1:
+							begin
+								pre_flag <= flag;
+								countC <= 0;
+								Cstate <= 0;
+							end
+							endcase
+						end
+		end
+end
+	
+/// audio stuff /////////////////////////////////////////////////
+// output to audio DAC
+wire signed [15:0] audio_outL, audio_outR ;
+// input from audio ADC
+wire signed [15:0] audio_inL, audio_inR ;
+
+assign audio_outR = strOutT[19:4];
+assign audio_outL = strOutT[19:4];
+
+assign strOutT = strOut + strOutBB + strOutDb + strOutD + strOutEb + strOutE + strOutF + strOutGb
+	+ strOutG + strOutAb + strOutA + strOutBb + strOutB + strOutC + strOutDB + strOutDD;
+  
+reg signed [19:0] strIn, strOut, strInBB, strOutBB, strInDb, strOutDb, strInD, strOutD, strInEb, strOutEb,
+						strInE, strOutE, strInF, strOutF, strInGb, strOutGb, strInG, strOutG,
+						strInAb, strOutAb, strInA, strOutA, strInBb, strOutBb, strInB, strOutB,
+						strInC, strOutC, strInDB, strOutDB, strInDD, strOutDD;
+						
+wire signed [19:0] strOutT;
+
+reg signed [19:0] r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, // Middle C
+						r11, r12, r13, r14, r15, r16, r17, r18, r19, r20,
+                  r21, r22, r23, r24, r25, r26, r27, r28,
+						
+						r1BB, r2BB, r3BB, r4BB, r5BB, r6BB, r7BB, r8BB, r9BB, r10BB,  // low B
+                  r11BB, r12BB, r13BB, r14BB, r15BB, r16BB, r17BB, r18BB, r19BB, r20BB,
+						r21BB, r22BB, r23BB, r24BB, r25BB, r26BB, r27BB, r28BB, r29BB, r30BB,
+						
+						r1Db, r2Db, r3Db, r4Db, r5Db, r6Db, r7Db, r8Db, r9Db, r10Db,  // C#/Db
+                  r11Db, r12Db, r13Db, r14Db, r15Db, r16Db, r17Db, r18Db, r19Db, r20Db,
+						r21Db, r22Db, r23Db, r24Db, r25Db, r26Db,
+						
+						r1D, r2D, r3D, r4D, r5D, r6D, r7D, r8D, r9D, r10D, // D
+                  r11D, r12D, r13D, r14D, r15D, r16D, r17D, r18D, r19D, r20D,
+						r21D, r22D, r23D, r24D, r25D,
+						
+						r1Eb, r2Eb, r3Eb, r4Eb, r5Eb, r6Eb, r7Eb, r8Eb, r9Eb, r10Eb, // D#/Eb
+                  r11Eb, r12Eb, r13Eb, r14Eb, r15Eb, r16Eb, r17Eb, r18Eb, r19Eb, r20Eb,
+						r21Eb, r22Eb, r23Eb,
+						
+						r1E, r2E, r3E, r4E, r5E, r6E, r7E, r8E, r9E, r10E, // E
+                  r11E, r12E, r13E, r14E, r15E, r16E, r17E, r18E, r19E, r20E,
+						r21E, r22E,
+						
+						r1F, r2F, r3F, r4F, r5F, r6F, r7F, r8F, r9F, r10F, // F
+                  r11F, r12F, r13F, r14F, r15F, r16F, r17F, r18F, r19F, r20F,
+						
+						r1Gb, r2Gb, r3Gb, r4Gb, r5Gb, r6Gb, r7Gb, r8Gb, r9Gb, r10Gb, // F#/Gb
+                  r11Gb, r12Gb, r13Gb, r14Gb, r15Gb, r16Gb, r17Gb, r18Gb, r19Gb,
+						
+						r1G, r2G, r3G, r4G, r5G, r6G, r7G, r8G, r9G, r10G, // G
+                  r11G, r12G, r13G, r14G, r15G, r16G, r17G, r18G, 
+						
+						r1Ab, r2Ab, r3Ab, r4Ab, r5Ab, r6Ab, r7Ab, r8Ab, r9Ab, r10Ab, // G#/Ab
+                  r11Ab, r12Ab, r13Ab, r14Ab, r15Ab, r16Ab, r17Ab,
+						
+						r1A, r2A, r3A, r4A, r5A, r6A, r7A, r8A, r9A, r10A, // A
+                  r11A, r12A, r13A, r14A, r15A, r16A, 
+						
+						r1Bb, r2Bb, r3Bb, r4Bb, r5Bb, r6Bb, r7Bb, r8Bb, r9Bb, r10Bb,  // A#/Bb
+                  r11Bb, r12Bb, r13Bb, r14Bb, r15Bb,
+						
+						r1B, r2B, r3B, r4B, r5B, r6B, r7B, r8B, r9B, r10B,  // B
+                  r11B, r12B, r13B, r14B,
+						
+						r1C, r2C, r3C, r4C, r5C, r6C, r7C, r8C, r9C, r10C,  // C
+                  r11C, r12C, r13C,
+				  
+				  		r1DB, r2DB, r3DB, r4DB, r5DB, r6DB, r7DB, r8DB, r9DB, r10DB,  // high C#/Db
+                  r11DB, r12DB,
+				  
+				  		r1DD, r2DD, r3DD, r4DD, r5DD, r6DD, r7DD, r8DD, r9DD, r10DD,  // high D
+                  r11DD;
+						
+reg [3:0] state, stateBB, stateDb, stateD, stateEb, stateE, stateF, stateGb, stateG, 
+				stateAb, stateA, stateBb, stateB, stateC, stateDB, stateDD;
+				
+reg [5:0] count;
+reg frequency;
+
+reg signed [19:0] eta, xn_1, yn_1, etaBB, xn_1BB, yn_1BB, etaDb, xn_1Db, yn_1Db, etaD, xn_1D, yn_1D, etaEb, xn_1Eb, yn_1Eb,
+						etaE, xn_1E, yn_1E, etaF, xn_1F, yn_1F, etaGb, xn_1Gb, yn_1Gb, etaG, xn_1G, yn_1G,
+						etaAb, xn_1Ab, yn_1Ab, etaA, xn_1A, yn_1A, etaBb, xn_1Bb, yn_1Bb, etaB, xn_1B, yn_1B,
+						etaC, xn_1C, yn_1C, etaDB, xn_1DB, yn_1DB, etaDD, xn_1DD, yn_1DD;
+						
+wire signed [19:0] yn, low_pass, ynBB, low_passBB, ynDb, low_passDb, ynD, low_passD, ynEb, low_passEb, 
+						ynE, low_passE, ynF, low_passF, ynGb, low_passGb, ynG, low_passG, ynAb, low_passAb,
+						ynA, low_passA, ynBb, low_passBb, ynB, low_passB, ynC, low_passC, ynDB, low_passDB, ynDD, low_passDD;
+						
+wire signed [39:0] xn_eta, yn_eta, xn_etaBB, yn_etaBB, xn_etaDb, yn_etaDb, xn_etaD, yn_etaD, xn_etaEb, yn_etaEb,
+						xn_etaE, yn_etaE, xn_etaF, yn_etaF, xn_etaGb, yn_etaGb, xn_etaG, yn_etaG,
+						xn_etaAb, yn_etaAb, xn_etaA, yn_etaA, xn_etaBb, yn_etaBb, xn_etaB, yn_etaB, 
+						xn_etaC, yn_etaC, xn_etaDB, yn_etaDB, xn_etaDD, yn_etaDD;
+
+always@ (posedge AUD_DACLRCK)
+begin 
+	if(count == 2)  // (48000Hz / 6) --> 8000Hz 
+	begin
+		frequency <= !frequency;
+		count <=0;
+	end
+	else
+	begin
+		count <= count + 1;
+	end
+end
+
+// Middle C :
+assign xn_eta = strOut * eta;
+assign yn_eta = yn_1 * eta;
+assign yn = {xn_eta[39], xn_eta[35:17]} - {yn_eta[39], yn_eta[35:17]} + xn_1;
+assign low_pass = ((yn_1 + yn) >>> 1) - ((yn_1 + yn) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+reg plucked;
+
+always@ (posedge frequency)
+begin 
+	if(playC || (!KEY[1] && DPDT_SW[1])) //mGreen > 10'h99 && mRed < 10'h80 && mBlue < 10'h80 && countC > 11'd1600) //!KEY[1] && DPDT_SW[1]) //!KEY[1]) // playC) // 
+	begin
+		strIn <= 20'd0;
+		r1 <= 20'd13107;
+		r2 <= 20'd32768;
+		r3 <= 20'd52429;
+		r4 <= 20'd74711;
+		r5 <= 20'd99615;
+		r6 <= 20'd131072;
+		r7 <= 20'd121897;
+		r8 <= 20'd112722;
+		r9 <= 20'd103547;
+		r10 <= 20'd61604;
+		r11 <= 20'd89129;
+		r12 <= 20'd81265;
+		r13 <= 20'd74711;
+		r14 <= 20'd69468;
+		r15 <= 20'd61604;
+		r16 <= 20'd55706;
+		r17 <= 20'd49807;
+		r18 <= 20'd43254;
+		r19 <= 20'd39322;
+		r20 <= 20'd34079;
+		r21 <= 20'd28836;
+		r22 <= 20'd26214;
+		r23 <= 20'd21627;
+		r24 <= 20'd16384;
+		r25 <= 20'd13107;
+		r26 <= 20'd10486;
+		r27 <= 20'd6553;
+		r28 <= 20'd3932;
+		strOut <= 20'd0;
+		
+		eta <= 20'd35049; // 0.2674
+		
+		plucked <= 1;
+		
+		state <= 0;
+	end
+	else
+	begin
+		case (state)
+		0:
+		begin
+			r1 <= strIn;
+			r2 <= r1;
+			r3 <= r2;
+			r4 <= r3;
+			r5 <= r4;
+			r6 <= r5;
+			r7 <= r6;
+			r8 <= r7;
+			r9 <= r8;
+			r10 <= r9;
+			r11 <= r10;
+			r12 <= r11;
+			r13 <= r12;
+			r14 <= r13;
+			r15 <= r14;
+			r16 <= r15;
+			r17 <= r16;
+			r18 <= r17;
+			r19 <= r18;
+			r20 <= r19;
+			r21 <= r20;
+			r22 <= r21;
+			r23 <= r22;
+			r24 <= r23;
+			r25 <= r24;
+			r26 <= r25;
+			r27 <= r26;
+			r28 <= r27;
+			strOut <= r28;
+			
+			state <= 1;
+		end
+		1:
+		begin
+			xn_1 <= strOut;
+			yn_1 <= yn;
+			strIn <= low_pass;
+			
+			plucked <= 0;
+			
+			state <= 0;	
+		end
+		endcase
+	end
+end
+
+//always@ (posedge frequency)
+//begin 
+//	if(playC || (!KEY[1] && DPDT_SW[1])) //!KEY[1]) // playC) // 
+//	begin
+//		state <= 0;
+//	end
+//	else
+//	begin
+//		case (state)
+//		0:
+//		begin
+//			if(!playC)
+//				state <= 1;
+//		end
+//		1:
+//		begin
+//			strIn <= 20'd0;
+//			r1 <= 20'd13107;
+//			r2 <= 20'd32768;
+//			r3 <= 20'd52429;
+//			r4 <= 20'd74711;
+//			r5 <= 20'd99615;
+//			r6 <= 20'd131072;
+//			r7 <= 20'd121897;
+//			r8 <= 20'd112722;
+//			r9 <= 20'd103547;
+//			r10 <= 20'd61604;
+//			r11 <= 20'd89129;
+//			r12 <= 20'd81265;
+//			r13 <= 20'd74711;
+//			r14 <= 20'd69468;
+//			r15 <= 20'd61604;
+//			r16 <= 20'd55706;
+//			r17 <= 20'd49807;
+//			r18 <= 20'd43254;
+//			r19 <= 20'd39322;
+//			r20 <= 20'd34079;
+//			r21 <= 20'd28836;
+//			r22 <= 20'd26214;
+//			r23 <= 20'd21627;
+//			r24 <= 20'd16384;
+//			r25 <= 20'd13107;
+//			r26 <= 20'd10486;
+//			r27 <= 20'd6553;
+//			r28 <= 20'd3932;
+//			strOut <= 20'd0;
+//			
+//			eta <= 20'd35049; // 0.2674
+//			
+//			state <= 2;
+//		end
+//		2:
+//		begin
+//			r1 <= strIn;
+//			r2 <= r1;
+//			r3 <= r2;
+//			r4 <= r3;
+//			r5 <= r4;
+//			r6 <= r5;
+//			r7 <= r6;
+//			r8 <= r7;
+//			r9 <= r8;
+//			r10 <= r9;
+//			r11 <= r10;
+//			r12 <= r11;
+//			r13 <= r12;
+//			r14 <= r13;
+//			r15 <= r14;
+//			r16 <= r15;
+//			r17 <= r16;
+//			r18 <= r17;
+//			r19 <= r18;
+//			r20 <= r19;
+//			r21 <= r20;
+//			r22 <= r21;
+//			r23 <= r22;
+//			r24 <= r23;
+//			r25 <= r24;
+//			r26 <= r25;
+//			r27 <= r26;
+//			r28 <= r27;
+//			strOut <= r28;
+//			
+//			state <= 3;
+//		end
+//		3:
+//		begin
+//			xn_1 <= strOut;
+//			yn_1 <= yn;
+//			strIn <= low_pass;
+//			
+//			state <= 2;	
+//		end
+//		endcase
+//	end
+//end	
+
+// Low B :
+assign xn_etaBB = strOutBB * etaBB;
+assign yn_etaBB = yn_1BB * etaBB;
+assign ynBB = {xn_etaBB[39], xn_etaBB[35:17]} - {yn_etaBB[39], yn_etaBB[35:17]} + xn_1BB;
+assign low_passBB = ((yn_1BB + ynBB) >>> 1) - ((yn_1BB + ynBB) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[0])
+	begin
+		strInBB <= 20'd0;
+		r1BB <= 20'd13107;
+		r2BB <= 20'd32768;
+		r3BB <= 20'd52429;
+		r4BB <= 20'd74711;
+		r5BB <= 20'd99615;
+		r6BB <= 20'd131072;
+		r7BB <= 20'd125829;
+		r8BB <= 20'd117965;
+		r9BB <= 20'd112722;
+		r10BB <= 20'd104858;
+		r11BB <= 20'd99615;
+		r12BB <= 20'd93061;
+		r13BB <= 20'd86508;
+		r14BB <= 20'd79954;
+		r15BB <= 20'd73400;
+		r16BB <= 20'd68157;
+		r17BB <= 20'd60293;
+		r18BB <= 20'd56361;
+		r19BB <= 20'd48497;
+		r20BB <= 20'd44564;
+		r21BB <= 20'd38011;
+		r22BB <= 20'd32768;
+		r23BB <= 20'd30147;
+		r24BB <= 20'd23593;
+		r25BB <= 20'd19661;
+		r26BB <= 20'd15729;
+		r27BB <= 20'd10486;
+		r28BB <= 20'd7864;
+		r29BB <= 20'd3932;
+		r30BB <= 20'd1311;
+		strOutBB <= 20'd0;
+		
+		etaBB <= 20'd56715; // 0.4327
+		
+		stateBB <= 0;
+	end
+	else
+	begin
+		case (stateBB)
+		0:
+		begin
+			r1BB <= strInBB;
+			r2BB <= r1BB;
+			r3BB <= r2BB;
+			r4BB <= r3BB;
+			r5BB <= r4BB;
+			r6BB <= r5BB;
+			r7BB <= r6BB;
+			r8BB <= r7BB;
+			r9BB <= r8BB;
+			r10BB <= r9BB;
+			r11BB <= r10BB;
+			r12BB <= r11BB;
+			r13BB <= r12BB;
+			r14BB <= r13BB;
+			r15BB <= r14BB;
+			r16BB <= r15BB;
+			r17BB <= r16BB;
+			r18BB <= r17BB;
+			r19BB <= r18BB;
+			r20BB <= r19BB;
+			r21BB <= r20BB;
+			r22BB <= r21BB;
+			r23BB <= r22BB;
+			r24BB <= r23BB;
+			r25BB <= r24BB;
+			r26BB <= r25BB;
+			r27BB <= r26BB;
+			r28BB <= r27BB;
+			r29BB <= r28BB;
+			r30BB <= r29BB;
+			strOutBB <= r30BB;
+			
+			stateBB <= 1;
+		end
+		1:
+		begin
+			xn_1BB <= strOutBB;
+			yn_1BB <= ynBB;
+			strInBB <= low_passBB;
+			
+			stateBB <= 0;	
+		end
+		endcase
+	end
+end	
+
+// C#/Db : 
+assign xn_etaDb = strOutDb * etaDb;
+assign yn_etaDb = yn_1Db * etaDb;
+assign ynDb = {xn_etaDb[39], xn_etaDb[35:17]} - {yn_etaDb[39], yn_etaDb[35:17]} + xn_1Db;
+assign low_passDb = ((yn_1Db + ynDb) >>> 1) - ((yn_1Db + ynDb) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[2])
+	begin
+		strInDb <= 20'd0;
+		r1Db <= 20'd15729;
+		r2Db <= 20'd36700;
+		r3Db <= 20'd55050;
+		r4Db <= 20'd74711;
+		r5Db <= 20'd100930;
+		r6Db <= 20'd131072;
+		r7Db <= 20'd121900;
+		r8Db <= 20'd114030;
+		r9Db <= 20'd104860;
+		r10Db <= 20'd98304;
+		r11Db <= 20'd91750;
+		r12Db <= 20'd82575;
+		r13Db <= 20'd77332;
+		r14Db <= 20'd72090;
+		r15Db <= 20'd65536;
+		r16Db <= 20'd57672;
+		r17Db <= 20'd52429;
+		r18Db <= 20'd45875;
+		r19Db <= 20'd39322;
+		r20Db <= 20'd32768;
+		r21Db <= 20'd26214;
+		r22Db <= 20'd22282;
+		r23Db <= 20'd18350;
+		r24Db <= 20'd13107;
+		r25Db <= 20'd9175;
+		r26Db <= 20'd3932;
+		strOutDb <= 20'd0;
+		
+		etaDb <= 20'd9712; // 0.0741
+		
+		stateDb <= 0;
+	end
+	else
+	begin
+		case (stateDb)
+		0:
+		begin
+			r1Db <= strInDb;
+			r2Db <= r1Db;
+			r3Db <= r2Db;
+			r4Db <= r3Db;
+			r5Db <= r4Db;
+			r6Db <= r5Db;
+			r7Db <= r6Db;
+			r8Db <= r7Db;
+			r9Db <= r8Db;
+			r10Db <= r9Db;
+			r11Db <= r10Db;
+			r12Db <= r11Db;
+			r13Db <= r12Db;
+			r14Db <= r13Db;
+			r15Db <= r14Db;
+			r16Db <= r15Db;
+			r17Db <= r16Db;
+			r18Db <= r17Db;
+			r19Db <= r18Db;
+			r20Db <= r19Db;
+			r21Db <= r20Db;
+			r22Db <= r21Db;
+			r23Db <= r22Db;
+			r24Db <= r23Db;
+			r25Db <= r24Db;
+			r26Db <= r25Db;
+			strOutDb <= r26Db;
+			
+			stateDb <= 1;
+		end
+		1:
+		begin
+			xn_1Db <= strOutDb;
+			yn_1Db <= ynDb;
+			strInDb <= low_passDb;
+			
+			stateDb <= 0;	
+		end
+		endcase
+	end
+end
+
+// D :
+assign xn_etaD = strOutD * etaD;
+assign yn_etaD = yn_1D * etaD;
+assign ynD = {xn_etaD[39], xn_etaD[35:17]} - {yn_etaD[39], yn_etaD[35:17]} + xn_1D;
+assign low_passD = ((yn_1D + ynD) >>> 1) - ((yn_1D + ynD ) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[3])
+	begin
+		strInD <= 20'd0;
+		r1D <= 20'd13107;
+		r2D <= 20'd35389;
+		r3D <= 20'd55050;
+		r4D <= 20'd78643;
+		r5D <= 20'd104860;
+		r6D <= 20'd131072;
+		r7D <= 20'd123210;
+		r8D <= 20'd114030;
+		r9D <= 20'd104860;
+		r10D <= 20'd61604;
+		r11D <= 20'd87818;
+		r12D <= 20'd81265;
+		r13D <= 20'd74711;
+		r14D <= 20'd66847;
+		r15D <= 20'd60293;
+		r16D <= 20'd53740;
+		r17D <= 20'd47186;
+		r18D <= 20'd39322;
+		r19D <= 20'd32768;
+		r20D <= 20'd27525;
+		r21D <= 20'd23593;
+		r22D <= 20'd18350;
+		r23D <= 20'd13107;
+		r24D <= 20'd7864;
+		r25D <= 20'd5243;
+		strOutD <= 20'd0;
+		
+		etaD <= 20'd79993; // 0.6103
+		
+		stateD <= 0;
+	end
+	else
+	begin
+		case (stateD)
+		0:
+		begin
+			r1D <= strInD;
+			r2D <= r1D;
+			r3D <= r2D;
+			r4D <= r3D;
+			r5D <= r4D;
+			r6D <= r5D;
+			r7D <= r6D;
+			r8D <= r7D;
+			r9D <= r8D;
+			r10D <= r9D;
+			r11D <= r10D;
+			r12D <= r11D;
+			r13D <= r12D;
+			r14D <= r13D;
+			r15D <= r14D;
+			r16D <= r15D;
+			r17D <= r16D;
+			r18D <= r17D;
+			r19D <= r18D;
+			r20D <= r19D;
+			r21D <= r20D;
+			r22D <= r21D;
+			r23D <= r22D;
+			r24D <= r23D;
+			r25D <= r24D;
+		
+			strOutD <= r25D;
+			
+			stateD <= 1;
+		end
+		1:
+		begin
+			xn_1D <= strOutD;
+			yn_1D <= ynD;
+			strInD <= low_passD;
+			
+			stateD <= 0;	
+		end
+		endcase
+	end
+end	
+
+// D#/Eb : 
+assign xn_etaEb = strOutEb * etaEb;
+assign yn_etaEb = yn_1Eb * etaEb;
+assign ynEb = {xn_etaEb[39], xn_etaEb[35:17]} - {yn_etaEb[39], yn_etaEb[35:17]} + xn_1Eb;
+assign low_passEb = ((yn_1Eb + ynEb) >>> 1) - ((yn_1Eb + ynEb) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[4])
+	begin
+		strInEb <= 20'd0;
+		r1Eb <= 20'd19661;
+		r2Eb <= 20'd41943;
+		r3Eb <= 20'd68175;
+		r4Eb <= 20'd102240;
+		r5Eb <= 20'd131072;
+		r6Eb <= 20'd121897;
+		r7Eb <= 20'd114030;
+		r8Eb <= 20'd104860;
+		r9Eb <= 20'd61604;
+		r10Eb <= 20'd89129;
+		r11Eb <= 20'd81265;
+		r12Eb <= 20'd73400;
+		r13Eb <= 20'd65536;
+		r14Eb <= 20'd58982;
+		r15Eb <= 20'd52429;
+		r16Eb <= 20'd45875;
+		r17Eb <= 20'd39322;
+		r18Eb <= 20'd32768;
+		r19Eb <= 20'd26214;
+		r20Eb <= 20'd20972;
+		r21Eb <= 20'd15729;
+		r22Eb <= 20'd10486;
+		r23Eb <= 20'd5243;
+		strOutEb <= 20'd0;
+		
+		etaEb <= 20'd21955; // 0.1675
+		
+		stateEb <= 0;
+	end
+	else
+	begin
+		case (stateEb)
+		0:
+		begin
+			r1Eb <= strInEb;
+			r2Eb <= r1Eb;
+			r3Eb <= r2Eb;
+			r4Eb <= r3Eb;
+			r5Eb <= r4Eb;
+			r6Eb <= r5Eb;
+			r7Eb <= r6Eb;
+			r8Eb <= r7Eb;
+			r9Eb <= r8Eb;
+			r10Eb <= r9Eb;
+			r11Eb <= r10Eb;
+			r12Eb <= r11Eb;
+			r13Eb <= r12Eb;
+			r14Eb <= r13Eb;
+			r15Eb <= r14Eb;
+			r16Eb <= r15Eb;
+			r17Eb <= r16Eb;
+			r18Eb <= r17Eb;
+			r19Eb <= r18Eb;
+			r20Eb <= r19Eb;
+			r21Eb <= r20Eb;
+			r22Eb <= r21Eb;
+			r23Eb <= r22Eb;
+			strOutEb <= r23Eb;
+			
+			stateEb <= 1;
+		end
+		1:
+		begin
+			xn_1Eb <= strOutEb;
+			yn_1Eb <= ynEb;
+			strInEb <= low_passEb;
+			
+			stateEb <= 0;	
+		end
+		endcase
+	end
+end	
+
+
+// E :
+assign xn_etaE = strOutE * etaE;
+assign yn_etaE = yn_1E * etaE;
+assign ynE = {xn_etaE[39], xn_etaE[35:17]} - {yn_etaE[39], yn_etaE[35:17]} + xn_1E;
+assign low_passE = ((yn_1E + ynE) >>> 1) - ((yn_1E + ynE) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[5])
+	begin
+		strInE <= 20'd0;
+		r1E <= 20'd19661;
+		r2E <= 20'd41943;
+		r3E <= 20'd68157;
+		r4E <= 20'd102240;
+		r5E <= 20'd131072;
+		r6E <= 20'd121897;
+		r7E <= 20'd112722;
+		r8E <= 20'd104860;
+		r9E <= 20'd61604;
+		r10E <= 20'd89129;
+		r11E <= 20'd81265;
+		r12E <= 20'd74711;
+		r13E <= 20'd68157;
+		r14E <= 20'd61604;
+		r15E <= 20'd55050;
+		r16E <= 20'd47186;
+		r17E <= 20'd40632;
+		r18E <= 20'd34079;
+		r19E <= 20'd26214;
+		r20E <= 20'd19661;
+		r21E <= 20'd11796;
+		r22E <= 20'd5243;
+		strOutE <= 20'd0;
+		
+		etaE <= 20'd75340; // 0.5748
+		
+		stateE <= 0;
+	end
+	else
+	begin
+		case (stateE)
+		0:
+		begin
+			r1E <= strInE;
+			r2E <= r1E;
+			r3E <= r2E;
+			r4E <= r3E;
+			r5E <= r4E;
+			r6E <= r5E;
+			r7E <= r6E;
+			r8E <= r7E;
+			r9E <= r8E;
+			r10E <= r9E;
+			r11E <= r10E;
+			r12E <= r11E;
+			r13E <= r12E;
+			r14E <= r13E;
+			r15E <= r14E;
+			r16E <= r15E;
+			r17E <= r16E;
+			r18E <= r17E;
+			r19E <= r18E;
+			r20E <= r19E;
+			r21E <= r20E;
+			r22E <= r21E;
+			strOutE <= r22E;
+			
+			stateE <= 1;
+		end
+		1:
+		begin
+			xn_1E <= strOutE;
+			yn_1E <= ynE;
+			strInE <= low_passE;
+			
+			stateE <= 0;	
+		end
+		endcase
+	end
+end	
+
+// F : 
+assign xn_etaF = strOutF * etaF;
+assign yn_etaF = yn_1F * etaF;
+assign ynF = {xn_etaF[39], xn_etaF[35:17]} - {yn_etaF[39], yn_etaF[35:17]} + xn_1F;
+assign low_passF = ((yn_1F + ynF) >>> 1) - ((yn_1F + ynF) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[6])
+	begin
+		strInF <= 20'd0;
+		r1F <= 20'd19661;
+		r2F <= 20'd41943;
+		r3F <= 20'd68157;
+		r4F <= 20'd102240;
+		r5F <= 20'd131072;
+		r6F <= 20'd121897;
+		r7F <= 20'd110100;
+		r8F <= 20'd99615;
+		r9F <= 20'd90440;
+		r10F <= 20'd81265;
+		r11F <= 20'd72090;
+		r12F <= 20'd61604;
+		r13F <= 20'd55050;
+		r14F <= 20'd47186;
+		r15F <= 20'd39322;
+		r16F <= 20'd30147;
+		r17F <= 20'd22282;
+		r18F <= 20'd17039;
+		r19F <= 20'd10486;
+		r20F <= 20'd5243;
+		strOutF <= 20'd0;
+		
+		etaF <= 20'd6318; // 0.0482
+		
+		stateF <= 0;
+	end
+	else
+	begin
+		case (stateF)
+		0:
+		begin
+			r1F <= strInF;
+			r2F <= r1F;
+			r3F <= r2F;
+			r4F <= r3F;
+			r5F <= r4F;
+			r6F <= r5F;
+			r7F <= r6F;
+			r8F <= r7F;
+			r9F <= r8F;
+			r10F <= r9F;
+			r11F <= r10F;
+			r12F <= r11F;
+			r13F <= r12F;
+			r14F <= r13F;
+			r15F <= r14F;
+			r16F <= r15F;
+			r17F <= r16F;
+			r18F <= r17F;
+			r19F <= r18F;
+			r20F <= r19F;
+			strOutF <= r20F;
+			
+			stateF <= 1;
+		end
+		1:
+		begin
+			xn_1F <= strOutF;
+			yn_1F <= ynF;
+			strInF <= low_passF;
+			
+			stateF <= 0;	
+		end
+		endcase
+	end
+end	
+
+// F#/Gb : 
+assign xn_etaGb = strOutGb * etaGb;
+assign yn_etaGb = yn_1Gb * etaGb;
+assign ynGb = {xn_etaGb[39], xn_etaGb[35:17]} - {yn_etaGb[39], yn_etaGb[35:17]} + xn_1Gb;
+assign low_passGb = ((yn_1Gb + ynGb) >>> 1) - ((yn_1Gb + ynGb) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[7])
+	begin
+		strInGb <= 20'd0;
+		r1Gb <= 20'd19660;
+		r2Gb <= 20'd41943;
+		r3Gb <= 20'd68157;
+		r4Gb <= 20'd102240;
+		r5Gb <= 20'd131072;
+		r6Gb <= 20'd120590;
+		r7Gb <= 20'd108790;
+		r8Gb <= 20'd98304;
+		r9Gb <= 20'd89129;
+		r10Gb <= 20'd78643;
+		r11Gb <= 20'd69468;
+		r12Gb <= 20'd60293;
+		r13Gb <= 20'd52429;
+		r14Gb <= 20'd43254;
+		r15Gb <= 20'd34079;
+		r16Gb <= 20'd26214;
+		r17Gb <= 20'd19661;
+		r18Gb <= 20'd13107;
+		r19Gb <= 20'd5243;
+		strOutGb <= 20'd0;
+		
+		etaGb <= 20'd30540; // 0.2330
+		
+		stateGb <= 0;
+	end
+	else
+	begin
+		case (stateGb)
+		0:
+		begin
+			r1Gb <= strInGb;
+			r2Gb <= r1Gb;
+			r3Gb <= r2Gb;
+			r4Gb <= r3Gb;
+			r5Gb <= r4Gb;
+			r6Gb <= r5Gb;
+			r7Gb <= r6Gb;
+			r8Gb <= r7Gb;
+			r9Gb <= r8Gb;
+			r10Gb <= r9Gb;
+			r11Gb <= r10Gb;
+			r12Gb <= r11Gb;
+			r13Gb <= r12Gb;
+			r14Gb <= r13Gb;
+			r15Gb <= r14Gb;
+			r16Gb <= r15Gb;
+			r17Gb <= r16Gb;
+			r18Gb <= r17Gb;
+			r19Gb <= r18Gb;
+			strOutGb <= r19Gb;
+			
+			stateGb <= 1;
+		end
+		1:
+		begin
+			xn_1Gb <= strOutGb;
+			yn_1Gb <= ynGb;
+			strInGb <= low_passGb;
+			
+			stateGb <= 0;	
+		end
+		endcase
+	end
+end
+
+// G :
+assign xn_etaG = strOutG * etaG;
+assign yn_etaG = yn_1G * etaG;
+assign ynG = {xn_etaG[39], xn_etaG[35:17]} - {yn_etaG[39], yn_etaG[35:17]} + xn_1G;
+assign low_passG = ((yn_1G + ynG) >>> 1) - ((yn_1G + ynG) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[8])
+	begin
+		strInG <= 20'd0;
+		r1G <= 20'd22282;
+		r2G <= 20'd55050;
+		r3G <= 20'd91750;
+		r4G <= 20'd131072;
+		r5G <= 20'd117960;
+		r6G <= 20'd107480;
+		r7G <= 20'd96993;
+		r8G <= 20'd86508;
+		r9G <= 20'd76022;
+		r10G <= 20'd65536;
+		r11G <= 20'd57672;
+		r12G <= 20'd48497;
+		r13G <= 20'd39322;
+		r14G <= 20'd31457;
+		r15G <= 20'd22282;
+		r16G <= 20'd15729;
+		r17G <= 20'd9175;
+		r18G <= 20'd3932;
+		strOutG <= 20'd0;
+		
+		etaG <= 20'd55116; // 0.4205
+		
+		stateG <= 0;
+	end
+	else
+	begin
+		case (stateG)
+		0:
+		begin
+			r1G <= strInG;
+			r2G <= r1G;
+			r3G <= r2G;
+			r4G <= r3G;
+			r5G <= r4G;
+			r6G <= r5G;
+			r7G <= r6G;
+			r8G <= r7G;
+			r9G <= r8G;
+			r10G <= r9G;
+			r11G <= r10G;
+			r12G <= r11G;
+			r13G <= r12G;
+			r14G <= r13G;
+			r15G <= r14G;
+			r16G <= r15G;
+			r17G <= r16G;
+			r18G <= r17G;
+			strOutG <= r18G;
+			
+			stateG <= 1;
+		end
+		1:
+		begin
+			xn_1G <= strOutG;
+			yn_1G <= ynG;
+			strInG <= low_passG;
+			
+			stateG <= 0;	
+		end
+		endcase
+	end
+end	
+
+// G#/Ab :
+assign xn_etaAb = strOutAb * etaAb;
+assign yn_etaAb = yn_1Ab * etaAb;
+assign ynAb = {xn_etaAb[39], xn_etaAb[35:17]} - {yn_etaAb[39], yn_etaAb[35:17]} + xn_1Ab;
+assign low_passAb = ((yn_1Ab + ynAb) >>> 1) - ((yn_1Ab + ynAb) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[9])
+	begin
+		strInAb <= 20'd0;
+		r1Ab <= 20'd22282;
+		r2Ab <= 20'd55050;
+		r3Ab <= 20'd91750;
+		r4Ab <= 20'd131072;
+		r5Ab <= 20'd119280;
+		r6Ab <= 20'd108790;
+		r7Ab <= 20'd99615;
+		r8Ab <= 20'd87818;
+		r9Ab <= 20'd77332;
+		r10Ab <= 20'd65536;
+		r11Ab <= 20'd57672;
+		r12Ab <= 20'd49807;
+		r13Ab <= 20'd39322;
+		r14Ab <= 20'd30147;
+		r15Ab <= 20'd20972;
+		r16Ab <= 20'd13107;
+		r17Ab <= 20'd5243;
+		strOutAb <= 20'd0;
+		
+		etaAb <= 20'd76481; // 0.5835
+		
+		stateAb <= 0;
+	end
+	else
+	begin
+		case (stateAb)
+		0:
+		begin
+			r1Ab <= strInAb;
+			r2Ab <= r1Ab;
+			r3Ab <= r2Ab;
+			r4Ab <= r3Ab;
+			r5Ab <= r4Ab;
+			r6Ab <= r5Ab;
+			r7Ab <= r6Ab;
+			r8Ab <= r7Ab;
+			r9Ab <= r8Ab;
+			r10Ab <= r9Ab;
+			r11Ab <= r10Ab;
+			r12Ab <= r11Ab;
+			r13Ab <= r12Ab;
+			r14Ab <= r13Ab;
+			r15Ab <= r14Ab;
+			r16Ab <= r15Ab;
+			r17Ab <= r16Ab;
+			strOutAb <= r17Ab;
+			
+			stateAb <= 1;
+		end
+		1:
+		begin
+			xn_1Ab <= strOutAb;
+			yn_1Ab <= ynAb;
+			strInAb <= low_passAb;
+			
+			stateAb <= 0;	
+		end
+		endcase
+	end
+end
+
+// A : 
+assign xn_etaA = strOutA * etaA;
+assign yn_etaA = yn_1A * etaA;
+assign ynA = {xn_etaA[39], xn_etaA[35:17]} - {yn_etaA[39], yn_etaA[35:17]} + xn_1A;
+assign low_passA = ((yn_1A + ynA) >>> 1) - ((yn_1A + ynA) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[10])
+	begin
+		strInA <= 20'd0;
+		r1A <= 20'd22282;
+		r2A <= 20'd55050;
+		r3A <= 20'd91750;
+		r4A <= 20'd131072;
+		r5A <= 20'd117960;
+		r6A <= 20'd104860;
+		r7A <= 20'd93061;
+		r8A <= 20'd81265;
+		r9A <= 20'd69468;
+		r10A <= 20'd60293;
+		r11A <= 20'd51118;
+		r12A <= 20'd39322;
+		r13A <= 20'd32768;
+		r14A <= 20'd23593;
+		r15A <= 20'd13107;
+		r16A <= 20'd5243;
+		strOutA <= 20'd0;
+		
+		etaA <= 20'd90702; // 0.6920
+		
+		stateA <= 0;
+	end
+	else
+	begin
+		case (stateA)
+		0:
+		begin
+			r1A <= strInA;
+			r2A <= r1A;
+			r3A <= r2A;
+			r4A <= r3A;
+			r5A <= r4A;
+			r6A <= r5A;
+			r7A <= r6A;
+			r8A <= r7A;
+			r9A <= r8A;
+			r10A <= r9A;
+			r11A <= r10A;
+			r12A <= r11A;
+			r13A <= r12A;
+			r14A <= r13A;
+			r15A <= r14A;
+			r16A <= r15A;
+			strOutA <= r16A;
+			
+			stateA <= 1;
+		end
+		1:
+		begin
+			xn_1A <= strOutA;
+			yn_1A <= ynA;
+			strInA <= low_passA;
+			
+			stateA <= 0;	
+		end
+		endcase
+	end
+end	
+
+// A#/Bb : 
+assign xn_etaBb = strOutBb * etaBb;
+assign yn_etaBb = yn_1Bb * etaBb;
+assign ynBb = {xn_etaBb[39], xn_etaBb[35:17]} - {yn_etaBb[39], yn_etaBb[35:17]} + xn_1Bb;
+assign low_passBb = ((yn_1Bb + ynBb) >>> 1) - ((yn_1Bb + ynBb) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[11])
+	begin
+		strInBb <= 20'd0;
+		r1Bb <= 20'd22282;
+		r2Bb <= 20'd55050;
+		r3Bb <= 20'd91750;
+		r4Bb <= 20'd131072;
+		r5Bb <= 20'd117960;
+		r6Bb <= 20'd102240;
+		r7Bb <= 20'd89129;
+		r8Bb <= 20'd77332;
+		r9Bb <= 20'd65536;
+		r10Bb <= 20'd55050;
+		r11Bb <= 20'd43254;
+		r12Bb <= 20'd34079;
+		r13Bb <= 20'd24904;
+		r14Bb <= 20'd14418;
+		r15Bb <= 20'd6554;
+		strOutBb <= 20'd0;
+		
+		etaBb <= 20'd94726; // 0.7227
+		
+		stateBb <= 0;
+	end
+	else
+	begin
+		case (stateBb)
+		0:
+		begin
+			r1Bb <= strInBb;
+			r2Bb <= r1Bb;
+			r3Bb <= r2Bb;
+			r4Bb <= r3Bb;
+			r5Bb <= r4Bb;
+			r6Bb <= r5Bb;
+			r7Bb <= r6Bb;
+			r8Bb <= r7Bb;
+			r9Bb <= r8Bb;
+			r10Bb <= r9Bb;
+			r11Bb <= r10Bb;
+			r12Bb <= r11Bb;
+			r13Bb <= r12Bb;
+			r14Bb <= r13Bb;
+			r15Bb <= r14Bb;
+			strOutBb <= r15Bb;
+			
+			stateBb <= 1;
+		end
+		1:
+		begin
+			xn_1Bb <= strOutBb;
+			yn_1Bb <= ynBb;
+			strInBb <= low_passBb;
+			
+			stateBb <= 0;	
+		end
+		endcase
+	end
+end
+
+// B : number not done
+assign xn_etaB = strOutB * etaB;
+assign yn_etaB = yn_1B * etaB;
+assign ynB = {xn_etaB[39], xn_etaB[35:17]} - {yn_etaB[39], yn_etaB[35:17]} + xn_1B;
+assign low_passB = ((yn_1B + ynB) >>> 1) - ((yn_1B + ynB) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[12])
+	begin
+		strInB <= 20'd0;
+		r1B <= 20'd41943;
+		r2B <= 20'd86508;
+		r3B <= 20'd131072;
+		r4B <= 20'd111410;
+		r5B <= 20'd96993;
+		r6B <= 20'd83886;
+		r7B <= 20'd69468;
+		r8B <= 20'd60293;
+		r9B <= 20'd48497;
+		r10B <= 20'd39322;
+		r11B <= 20'd30147;
+		r12B <= 20'd20972;
+		r13B <= 20'd13107;
+		r14B <= 20'd5243;
+		strOutB <= 20'd0;
+		
+		etaB <= 20'd87740; // 0.6694
+		
+		stateB <= 0;
+	end
+	else
+	begin
+		case (stateB)
+		0:
+		begin
+			r1B <= strInB;
+			r2B <= r1B;
+			r3B <= r2B;
+			r4B <= r3B;
+			r5B <= r4B;
+			r6B <= r5B;
+			r7B <= r6B;
+			r8B <= r7B;
+			r9B <= r8B;
+			r10B <= r9B;
+			r11B <= r10B;
+			r12B <= r11B;
+			r13B <= r12B;
+			r14B <= r13B;
+			strOutB <= r14B;
+			
+			stateB <= 1;
+		end
+		1:
+		begin
+			xn_1B <= strOutB;
+			yn_1B <= ynB;
+			strInB <= low_passB;
+			
+			stateB <= 0;	
+		end
+		endcase
+	end
+end	
+
+// C : 
+assign xn_etaC = strOutC * etaC;
+assign yn_etaC = yn_1C * etaC;
+assign ynC = {xn_etaC[39], xn_etaC[35:17]} - {yn_etaC[39], yn_etaC[35:17]} + xn_1C;
+assign low_passC = ((yn_1C + ynC) >>> 1) - ((yn_1C + ynC) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[13])
+	begin
+		strInC <= 20'd0;
+		r1C <= 20'd41943;
+		r2C <= 20'd86508;
+		r3C <= 20'd131072;
+		r4C <= 20'd115340;
+		r5C <= 20'd98304;
+		r6C <= 20'd82575;
+		r7C <= 20'd68157;
+		r8C <= 20'd56361;
+		r9C <= 20'd43254;
+		r10C <= 20'd31457;
+		r11C <= 20'd22282;
+		r12C <= 20'd13107;
+		r13C <= 20'd3932;
+		strOutC <= 20'd0;
+		
+		etaC <= 20'd72299; // 0.5516
+		
+		stateC <= 0;
+	end
+	else
+	begin
+		case (stateC)
+		0:
+		begin
+			r1C <= strInC;
+			r2C <= r1C;
+			r3C <= r2C;
+			r4C <= r3C;
+			r5C <= r4C;
+			r6C <= r5C;
+			r7C <= r6C;
+			r8C <= r7C;
+			r9C <= r8C;
+			r10C <= r9C;
+			r11C <= r10C;
+			r12C <= r11C;
+			r13C <= r12C;
+			strOutC <= r13C;
+			
+			stateC <= 1;
+		end
+		1:
+		begin
+			xn_1C <= strOutC;
+			yn_1C <= ynC;
+			strInC <= low_passC;
+			
+			stateC <= 0;	
+		end
+		endcase
+	end
+end	
+
+// High C#/Db : 
+assign xn_etaDB = strOutDB * etaDB;
+assign yn_etaDB = yn_1DB * etaDB;
+assign ynDB = {xn_etaDB[39], xn_etaDB[35:17]} - {yn_etaDB[39], yn_etaDB[35:17]} + xn_1DB;
+assign low_passDB = ((yn_1DB + ynDB) >>> 1) - ((yn_1DB + ynDB) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[14])
+	begin
+		strInDB <= 20'd0;
+		r1DB <= 20'd41943;
+		r2DB <= 20'd86508;
+		r3DB <= 20'd131072;
+		r4DB <= 20'd114033;
+		r5DB <= 20'd98304;
+		r6DB <= 20'd82575;
+		r7DB <= 20'd69468;
+		r8DB <= 20'd57672;
+		r9DB <= 20'd47186;
+		r10DB <= 20'd35389;
+		r11DB <= 20'd23593;
+		r12DB <= 20'd10486;
+		strOutDB <= 20'd0;
+		
+		etaDB <= 20'd52114; // 0.3976
+		
+		stateDB <= 0;
+	end
+	else
+	begin
+		case (stateDB)
+		0:
+		begin
+			r1DB <= strInDB;
+			r2DB <= r1DB;
+			r3DB <= r2DB;
+			r4DB <= r3DB;
+			r5DB <= r4DB;
+			r6DB <= r5DB;
+			r7DB <= r6DB;
+			r8DB <= r7DB;
+			r9DB <= r8DB;
+			r10DB <= r9DB;
+			r11DB <= r10DB;
+			r12DB <= r11DB;
+			strOutDB <= r12DB;
+			
+			stateDB <= 1;
+		end
+		1:
+		begin
+			xn_1DB <= strOutDB;
+			yn_1DB <= ynDB;
+			strInDB <= low_passDB;
+			
+			stateDB <= 0;	
+		end
+		endcase
+	end
+end
+
+// High D : 
+assign xn_etaDD = strOutDD * etaDD;
+assign yn_etaDD = yn_1DD * etaDD;
+assign ynDD = {xn_etaDD[39], xn_etaDD[35:17]} - {yn_etaDD[39], yn_etaDD[35:17]} + xn_1DD;
+assign low_passDD = ((yn_1DD + ynDD) >>> 1) - ((yn_1DD + ynDD) >>> 7); // damping: (0.5 - 0.0078125 = 0.4921875)
+
+always@ (posedge frequency)
+begin 
+	if(!KEY[1] && DPDT_SW[15])
+	begin
+		strInDD <= 20'd0;
+		r1DD <= 20'd41943;
+		r2DD <= 20'd86508;
+		r3DD <= 20'd131072;
+		r4DD <= 20'd112722;
+		r5DD <= 20'd95683;
+		r6DD <= 20'd78643;
+		r7DD <= 20'd61604;
+		r8DD <= 20'd45875;
+		r9DD <= 20'd34079;
+		r10DD <= 20'd20972;
+		r11DD <= 20'd10486;
+		strOutDD <= 20'd0;
+		
+		etaDD <= 20'd29334; // 0.2338
+		
+		stateDD <= 0;
+	end
+	else
+	begin
+		case (stateDD)
+		0:
+		begin
+			r1DD <= strInDD;
+			r2DD <= r1DD;
+			r3DD <= r2DD;
+			r4DD <= r3DD;
+			r5DD <= r4DD;
+			r6DD <= r5DD;
+			r7DD <= r6DD;
+			r8DD <= r7DD;
+			r9DD <= r8DD;
+			r10DD <= r9DD;
+			r11DD <= r10DD;
+			strOutDD <= r11DD;
+			
+			stateDD <= 1;
+		end
+		1:
+		begin
+			xn_1DD <= strOutDD;
+			yn_1DD <= ynDD;
+			strInDD <= low_passDD;
+			
+			stateDD <= 0;	
+		end
+		endcase
+	end
+end
+
+endmodule

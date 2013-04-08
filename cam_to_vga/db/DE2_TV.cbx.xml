@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="DE2_TV">
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_iep1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|YCbCr2RGB:u8|MAC_3:u1|altmult_add:ALTMULT_ADD_component" CBX_FILE_NAME="mult_add_4f74.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|DIV:u5|lpm_divide:lpm_divide_component" CBX_FILE_NAME="lpm_divide_d6t.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Line_Buffer:u10|altshift_taps:altshift_taps_component" CBX_FILE_NAME="shift_taps_k0r.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_iep1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|YCbCr2RGB:u8|MAC_3:u2|altmult_add:ALTMULT_ADD_component" CBX_FILE_NAME="mult_add_4f74.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component" CBX_FILE_NAME="shift_taps_k0r.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Mirror_Col:u100|Stack_RAM:comb_96|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ppq1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_iep1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Mirror_Col:u100|Stack_RAM:comb_130|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ppq1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Mirror_Col:u100|Stack_RAM:comb_62|altsyncram:altsyncram_component" CBX_FILE_NAME="altsyncram_ppq1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_iep1.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|DE2_TV|YCbCr2RGB:u8|MAC_3:u0|altmult_add:ALTMULT_ADD_component" CBX_FILE_NAME="mult_add_4f74.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
