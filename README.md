@@ -30,3 +30,15 @@ From left to right
 7 (Brown) GND
 
 Schematic: http://seb.riot.org/nescontr/ for the time being
+
+
+Confirmed GPIO pinout
+34
+32
+30
+28
+26
+VCC
+24
+22
+20
