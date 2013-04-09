@@ -165,9 +165,19 @@ module DE2_TV
   //  For Audio CODEC
   wire  AUD_CTRL_CLK;  //  For Audio Controller
   assign  AUD_XCK = AUD_CTRL_CLK;
+  
+  //assign GPIO_0[28] = BTN_a;
+  assign GPIO_0[34] = DPDT_SW[0];
+  assign GPIO_0[32] = DPDT_SW[1];
+  assign GPIO_0[30] = DPDT_SW[2];
+  assign GPIO_0[28] = DPDT_SW[3];
+  assign GPIO_0[26] = DPDT_SW[4];
+  assign GPIO_0[24] = DPDT_SW[5];
+  assign GPIO_0[22] = DPDT_SW[6];
+  assign GPIO_0[20] = DPDT_SW[7];
 
   //  7 segment LUT
-  SEG7_LUT_8 u0 
+  /*SEG7_LUT_8 u0 
   (
     .oSEG0  (HEX0),
     .oSEG1  (HEX1),
@@ -178,7 +188,7 @@ module DE2_TV
     .oSEG6  (HEX6),
     .oSEG7  (HEX7),
     .iDIG   (DPDT_SW) 
-  );
+  );*/
 
   // Audio CODEC and video decoder setting
   I2C_AV_Config u1  
@@ -313,8 +323,7 @@ module DE2_TV
   );
 
   // Comment out this module if you don't want the mirror effect
-  //Don't do that, actually just feed mRed, mGreen, mBlue into the assign for VGA RGB
-  Mirror_Col u100  
+  /*Mirror_Col u100  
   (  //  Input Side
     .iCCD_R       (mRed),
     .iCCD_G       (mGreen),
@@ -327,7 +336,7 @@ module DE2_TV
     .oCCD_G       (Green),
     .oCCD_B       (Blue)//,
     //.oCCD_DVAL(TV_DVAL));
-  );
+  );*/
 
   //VGA Controller
   VGA_Ctrl u9 
