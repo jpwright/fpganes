@@ -1,5 +1,5 @@
 Assembler report for DE2_TV
-Tue Apr 09 15:30:52 2013
+Wed Apr 10 13:13:49 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -10,8 +10,8 @@ Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/cam_to_vga/DE2_TV.sof
-  6. Assembler Device Options: C:/cam_to_vga/DE2_TV.pof
+  5. Assembler Device Options: C:/fpganes/cam_to_vga/DE2_TV.sof
+  6. Assembler Device Options: C:/fpganes/cam_to_vga/DE2_TV.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Tue Apr 09 15:30:52 2013 ;
+; Assembler Status      ; Successful - Wed Apr 10 13:13:49 2013 ;
 ; Revision Name         ; DE2_TV                                ;
 ; Top-level Entity Name ; DE2_TV                                ;
 ; Family                ; Cyclone II                            ;
@@ -78,37 +78,37 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------+
-; Assembler Generated Files ;
-+---------------------------+
-; File Name                 ;
-+---------------------------+
-; C:/cam_to_vga/DE2_TV.sof  ;
-; C:/cam_to_vga/DE2_TV.pof  ;
-+---------------------------+
++----------------------------------+
+; Assembler Generated Files        ;
++----------------------------------+
+; File Name                        ;
++----------------------------------+
+; C:/fpganes/cam_to_vga/DE2_TV.sof ;
+; C:/fpganes/cam_to_vga/DE2_TV.pof ;
++----------------------------------+
 
 
-+----------------------------------------------------+
-; Assembler Device Options: C:/cam_to_vga/DE2_TV.sof ;
-+----------------+-----------------------------------+
-; Option         ; Setting                           ;
-+----------------+-----------------------------------+
-; Device         ; EP2C35F672C8                      ;
-; JTAG usercode  ; 0xFFFFFFFF                        ;
-; Checksum       ; 0x00408349                        ;
-+----------------+-----------------------------------+
++------------------------------------------------------------+
+; Assembler Device Options: C:/fpganes/cam_to_vga/DE2_TV.sof ;
++----------------+-------------------------------------------+
+; Option         ; Setting                                   ;
++----------------+-------------------------------------------+
+; Device         ; EP2C35F672C8                              ;
+; JTAG usercode  ; 0xFFFFFFFF                                ;
+; Checksum       ; 0x00430943                                ;
++----------------+-------------------------------------------+
 
 
-+----------------------------------------------------+
-; Assembler Device Options: C:/cam_to_vga/DE2_TV.pof ;
-+--------------------+-------------------------------+
-; Option             ; Setting                       ;
-+--------------------+-------------------------------+
-; Device             ; EPCS16                        ;
-; JTAG usercode      ; 0x00000000                    ;
-; Checksum           ; 0x1C53371B                    ;
-; Compression Ratio  ; 3                             ;
-+--------------------+-------------------------------+
++------------------------------------------------------------+
+; Assembler Device Options: C:/fpganes/cam_to_vga/DE2_TV.pof ;
++--------------------+---------------------------------------+
+; Option             ; Setting                               ;
++--------------------+---------------------------------------+
+; Device             ; EPCS16                                ;
+; JTAG usercode      ; 0x00000000                            ;
+; Checksum           ; 0x1C5053C8                            ;
+; Compression Ratio  ; 3                                     ;
++--------------------+---------------------------------------+
 
 
 +--------------------+
@@ -117,13 +117,13 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Assembler
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Tue Apr 09 15:30:49 2013
+    Info: Processing started: Wed Apr 10 13:13:46 2013
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off DE2_TV -c DE2_TV
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II 64-Bit Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 387 megabytes
-    Info: Processing ended: Tue Apr 09 15:30:52 2013
+    Info: Processing ended: Wed Apr 10 13:13:49 2013
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 

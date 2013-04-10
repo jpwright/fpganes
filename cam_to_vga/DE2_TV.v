@@ -167,14 +167,105 @@ module DE2_TV
   assign  AUD_XCK = AUD_CTRL_CLK;
   
   //assign GPIO_0[28] = BTN_a;
-  assign GPIO_0[34] = DPDT_SW[0];
-  assign GPIO_0[32] = DPDT_SW[1];
-  assign GPIO_0[30] = DPDT_SW[2];
-  assign GPIO_0[28] = DPDT_SW[3];
-  assign GPIO_0[26] = DPDT_SW[4];
-  assign GPIO_0[24] = DPDT_SW[5];
-  assign GPIO_0[22] = DPDT_SW[6];
-  assign GPIO_0[20] = DPDT_SW[7];
+  
+  assign GPIO_0[34] = DPDT_SW[0]; //Start
+  assign GPIO_0[32] = DPDT_SW[1]; //Select
+  /*
+  assign GPIO_0[30] = DPDT_SW[2]; //B
+  assign GPIO_0[28] = DPDT_SW[3]; //A
+  assign GPIO_0[26] = DPDT_SW[4]; //Right
+  assign GPIO_0[24] = DPDT_SW[5]; //Left
+  assign GPIO_0[22] = DPDT_SW[6]; //Up
+  assign GPIO_0[20] = DPDT_SW[7]; //Down
+  */
+  
+  //assign GPIO_0[24] = KEY[3]; //Left
+  //assign GPIO_0[26] = KEY[2]; //Right
+  //assign GPIO_0[30] = KEY[1]; //B
+  //assign GPIO_0[28] = KEY[0]; //A
+  
+  reg BTN_left = 1;
+  
+  reg BTN_right = 0;
+  reg BTN_b = 0;
+  reg BTN_a = 1;
+  
+  assign GPIO_0[24] = BTN_left;
+  assign GPIO_0[26] = BTN_right || ~DPDT_SW[0]; //Release if we push start
+  assign GPIO_0[30] = BTN_b || ~DPDT_SW[0]; //Release if we push start
+  assign GPIO_0[28] = BTN_a;
+  
+  
+  
+  
+  reg[3:0] seconds_ones;
+  reg[3:0] seconds_tens;
+  reg[3:0] seconds_hundreds;
+  reg[3:0] seconds_thousands;
+	 
+  reg[26:0] counter_ones;
+	 
+	//every 1 seconds
+	always@(posedge OSC_50 or negedge KEY[0])
+	begin
+		if(!KEY[0])
+		begin
+			seconds_ones		<=	0;
+			seconds_tens		<= 0;
+			seconds_hundreds 	<= 0;
+			seconds_thousands <= 0;
+			counter_ones		<=	0;
+		end
+		else
+		begin
+			if(counter_ones == 49999999 )
+			begin
+				seconds_ones	<=	seconds_ones+1;
+				//BTN_a <= ~BTN_a;
+				counter_ones	<=	0;		
+			end
+
+			else
+				if (counter_ones % 20000000 == 0)
+				begin
+					BTN_a <= ~BTN_a;
+			   end
+				 counter_ones	<=	counter_ones+1;	
+
+
+			if (seconds_ones == 10)
+			begin
+				seconds_ones <= 0;
+				seconds_tens <= seconds_tens+1;
+			end
+
+			if (seconds_tens == 10)
+			begin
+				seconds_tens <=0;
+				seconds_hundreds <= seconds_hundreds+1;
+			end
+
+			if (seconds_hundreds == 10)
+			begin
+				seconds_hundreds <= 0;
+				seconds_thousands <= seconds_thousands+1;
+			end
+
+
+		end
+	end
+
+
+	HexDigit H0(HEX0, seconds_ones);
+	HexDigit H1(HEX1, seconds_tens);
+	HexDigit H2(HEX2, seconds_hundreds);
+	HexDigit H3(HEX3, seconds_thousands);
+
+	assign HEX4 = 7'h7F;
+	assign HEX5 = 7'h7F;
+	assign HEX6 = 7'h7F;
+	assign HEX7 = 7'h7F;
+  
 
   //  7 segment LUT
   /*SEG7_LUT_8 u0 
@@ -464,3 +555,28 @@ module DE2_TV
   );
 
 endmodule
+
+//////////////////////////////////////////////
+// Decode one hex digit for LED 7-seg display
+module HexDigit(segs, num);
+	input [3:0] num	;		//the hex digit to be displayed
+	output [6:0] segs ;		//actual LED segments
+	reg [6:0] segs ;
+	always @ (num)
+	begin
+		case (num)
+				4'h0: segs = 7'b1000000;
+				4'h1: segs = 7'b1111001;
+				4'h2: segs = 7'b0100100;
+				4'h3: segs = 7'b0110000;
+				4'h4: segs = 7'b0011001;
+				4'h5: segs = 7'b0010010;
+				4'h6: segs = 7'b0000010;
+				4'h7: segs = 7'b1111000;
+				4'h8: segs = 7'b0000000;
+				4'h9: segs = 7'b0010000;
+				default segs = 7'b1111111;
+		endcase
+	end
+endmodule
+///////////////////////////////////////////////
