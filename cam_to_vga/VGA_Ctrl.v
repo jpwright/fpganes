@@ -52,7 +52,7 @@ parameter	H_TOTAL	=	H_FRONT+H_SYNC+H_BACK+H_ACT;
 ////////////////////////////////////////////////////////////
 //	Vertical Parameter
 parameter	V_FRONT	=	11;
-parameter	V_SYNC	=	2;
+parameter	V_SYNC	=	2; //2
 parameter	V_BACK	=	31;
 parameter	V_ACT	=	480;
 parameter	V_BLANK	=	V_FRONT+V_SYNC+V_BACK;

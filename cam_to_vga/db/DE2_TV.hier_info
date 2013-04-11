@@ -165,7 +165,7 @@ GPIO_0[24] <> <VCC>
 GPIO_0[25] <> <UNC>
 GPIO_0[26] <> GPIO_0[26]
 GPIO_0[27] <> <UNC>
-GPIO_0[28] <> GPIO_0[28]
+GPIO_0[28] <> <VCC>
 GPIO_0[29] <> <UNC>
 GPIO_0[30] <> GPIO_0[30]
 GPIO_0[31] <> <UNC>

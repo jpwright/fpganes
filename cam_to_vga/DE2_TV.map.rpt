@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE2_TV
-Wed Apr 10 13:13:19 2013
+Thu Apr 11 15:40:54 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -121,32 +121,31 @@ Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 113. Parameter Settings for User Entity Instance: Line_Buffer:u10|altshift_taps:altshift_taps_component
 114. Parameter Settings for User Entity Instance: Line_Buffer:u11|altshift_taps:altshift_taps_component
 115. Parameter Settings for User Entity Instance: AUDIO_DAC_ADC:u12
-116. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
-117. altpll Parameter Settings by Entity Instance
-118. dcfifo Parameter Settings by Entity Instance
-119. altmult_add Parameter Settings by Entity Instance
-120. altshift_taps Parameter Settings by Entity Instance
-121. Port Connectivity Checks: "AUDIO_DAC_ADC:u12"
-122. Port Connectivity Checks: "Line_Buffer:u11"
-123. Port Connectivity Checks: "Line_Buffer:u10"
-124. Port Connectivity Checks: "VGA_Ctrl:u9"
-125. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u2"
-126. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u1"
-127. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u0"
-128. Port Connectivity Checks: "YCbCr2RGB:u8"
-129. Port Connectivity Checks: "YUV422_to_444:u7"
-130. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2"
-131. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1"
-132. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2"
-133. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1"
-134. Port Connectivity Checks: "Sdram_Control_4Port:u6|sdr_data_path:data_path1"
-135. Port Connectivity Checks: "Sdram_Control_4Port:u6|control_interface:control1"
-136. Port Connectivity Checks: "Sdram_Control_4Port:u6"
-137. Port Connectivity Checks: "DIV:u5"
-138. Port Connectivity Checks: "ITU_656_Decoder:u4"
-139. Port Connectivity Checks: "I2C_AV_Config:u1|I2C_Controller:u0"
-140. Elapsed Time Per Partition
-141. Analysis & Synthesis Messages
+116. altpll Parameter Settings by Entity Instance
+117. dcfifo Parameter Settings by Entity Instance
+118. altmult_add Parameter Settings by Entity Instance
+119. altshift_taps Parameter Settings by Entity Instance
+120. Port Connectivity Checks: "AUDIO_DAC_ADC:u12"
+121. Port Connectivity Checks: "Line_Buffer:u11"
+122. Port Connectivity Checks: "Line_Buffer:u10"
+123. Port Connectivity Checks: "VGA_Ctrl:u9"
+124. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u2"
+125. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u1"
+126. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u0"
+127. Port Connectivity Checks: "YCbCr2RGB:u8"
+128. Port Connectivity Checks: "YUV422_to_444:u7"
+129. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2"
+130. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1"
+131. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2"
+132. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1"
+133. Port Connectivity Checks: "Sdram_Control_4Port:u6|sdr_data_path:data_path1"
+134. Port Connectivity Checks: "Sdram_Control_4Port:u6|control_interface:control1"
+135. Port Connectivity Checks: "Sdram_Control_4Port:u6"
+136. Port Connectivity Checks: "DIV:u5"
+137. Port Connectivity Checks: "ITU_656_Decoder:u4"
+138. Port Connectivity Checks: "I2C_AV_Config:u1|I2C_Controller:u0"
+139. Elapsed Time Per Partition
+140. Analysis & Synthesis Messages
 
 
 
@@ -172,15 +171,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Apr 10 13:13:19 2013     ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 11 15:40:54 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
-; Total logic elements               ; 1,919                                     ;
-;     Total combinational functions  ; 1,607                                     ;
-;     Dedicated logic registers      ; 1,063                                     ;
-; Total registers                    ; 1063                                      ;
+; Total logic elements               ; 1,639                                     ;
+;     Total combinational functions  ; 1,327                                     ;
+;     Dedicated logic registers      ; 1,019                                     ;
+; Total registers                    ; 1019                                      ;
 ; Total pins                         ; 426                                       ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 53,184                                    ;
@@ -374,9 +373,6 @@ applicable agreement for further details.
 ; db/cntr_hpf.tdf                           ; yes             ; Auto-Generated Megafunction  ; C:/fpganes/cam_to_vga/db/cntr_hpf.tdf                               ;
 ; db/cmpr_ldc.tdf                           ; yes             ; Auto-Generated Megafunction  ; C:/fpganes/cam_to_vga/db/cmpr_ldc.tdf                               ;
 ; audio_dac_adc.v                           ; yes             ; Auto-Found Verilog HDL File  ; C:/fpganes/cam_to_vga/audio_dac_adc.v                               ;
-; db/lpm_divide_88m.tdf                     ; yes             ; Auto-Generated Megafunction  ; C:/fpganes/cam_to_vga/db/lpm_divide_88m.tdf                         ;
-; db/sign_div_unsign_fnh.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/fpganes/cam_to_vga/db/sign_div_unsign_fnh.tdf                    ;
-; db/alt_u_div_06f.tdf                      ; yes             ; Auto-Generated Megafunction  ; C:/fpganes/cam_to_vga/db/alt_u_div_06f.tdf                          ;
 +-------------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
 
 
@@ -385,20 +381,20 @@ applicable agreement for further details.
 +---------------------------------------------+---------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                     ;
 +---------------------------------------------+---------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,919                                                                     ;
+; Estimated Total logic elements              ; 1,639                                                                     ;
 ;                                             ;                                                                           ;
-; Total combinational functions               ; 1607                                                                      ;
+; Total combinational functions               ; 1327                                                                      ;
 ; Logic element usage by number of LUT inputs ;                                                                           ;
-;     -- 4 input functions                    ; 595                                                                       ;
-;     -- 3 input functions                    ; 441                                                                       ;
-;     -- <=2 input functions                  ; 571                                                                       ;
+;     -- 4 input functions                    ; 513                                                                       ;
+;     -- 3 input functions                    ; 397                                                                       ;
+;     -- <=2 input functions                  ; 417                                                                       ;
 ;                                             ;                                                                           ;
 ; Logic elements by mode                      ;                                                                           ;
-;     -- normal mode                          ; 1007                                                                      ;
-;     -- arithmetic mode                      ; 600                                                                       ;
+;     -- normal mode                          ; 814                                                                       ;
+;     -- arithmetic mode                      ; 513                                                                       ;
 ;                                             ;                                                                           ;
-; Total registers                             ; 1063                                                                      ;
-;     -- Dedicated logic registers            ; 1063                                                                      ;
+; Total registers                             ; 1019                                                                      ;
+;     -- Dedicated logic registers            ; 1019                                                                      ;
 ;     -- I/O registers                        ; 0                                                                         ;
 ;                                             ;                                                                           ;
 ; I/O pins                                    ; 426                                                                       ;
@@ -409,8 +405,8 @@ applicable agreement for further details.
 ;                                             ;                                                                           ;
 ; Maximum fan-out node                        ; Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0 ;
 ; Maximum fan-out                             ; 513                                                                       ;
-; Total fan-out                               ; 10248                                                                     ;
-; Average fan-out                             ; 3.19                                                                      ;
+; Total fan-out                               ; 9319                                                                      ;
+; Average fan-out                             ; 3.23                                                                      ;
 +---------------------------------------------+---------------------------------------------------------------------------+
 
 
@@ -419,18 +415,14 @@ applicable agreement for further details.
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                       ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                               ; Library Name ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_TV                                          ; 1607 (134)        ; 1063 (44)    ; 53184       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
+; |DE2_TV                                          ; 1327 (46)         ; 1019 (0)     ; 53184       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
 ;    |AUDIO_DAC_ADC:u12|                           ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|AUDIO_DAC_ADC:u12                                                                                                                                         ;              ;
 ;    |DIV:u5|                                      ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5                                                                                                                                                    ;              ;
 ;       |lpm_divide:lpm_divide_component|          ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component                                                                                                                    ;              ;
 ;          |lpm_divide_d6t:auto_generated|         ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component|lpm_divide_d6t:auto_generated                                                                                      ;              ;
 ;             |sign_div_unsign_3li:divider|        ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component|lpm_divide_d6t:auto_generated|sign_div_unsign_3li:divider                                                          ;              ;
 ;                |alt_u_div_p1g:divider|           ; 60 (60)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component|lpm_divide_d6t:auto_generated|sign_div_unsign_3li:divider|alt_u_div_p1g:divider                                    ;              ;
-;    |HexDigit:H0|                                 ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|HexDigit:H0                                                                                                                                               ;              ;
-;    |HexDigit:H1|                                 ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|HexDigit:H1                                                                                                                                               ;              ;
-;    |HexDigit:H2|                                 ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|HexDigit:H2                                                                                                                                               ;              ;
-;    |HexDigit:H3|                                 ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|HexDigit:H3                                                                                                                                               ;              ;
-;    |I2C_AV_Config:u1|                            ; 169 (121)         ; 73 (44)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|I2C_AV_Config:u1                                                                                                                                          ;              ;
+;    |I2C_AV_Config:u1|                            ; 168 (120)         ; 73 (44)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|I2C_AV_Config:u1                                                                                                                                          ;              ;
 ;       |I2C_Controller:u0|                        ; 48 (48)           ; 29 (29)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|I2C_AV_Config:u1|I2C_Controller:u0                                                                                                                        ;              ;
 ;    |ITU_656_Decoder:u4|                          ; 50 (50)           ; 80 (80)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|ITU_656_Decoder:u4                                                                                                                                        ;              ;
 ;    |Line_Buffer:u10|                             ; 15 (0)            ; 10 (0)       ; 10208       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u10                                                                                                                                           ;              ;
@@ -445,7 +437,7 @@ applicable agreement for further details.
 ;             |altsyncram_q0c1:altsyncram2|        ; 0 (0)             ; 0 (0)        ; 10208       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|altsyncram_q0c1:altsyncram2                                           ;              ;
 ;             |cntr_hpf:cntr1|                     ; 15 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1                                                        ;              ;
 ;                |cmpr_ldc:cmpr5|                  ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5                                         ;              ;
-;    |Reset_Delay:u3|                              ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Reset_Delay:u3                                                                                                                                            ;              ;
+;    |Reset_Delay:u3|                              ; 34 (34)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Reset_Delay:u3                                                                                                                                            ;              ;
 ;    |Sdram_Control_4Port:u6|                      ; 580 (192)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
 ;       |Sdram_PLL:sdram_pll1|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1                                                                                                               ;              ;
 ;          |altpll:altpll_component|               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component                                                                                       ;              ;
@@ -534,10 +526,6 @@ applicable agreement for further details.
 ;                |ded_mult_ob91:ded_mult2|         ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u2|altmult_add:ALTMULT_ADD_component|mult_add_4f74:auto_generated|ded_mult_ob91:ded_mult2                                              ;              ;
 ;                |ded_mult_ob91:ded_mult3|         ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u2|altmult_add:ALTMULT_ADD_component|mult_add_4f74:auto_generated|ded_mult_ob91:ded_mult3                                              ;              ;
 ;    |YUV422_to_444:u7|                            ; 8 (8)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|YUV422_to_444:u7                                                                                                                                          ;              ;
-;    |lpm_divide:Mod0|                             ; 164 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|lpm_divide:Mod0                                                                                                                                           ;              ;
-;       |lpm_divide_88m:auto_generated|            ; 164 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|lpm_divide:Mod0|lpm_divide_88m:auto_generated                                                                                                             ;              ;
-;          |sign_div_unsign_fnh:divider|           ; 164 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|lpm_divide:Mod0|lpm_divide_88m:auto_generated|sign_div_unsign_fnh:divider                                                                                 ;              ;
-;             |alt_u_div_06f:divider|              ; 164 (164)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|lpm_divide:Mod0|lpm_divide_88m:auto_generated|sign_div_unsign_fnh:divider|alt_u_div_06f:divider                                                           ;              ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -774,10 +762,10 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1063  ;
-; Number of registers using Synchronous Clear  ; 175   ;
+; Total registers                              ; 1019  ;
+; Number of registers using Synchronous Clear  ; 163   ;
 ; Number of registers using Synchronous Load   ; 79    ;
-; Number of registers using Asynchronous Clear ; 688   ;
+; Number of registers using Asynchronous Clear ; 645   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 284   ;
 ; Number of registers using Preset             ; 0     ;
@@ -800,7 +788,6 @@ Encoding Type:  One-Hot
 ; VGA_Ctrl:u9|oVGA_VS                                                                                                                           ; 2       ;
 ; I2C_AV_Config:u1|I2C_Controller:u0|END                                                                                                        ; 5       ;
 ; I2C_AV_Config:u1|I2C_Controller:u0|SDO                                                                                                        ; 4       ;
-; BTN_a                                                                                                                                         ; 2       ;
 ; DIV:u5|lpm_divide:lpm_divide_component|lpm_divide_d6t:auto_generated|sign_div_unsign_3li:divider|alt_u_div_p1g:divider|DFFDenominator[2]      ; 10      ;
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0 ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0 ; 1       ;
@@ -809,7 +796,7 @@ Encoding Type:  One-Hot
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
-; Total number of inverted registers = 20                                                                                                       ;         ;
+; Total number of inverted registers = 19                                                                                                       ;         ;
 +-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -818,21 +805,21 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                          ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[1]               ;                            ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[10] ;                            ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[1]    ;                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[11]              ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[14] ;                            ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[2]    ;                            ;
 ; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[0]                                        ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[9]                                      ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[4]                                       ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[18]                            ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[5]                                      ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[0]                                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[20]                            ;                            ;
 ; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[8]                         ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[8]                         ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[8]                         ;                            ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_shift[1]         ;                            ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[2]                                 ;                            ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|RD_MASK[0]                           ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[13]                        ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[11]                        ;                            ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_shift[0]         ;                            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[6]                                 ;                            ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|RD_MASK[1]                           ;                            ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|CMD[0]                               ;                            ;
-; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[0]                                ;                            ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[7]                                ;                            ;
 +--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
 
 
@@ -2939,29 +2926,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0 ;
-+------------------------+----------------+------------------------+
-; Parameter Name         ; Value          ; Type                   ;
-+------------------------+----------------+------------------------+
-; LPM_WIDTHN             ; 27             ; Untyped                ;
-; LPM_WIDTHD             ; 25             ; Untyped                ;
-; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                ;
-; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                ;
-; LPM_PIPELINE           ; 0              ; Untyped                ;
-; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
-; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
-; CBXI_PARAMETER         ; lpm_divide_88m ; Untyped                ;
-; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
-; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
-; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
-; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
-; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
-; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
-+------------------------+----------------+------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +-----------------------------------------------------------------------------------------------------+
 ; altpll Parameter Settings by Entity Instance                                                        ;
 +-------------------------------+---------------------------------------------------------------------+
@@ -3381,7 +3345,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:11     ;
+; Top            ; 00:00:07     ;
 +----------------+--------------+
 
 
@@ -3391,7 +3355,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Wed Apr 10 13:13:04 2013
+    Info: Processing started: Thu Apr 11 15:40:41 2013
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE2_TV -c DE2_TV
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Found 1 design units, including 1 entities, in source file stack_ram.v
@@ -3460,11 +3424,6 @@ Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(57):
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(65): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(73): instance has no name
 Info: Elaborating entity "DE2_TV" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(223): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(233): truncated value with size 32 to match size of target (27)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(239): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(245): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(251): truncated value with size 32 to match size of target (4)
 Warning (10034): Output port "LED_GREEN" at DE2_TV.v(55) has no driver
 Warning (10034): Output port "LED_RED" at DE2_TV.v(56) has no driver
 Warning (10034): Output port "FL_ADDR" at DE2_TV.v(78) has no driver
@@ -3544,108 +3503,108 @@ Info: Found 1 design units, including 1 entities, in source file db/add_sub_mkc.
 Info: Elaborating entity "add_sub_mkc" for hierarchy "DIV:u5|lpm_divide:lpm_divide_component|lpm_divide_d6t:auto_generated|sign_div_unsign_3li:divider|alt_u_div_p1g:divider|add_sub_mkc:add_sub_1"
 Info: Elaborating entity "Sdram_Control_4Port" for hierarchy "Sdram_Control_4Port:u6"
 Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(372): truncated value with size 32 to match size of target (10)
-Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(415): truncated value with size 32 to match size of target (23)
-Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(417): truncated value with size 32 to match size of target (23)
+Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(416): truncated value with size 32 to match size of target (23)
 Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(418): truncated value with size 32 to match size of target (23)
 Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(419): truncated value with size 32 to match size of target (23)
 Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(420): truncated value with size 32 to match size of target (23)
 Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(421): truncated value with size 32 to match size of target (23)
-Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(410): inferring latch(es) for variable "rWR1_MAX_ADDR", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(410): inferring latch(es) for variable "rWR2_MAX_ADDR", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(410): inferring latch(es) for variable "rRD1_MAX_ADDR", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(410): inferring latch(es) for variable "rRD2_MAX_ADDR", which holds its previous value in one or more paths through the always construct
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[0]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[1]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[2]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[3]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[4]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[5]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[6]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[7]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[8]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[9]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[10]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[11]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[12]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[13]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[14]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[15]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[16]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[17]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[18]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[19]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[20]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[21]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD2_MAX_ADDR[22]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[0]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[1]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[2]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[3]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[4]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[5]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[6]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[7]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[8]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[9]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[10]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[11]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[12]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[13]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[14]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[15]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[16]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[17]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[18]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[19]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[20]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[21]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rRD1_MAX_ADDR[22]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[0]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[1]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[2]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[3]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[4]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[5]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[6]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[7]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[8]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[9]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[10]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[11]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[12]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[13]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[14]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[15]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[16]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[17]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[18]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[19]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[20]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[21]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR2_MAX_ADDR[22]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[0]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[1]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[2]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[3]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[4]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[5]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[6]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[7]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[8]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[9]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[10]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[11]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[12]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[13]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[14]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[15]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[16]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[17]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[18]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[19]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[20]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[21]" at Sdram_Control_4Port.v(410)
-Info (10041): Inferred latch for "rWR1_MAX_ADDR[22]" at Sdram_Control_4Port.v(410)
+Warning (10230): Verilog HDL assignment warning at Sdram_Control_4Port.v(422): truncated value with size 32 to match size of target (23)
+Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(411): inferring latch(es) for variable "rWR1_MAX_ADDR", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(411): inferring latch(es) for variable "rWR2_MAX_ADDR", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(411): inferring latch(es) for variable "rRD1_MAX_ADDR", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at Sdram_Control_4Port.v(411): inferring latch(es) for variable "rRD2_MAX_ADDR", which holds its previous value in one or more paths through the always construct
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[0]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[1]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[2]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[3]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[4]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[5]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[6]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[7]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[8]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[9]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[10]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[11]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[12]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[13]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[14]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[15]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[16]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[17]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[18]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[19]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[20]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[21]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD2_MAX_ADDR[22]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[0]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[1]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[2]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[3]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[4]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[5]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[6]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[7]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[8]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[9]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[10]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[11]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[12]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[13]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[14]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[15]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[16]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[17]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[18]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[19]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[20]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[21]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rRD1_MAX_ADDR[22]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[0]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[1]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[2]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[3]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[4]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[5]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[6]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[7]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[8]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[9]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[10]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[11]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[12]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[13]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[14]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[15]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[16]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[17]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[18]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[19]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[20]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[21]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR2_MAX_ADDR[22]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[0]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[1]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[2]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[3]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[4]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[5]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[6]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[7]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[8]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[9]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[10]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[11]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[12]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[13]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[14]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[15]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[16]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[17]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[18]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[19]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[20]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[21]" at Sdram_Control_4Port.v(411)
+Info (10041): Inferred latch for "rWR1_MAX_ADDR[22]" at Sdram_Control_4Port.v(411)
 Info: Elaborating entity "Sdram_PLL" for hierarchy "Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1"
 Info: Elaborating entity "altpll" for hierarchy "Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component"
 Info: Elaborated megafunction instantiation "Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component"
@@ -3888,26 +3847,11 @@ Info: Ignored 80 buffer(s)
     Info: Ignored 80 SOFT buffer(s)
 Info: Found 1 instances of uninferred RAM logic
     Info: RAM logic "I2C_AV_Config:u1|Ram0" is uninferred due to asynchronous read logic
-Info: Inferred 1 megafunctions from design logic
-    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0"
-Info: Elaborated megafunction instantiation "lpm_divide:Mod0"
-Info: Instantiated megafunction "lpm_divide:Mod0" with the following parameter:
-    Info: Parameter "LPM_WIDTHN" = "27"
-    Info: Parameter "LPM_WIDTHD" = "25"
-    Info: Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
-    Info: Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
-Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_88m.tdf
-    Info: Found entity 1: lpm_divide_88m
-Info: Found 1 design units, including 1 entities, in source file db/sign_div_unsign_fnh.tdf
-    Info: Found entity 1: sign_div_unsign_fnh
-Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_06f.tdf
-    Info: Found entity 1: alt_u_div_06f
 Warning: 13 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning: The following nodes have both tri-state and non-tri-state drivers
     Warning: Inserted always-enabled tri-state buffer between "AUD_DACLRCK" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "AUD_BCLK" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[26]" and its non-tri-state driver.
-    Warning: Inserted always-enabled tri-state buffer between "GPIO_0[28]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[30]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[32]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[34]" and its non-tri-state driver.
@@ -4048,6 +3992,7 @@ Warning: The following bidir pins have no drivers
     Warning: Bidir "GPIO_1[35]" has no driver
 Warning: The following tri-state nodes are fed by constants
     Warning: The pin "GPIO_0[24]" is fed by VCC
+    Warning: The pin "GPIO_0[28]" is fed by VCC
 Info: Registers with preset signals will power-up high
 Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning: TRI or OPNDRN buffers permanently enabled
@@ -4060,6 +4005,34 @@ Warning: TRI or OPNDRN buffers permanently enabled
     Warning: Node "GPIO_0[32]~synth"
     Warning: Node "GPIO_0[34]~synth"
 Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "HEX0[0]" is stuck at GND
+    Warning (13410): Pin "HEX0[1]" is stuck at GND
+    Warning (13410): Pin "HEX0[2]" is stuck at GND
+    Warning (13410): Pin "HEX0[3]" is stuck at GND
+    Warning (13410): Pin "HEX0[4]" is stuck at GND
+    Warning (13410): Pin "HEX0[5]" is stuck at GND
+    Warning (13410): Pin "HEX0[6]" is stuck at VCC
+    Warning (13410): Pin "HEX1[0]" is stuck at GND
+    Warning (13410): Pin "HEX1[1]" is stuck at GND
+    Warning (13410): Pin "HEX1[2]" is stuck at GND
+    Warning (13410): Pin "HEX1[3]" is stuck at GND
+    Warning (13410): Pin "HEX1[4]" is stuck at GND
+    Warning (13410): Pin "HEX1[5]" is stuck at GND
+    Warning (13410): Pin "HEX1[6]" is stuck at VCC
+    Warning (13410): Pin "HEX2[0]" is stuck at GND
+    Warning (13410): Pin "HEX2[1]" is stuck at GND
+    Warning (13410): Pin "HEX2[2]" is stuck at GND
+    Warning (13410): Pin "HEX2[3]" is stuck at GND
+    Warning (13410): Pin "HEX2[4]" is stuck at GND
+    Warning (13410): Pin "HEX2[5]" is stuck at GND
+    Warning (13410): Pin "HEX2[6]" is stuck at VCC
+    Warning (13410): Pin "HEX3[0]" is stuck at GND
+    Warning (13410): Pin "HEX3[1]" is stuck at GND
+    Warning (13410): Pin "HEX3[2]" is stuck at GND
+    Warning (13410): Pin "HEX3[3]" is stuck at GND
+    Warning (13410): Pin "HEX3[4]" is stuck at GND
+    Warning (13410): Pin "HEX3[5]" is stuck at GND
+    Warning (13410): Pin "HEX3[6]" is stuck at VCC
     Warning (13410): Pin "HEX4[0]" is stuck at VCC
     Warning (13410): Pin "HEX4[1]" is stuck at VCC
     Warning (13410): Pin "HEX4[2]" is stuck at VCC
@@ -4279,18 +4252,18 @@ Warning: Design contains 33 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PS2_CLK"
     Warning (15610): No output dependent on input pin "ENET_INT"
     Warning (15610): No output dependent on input pin "AUD_ADCDAT"
-Info: Implemented 2491 device resources after synthesis - the final resource count might be different
+Info: Implemented 2211 device resources after synthesis - the final resource count might be different
     Info: Implemented 49 input pins
     Info: Implemented 218 output pins
     Info: Implemented 159 bidirectional pins
-    Info: Implemented 1950 logic cells
+    Info: Implemented 1670 logic cells
     Info: Implemented 96 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 18 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 429 warnings
-    Info: Peak virtual memory: 416 megabytes
-    Info: Processing ended: Wed Apr 10 13:13:20 2013
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:15
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 452 warnings
+    Info: Peak virtual memory: 395 megabytes
+    Info: Processing ended: Thu Apr 11 15:40:54 2013
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:13
 
 

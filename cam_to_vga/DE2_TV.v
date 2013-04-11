@@ -206,54 +206,54 @@ module DE2_TV
   reg[26:0] counter_ones;
 	 
 	//every 1 seconds
-	always@(posedge OSC_50 or negedge KEY[0])
-	begin
-		if(!KEY[0])
-		begin
-			seconds_ones		<=	0;
-			seconds_tens		<= 0;
-			seconds_hundreds 	<= 0;
-			seconds_thousands <= 0;
-			counter_ones		<=	0;
-		end
-		else
-		begin
-			if(counter_ones == 49999999 )
-			begin
-				seconds_ones	<=	seconds_ones+1;
-				//BTN_a <= ~BTN_a;
-				counter_ones	<=	0;		
-			end
-
-			else
-				if (counter_ones % 20000000 == 0)
-				begin
-					BTN_a <= ~BTN_a;
-			   end
-				 counter_ones	<=	counter_ones+1;	
-
-
-			if (seconds_ones == 10)
-			begin
-				seconds_ones <= 0;
-				seconds_tens <= seconds_tens+1;
-			end
-
-			if (seconds_tens == 10)
-			begin
-				seconds_tens <=0;
-				seconds_hundreds <= seconds_hundreds+1;
-			end
-
-			if (seconds_hundreds == 10)
-			begin
-				seconds_hundreds <= 0;
-				seconds_thousands <= seconds_thousands+1;
-			end
-
-
-		end
-	end
+//	always@(posedge OSC_50 or negedge KEY[0])
+//	begin
+//		if(!KEY[0])
+//		begin
+//			seconds_ones		<=	0;
+//			seconds_tens		<= 0;
+//			seconds_hundreds 	<= 0;
+//			seconds_thousands <= 0;
+//			counter_ones		<=	0;
+//		end
+//		else
+//		begin
+//			if(counter_ones == 49999999 )
+//			begin
+//				seconds_ones	<=	seconds_ones+1;
+//				//BTN_a <= ~BTN_a;
+//				counter_ones	<=	0;		
+//			end
+//
+//			else
+//				if (counter_ones % 20000000 == 0)
+//				begin
+//					BTN_a <= ~BTN_a;
+//			   end
+//				 counter_ones	<=	counter_ones+1;	
+//
+//
+//			if (seconds_ones == 10)
+//			begin
+//				seconds_ones <= 0;
+//				seconds_tens <= seconds_tens+1;
+//			end
+//
+//			if (seconds_tens == 10)
+//			begin
+//				seconds_tens <=0;
+//				seconds_hundreds <= seconds_hundreds+1;
+//			end
+//
+//			if (seconds_hundreds == 10)
+//			begin
+//				seconds_hundreds <= 0;
+//				seconds_thousands <= seconds_thousands+1;
+//			end
+//
+//
+//		end
+//	end
 
 
 	HexDigit H0(HEX0, seconds_ones);
@@ -357,7 +357,7 @@ module DE2_TV
     .RD1_DATA     (m1YCbCr),
     .RD1          (m1VGA_Read),
     .RD1_ADDR     (640*13),      //  Read odd field and bypess blanking
-    .RD1_MAX_ADDR (640*253),
+    .RD1_MAX_ADDR (640*253),      // 13 and 253
     .RD1_LENGTH   (9'h80),
     .RD1_LOAD     (!DLY0),
     .RD1_CLK      (OSC_27),
@@ -365,7 +365,7 @@ module DE2_TV
     .RD2_DATA     (m2YCbCr),
     .RD2          (m2VGA_Read),
     .RD2_ADDR     (640*267),      //  Read even field and bypess blanking
-    .RD2_MAX_ADDR (640*507),
+    .RD2_MAX_ADDR (640*507),      // 267 and 507
     .RD2_LENGTH   (9'h80),
     .RD2_LOAD     (!DLY0),
     .RD2_CLK      (OSC_27),

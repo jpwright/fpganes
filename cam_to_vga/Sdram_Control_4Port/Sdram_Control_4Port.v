@@ -406,6 +406,7 @@ begin
 
 	end
 end
+
 //	Internal Address & Length Control
 always@(posedge CLK or negedge RESET_N)
 begin
