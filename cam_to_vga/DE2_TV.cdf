@@ -3,8 +3,8 @@ JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
-	P ActionCode(Cfg)
-		Device PartName(EP2C35F672) Path("C:/fpganes/cam_to_vga/") File("DE2_TV.sof") MfrSpec(OpMask(1));
+	P ActionCode(Ign)
+		Device PartName(EP2C35F672) MfrSpec(OpMask(0) FullPath("C:/fpganes/cam_to_vga/DE2_TV.sof"));
 
 ChainEnd;
 

@@ -204,56 +204,74 @@ module DE2_TV
   reg[3:0] seconds_thousands;
 	 
   reg[26:0] counter_ones;
+  reg[26:0] counter_1ms;
+  
+
 	 
-	//every 1 seconds
-//	always@(posedge OSC_50 or negedge KEY[0])
-//	begin
-//		if(!KEY[0])
-//		begin
-//			seconds_ones		<=	0;
-//			seconds_tens		<= 0;
-//			seconds_hundreds 	<= 0;
-//			seconds_thousands <= 0;
-//			counter_ones		<=	0;
-//		end
-//		else
-//		begin
-//			if(counter_ones == 49999999 )
-//			begin
-//				seconds_ones	<=	seconds_ones+1;
-//				//BTN_a <= ~BTN_a;
-//				counter_ones	<=	0;		
-//			end
-//
-//			else
-//				if (counter_ones % 20000000 == 0)
-//				begin
-//					BTN_a <= ~BTN_a;
-//			   end
-//				 counter_ones	<=	counter_ones+1;	
-//
-//
-//			if (seconds_ones == 10)
-//			begin
-//				seconds_ones <= 0;
-//				seconds_tens <= seconds_tens+1;
-//			end
-//
-//			if (seconds_tens == 10)
-//			begin
-//				seconds_tens <=0;
-//				seconds_hundreds <= seconds_hundreds+1;
-//			end
-//
-//			if (seconds_hundreds == 10)
-//			begin
-//				seconds_hundreds <= 0;
-//				seconds_thousands <= seconds_thousands+1;
-//			end
-//
-//
-//		end
-//	end
+	//every 50 MHz
+	always@(posedge OSC_50 or negedge KEY[0])
+	begin
+		if(!KEY[0])
+		begin
+			seconds_ones		<=	0;
+			seconds_tens		<= 0;
+			seconds_hundreds 	<= 0;
+			seconds_thousands <= 0;
+			counter_ones		<=	0;
+			counter_1ms       <= 0;
+		end
+		else
+		begin
+			if(counter_ones == 49999999 )
+			begin
+				seconds_ones	<=	seconds_ones+1;
+				//BTN_a <= ~BTN_a;
+				counter_ones	<=	0;		
+			end
+
+			else
+			begin
+				counter_ones	<=	counter_ones+1;	
+			end
+			
+			if(counter_1ms == 21999999 )
+			begin
+				BTN_a <= 1;
+				counter_1ms	<=	counter_1ms+1;
+			end
+			
+			else if(counter_1ms == 24999999 )
+			begin
+				BTN_a <= 0;
+				counter_1ms	<=	0;	
+			end
+
+			else
+			begin
+				counter_1ms	<=	counter_1ms+1;	
+			end
+
+			if (seconds_ones == 10)
+			begin
+				seconds_ones <= 0;
+				seconds_tens <= seconds_tens+1;
+			end
+
+			if (seconds_tens == 10)
+			begin
+				seconds_tens <=0;
+				seconds_hundreds <= seconds_hundreds+1;
+			end
+
+			if (seconds_hundreds == 10)
+			begin
+				seconds_hundreds <= 0;
+				seconds_thousands <= seconds_thousands+1;
+			end
+
+
+		end
+	end
 
 
 	HexDigit H0(HEX0, seconds_ones);
@@ -352,6 +370,7 @@ module DE2_TV
     .WR1_MAX_ADDR (640*507),    //  525-18
     .WR1_LENGTH   (9'h80),
     .WR1_LOAD     (!DLY0),
+	 //.WR1_LOAD     (!DLY0),
     .WR1_CLK      (TD_CLK),
     //  FIFO Read Side 1
     .RD1_DATA     (m1YCbCr),
@@ -360,6 +379,7 @@ module DE2_TV
     .RD1_MAX_ADDR (640*253),      // 13 and 253
     .RD1_LENGTH   (9'h80),
     .RD1_LOAD     (!DLY0),
+	 //.RD1_LOAD     (!DLY1),
     .RD1_CLK      (OSC_27),
     //  FIFO Read Side 2
     .RD2_DATA     (m2YCbCr),
@@ -368,6 +388,7 @@ module DE2_TV
     .RD2_MAX_ADDR (640*507),      // 267 and 507
     .RD2_LENGTH   (9'h80),
     .RD2_LOAD     (!DLY0),
+	 //.RD2_LOAD     (!DLY1),
     .RD2_CLK      (OSC_27),
     //  SDRAM Side
     .SA           (DRAM_ADDR),
@@ -451,19 +472,96 @@ module DE2_TV
     .iCLK       (OSC_27), // 27 MHz clock
     .iRST_N     (DLY2)  
   );
+  
+  // Recolors Parts of the display
+  recolor u100  
+  (  //  Input Side
+    .iCCD_R       (mRed),
+    .iCCD_G       (mGreen),
+    .iCCD_B       (mBlue),
+    .iCCD_DVAL    (mDVAL),
+    .iCCD_PIXCLK  (VGA_CLK), //(TD_CLK),
+    .iRST_N       (DLY2),
+    //  Output Side
+    .oCCD_R       (Red),
+    .oCCD_G       (Green),
+    .oCCD_B       (Blue)//,
+    //.oCCD_DVAL(TV_DVAL));
+  );
     
   wire [9:0]  mVGA_R;
   wire [9:0]  mVGA_G;
   wire [9:0]  mVGA_B;
+  
+  wire [9:0]  mVGA_R_int;
+  wire [9:0]  mVGA_G_int;
+  wire [9:0]  mVGA_B_int;
+  
   wire [9:0] Red, Green, Blue;
 
   // Check RGB value of a pixel in the background image in ROM memory.
   // If it's 0, black, get RGB value from the camcorder; 
   // otherwise print white lines and letters on the screen
   // To get grayscale, replace the next three lines with the commented-out lines
-  assign  mVGA_R = mRed;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_G = mGreen;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_B = mBlue;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+//  assign  mVGA_R = Red;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+//  assign  mVGA_G = Green;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+//  assign  mVGA_B = Blue;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_R_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  
+  //assign mVGA_R = (VGA_X > 11'b00101000000) ? Red : 10'b1111111111;
+  //assign mVGA_R = VGA_row_R[VGA_X];
+  //assign mVGA_G = (VGA_X > 11'b00101000000) ? Green : 0;
+  //assign mVGA_B = (VGA_X > 11'b00101000000) ? Blue : 0;
+  
+  reg [9:0] mVGA_gs; //Grayscale
+  
+  //assign mVGA_gs = Red + Green + Blue;
+  
+  
+  reg [639:0] VGA_row_gs;
+  
+  reg VGA_pixel_gs;
+  
+//  always @ (OSC_27)
+//  begin
+//		VGA_pixel_gs <= (mVGA_R_int > DPDT_SW[17:8]) ? 1 : 0;
+//  end
+  
+  reg [319:0] row400;
+  
+  always @ (VGA_CLK)
+  begin
+		if (VGA_Y == 400 && VGA_X > 320)
+		begin
+			row400[VGA_X + 320] <= (mVGA_R_int > DPDT_SW[17:8]) ? 1 : 0;
+		end
+		
+		if (VGA_X > 320 && VGA_Y > 240)
+		begin
+			mVGA_gs <= (mVGA_R_int > DPDT_SW[17:8]) ? 10'b1111111111 : 0;
+		end
+		else
+		begin
+			mVGA_gs <= mVGA_R_int;
+		end
+	end
+			
+  
+//  assign mVGA_R = mVGA_R_int;
+//  assign mVGA_G = mVGA_G_int;
+//  assign mVGA_B = mVGA_B_int;
+	
+  assign mVGA_R = mVGA_gs;
+  assign mVGA_G = mVGA_gs;
+  assign mVGA_B = mVGA_gs;
+
+//  assign mVGA_R = (VGA_pixel_gs == 1) ? 1023 : 0;
+//  assign mVGA_G = (VGA_pixel_gs == 1) ? 1023 : 0;
+//  assign mVGA_B = (VGA_pixel_gs == 1) ? 1023 : 0;
+  
+  assign LED_RED = DRAM_DQ;
 
   //  For ITU-R 656 Decoder
   wire  [15:0] YCbCr;
@@ -504,7 +602,11 @@ module DE2_TV
 
   assign  m1VGA_Read =  VGA_Y[0]  ?  1'b0     :  VGA_Read;
   assign  m2VGA_Read =  VGA_Y[0]  ?  VGA_Read :  1'b0;
+  //assign m1VGA_Read = VGA_Read;
+  //assign m2VGA_Read = VGA_Read;
+  
   assign  mYCbCr_d   =  !VGA_Y[0] ?  m1YCbCr  :  m2YCbCr;
+  //assign  mYCbCr_d   =  m1YCbCr;
   assign  mYCbCr     =  m5YCbCr;
 
   wire      mDVAL;
@@ -525,6 +627,15 @@ module DE2_TV
     .shiftin  (m3YCbCr),
     .shiftout (m4YCbCr)
   );
+
+//Line_Buffer u10  
+//  (  
+//    .clken    (VGA_Read),
+//    .clock    (OSC_27),
+//    .shiftin  (mYCbCr_d),
+//    .shiftout (m4YCbCr)
+//  );
+  //assign m4YCbCr = mYCbCr_d;
 
   wire  [15:0] m4YCbCr;
   wire  [15:0] m5YCbCr;

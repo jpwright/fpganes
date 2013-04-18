@@ -1,5 +1,5 @@
 Flow report for DE2_TV
-Thu Apr 11 15:41:30 2013
+Thu Apr 18 18:53:51 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -38,17 +38,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Flow Summary                                                                   ;
 +------------------------------------+-------------------------------------------+
-; Flow Status                        ; Successful - Thu Apr 11 15:41:28 2013     ;
+; Flow Status                        ; Successful - Thu Apr 18 18:53:47 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
 ; Device                             ; EP2C35F672C8                              ;
 ; Timing Models                      ; Final                                     ;
-; Total logic elements               ; 1,568 / 33,216 ( 5 % )                    ;
-;     Total combinational functions  ; 1,332 / 33,216 ( 4 % )                    ;
-;     Dedicated logic registers      ; 988 / 33,216 ( 3 % )                      ;
-; Total registers                    ; 988                                       ;
+; Total logic elements               ; 1,793 / 33,216 ( 5 % )                    ;
+;     Total combinational functions  ; 1,546 / 33,216 ( 5 % )                    ;
+;     Dedicated logic registers      ; 1,076 / 33,216 ( 3 % )                    ;
+; Total registers                    ; 1076                                      ;
 ; Total pins                         ; 426 / 475 ( 90 % )                        ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 53,184 / 483,840 ( 11 % )                 ;
@@ -62,38 +62,36 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/11/2013 15:40:42 ;
+; Start date & time ; 04/18/2013 18:53:15 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE2_TV              ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                           ;
-+-----------------------------------------+---------------------------------------+---------------+-------------+------------+
-; Assignment Name                         ; Value                                 ; Default Value ; Entity Name ; Section Id ;
-+-----------------------------------------+---------------------------------------+---------------+-------------+------------+
-; AUTO_ENABLE_SMART_COMPILE               ; On                                    ; --            ; --          ; --         ;
-; AUTO_PACKED_REGISTERS_STRATIXII         ; Normal                                ; Auto          ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                   ; 132683363511549.136570924104232       ; --            ; --          ; --         ;
-; CYCLONEII_OPTIMIZATION_TECHNIQUE        ; Speed                                 ; Balanced      ; --          ; --         ;
-; ENABLE_SIGNALTAP                        ; Off                                   ; --            ; --          ; --         ;
-; IP_TOOL_NAME                            ; ROM: 1-PORT                           ; --            ; --          ; --         ;
-; IP_TOOL_VERSION                         ; 11.0                                  ; --            ; --          ; --         ;
-; MAX_CORE_JUNCTION_TEMP                  ; 85                                    ; --            ; --          ; --         ;
-; MIN_CORE_JUNCTION_TEMP                  ; 0                                     ; --            ; --          ; --         ;
-; MISC_FILE                               ; ROM_bb.v                              ; --            ; --          ; --         ;
-; PARTITION_COLOR                         ; 16764057                              ; --            ; --          ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL     ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE                  ; SOURCE                                ; --            ; --          ; Top        ;
-; PHYSICAL_SYNTHESIS_COMBO_LOGIC          ; On                                    ; Off           ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ; On                                    ; Off           ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_RETIMING    ; On                                    ; Off           ; --          ; --         ;
-; POWER_BOARD_THERMAL_MODEL               ; None (CONSERVATIVE)                   ; --            ; --          ; --         ;
-; POWER_PRESET_COOLING_SOLUTION           ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --         ;
-; ROUTER_TIMING_OPTIMIZATION_LEVEL        ; MAXIMUM                               ; Normal        ; --          ; --         ;
-; USE_SIGNALTAP_FILE                      ; stp1.stp                              ; --            ; --          ; --         ;
-+-----------------------------------------+---------------------------------------+---------------+-------------+------------+
++------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                       ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                                 ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
+; AUTO_ENABLE_SMART_COMPILE           ; On                                    ; --            ; --          ; --         ;
+; AUTO_PACKED_REGISTERS_STRATIXII     ; Normal                                ; Auto          ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 132683363511549.136632559405524       ; --            ; --          ; --         ;
+; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Speed                                 ; Balanced      ; --          ; --         ;
+; ENABLE_SIGNALTAP                    ; Off                                   ; --            ; --          ; --         ;
+; FITTER_EFFORT                       ; Fast Fit                              ; Auto Fit      ; --          ; --         ;
+; IP_TOOL_NAME                        ; ROM: 1-PORT                           ; --            ; --          ; --         ;
+; IP_TOOL_VERSION                     ; 11.0                                  ; --            ; --          ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                    ; --            ; --          ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                     ; --            ; --          ; --         ;
+; MISC_FILE                           ; ROM_bb.v                              ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; 16764057                              ; --            ; --          ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; PLACEMENT_AND_ROUTING                 ; --            ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE              ; SOURCE                                ; --            ; --          ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                   ; --            ; --          ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW ; --            ; --          ; --         ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL    ; MAXIMUM                               ; Normal        ; --          ; --         ;
+; USE_SIGNALTAP_FILE                  ; stp1.stp                              ; --            ; --          ; --         ;
++-------------------------------------+---------------------------------------+---------------+-------------+------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------+
@@ -101,11 +99,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:12     ; 1.0                     ; 395 MB              ; 00:00:12                           ;
-; Fitter                    ; 00:00:27     ; 1.9                     ; 556 MB              ; 00:00:32                           ;
+; Analysis & Synthesis      ; 00:00:12     ; 1.0                     ; 392 MB              ; 00:00:11                           ;
+; Fitter                    ; 00:00:14     ; 1.9                     ; 548 MB              ; 00:00:16                           ;
 ; Assembler                 ; 00:00:03     ; 1.0                     ; 387 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 412 MB              ; 00:00:04                           ;
-; Total                     ; 00:00:47     ; --                      ; --                  ; 00:00:50                           ;
+; TimeQuest Timing Analyzer ; 00:00:07     ; 1.0                     ; 415 MB              ; 00:00:05                           ;
+; Total                     ; 00:00:36     ; --                      ; --                  ; 00:00:34                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
