@@ -70,10 +70,10 @@ assign	oVGA_R		=	iRed;
 assign	oVGA_G		=	iGreen;
 assign	oVGA_B		=	iBlue;
 assign	oAddress	=	oCurrent_Y*H_ACT+oCurrent_X;
-assign	oRequest	=	((H_Cont>=H_BLANK && H_Cont<H_TOTAL)	&&
-						 (V_Cont>=V_BLANK && V_Cont<V_TOTAL));
-assign	oCurrent_X	=	(H_Cont>=H_BLANK)	?	H_Cont-H_BLANK	:	11'h0	;
-assign	oCurrent_Y	=	(V_Cont>=V_BLANK)	?	V_Cont-V_BLANK	:	11'h0	;
+assign	oRequest	=	((H_Cont>=H_BLANK-H_DLY && H_Cont<H_TOTAL-H_DLY)	&&
+						 (V_Cont>=V_BLANK-V_DLY && V_Cont<V_TOTAL-V_DLY));
+assign	oCurrent_X	=	(H_Cont>=(H_BLANK-H_DLY) && H_Cont<H_TOTAL)	?	H_Cont-(H_BLANK-H_DLY)	:	11'h0	;
+assign	oCurrent_Y	=	(V_Cont>=(V_BLANK-V_DLY) && V_Cont<V_TOTAL)	?	V_Cont-(V_BLANK-V_DLY)	:	11'h0	;
 
 //	Horizontal Generator: Refer to the pixel clock
 always@(posedge iCLK or negedge iRST_N)

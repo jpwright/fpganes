@@ -513,7 +513,7 @@ module DE2_TV
   assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
   assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
   
-  wire mVGA_th = (mVGA_R_int > DPDT_SW[17:8]) ? 1 : 0;
+  wire mVGA_th = (mVGA_R_int > (DPDT_SW[17:11] << 3)) ? 1 : 0;
   
   //assign mVGA_R = (VGA_X > 11'b00101000000) ? Red : 10'b1111111111;
   //assign mVGA_R = VGA_row_R[VGA_X];
@@ -562,6 +562,12 @@ module DE2_TV
   
   wire [8:0] grid;
   
+  wire [8:0] kernel = DPDT_SW[10:2];
+  
+  wire [8:0] kd = kernel ~^ grid;
+  
+  wire [2:0] kd_sum = kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
+  
   buffer3 	delayer(
 		.clock		(OSC_27),
 		.clken		(Shift_En),
@@ -576,7 +582,8 @@ module DE2_TV
    //assign mVGA_gs = (mVGA_th == 1) ? 10'b1111111111 : 0;
 	always @ (OSC_27)
 	begin
-		if (grid == 9'b111111111)
+		//if (grid == kernel)
+		if (kd_sum < 2)
 		begin
 			mVGA_gs_r <= 10'b1111111111;
 			mVGA_gs_g <= 10'b0000000000;

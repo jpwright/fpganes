@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE2_TV
-Mon Apr 22 22:05:52 2013
+Mon Apr 22 22:51:42 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -172,13 +172,13 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Apr 22 22:05:52 2013     ;
+; Analysis & Synthesis Status        ; Successful - Mon Apr 22 22:51:42 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
-; Total logic elements               ; 3,743                                     ;
-;     Total combinational functions  ; 1,512                                     ;
+; Total logic elements               ; 3,766                                     ;
+;     Total combinational functions  ; 1,535                                     ;
 ;     Dedicated logic registers      ; 2,996                                     ;
 ; Total registers                    ; 2996                                      ;
 ; Total pins                         ; 426                                       ;
@@ -384,17 +384,17 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 3,743  ;
+; Estimated Total logic elements              ; 3,766  ;
 ;                                             ;        ;
-; Total combinational functions               ; 1512   ;
+; Total combinational functions               ; 1535   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 595    ;
-;     -- 3 input functions                    ; 431    ;
-;     -- <=2 input functions                  ; 486    ;
+;     -- 4 input functions                    ; 592    ;
+;     -- 3 input functions                    ; 448    ;
+;     -- <=2 input functions                  ; 495    ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 912    ;
-;     -- arithmetic mode                      ; 600    ;
+;     -- normal mode                          ; 937    ;
+;     -- arithmetic mode                      ; 598    ;
 ;                                             ;        ;
 ; Total registers                             ; 2996   ;
 ;     -- Dedicated logic registers            ; 2996   ;
@@ -408,7 +408,7 @@ applicable agreement for further details.
 ;                                             ;        ;
 ; Maximum fan-out node                        ; OSC_27 ;
 ; Maximum fan-out                             ; 2310   ;
-; Total fan-out                               ; 15864  ;
+; Total fan-out                               ; 15921  ;
 ; Average fan-out                             ; 3.14   ;
 +---------------------------------------------+--------+
 
@@ -418,7 +418,7 @@ applicable agreement for further details.
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                       ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                               ; Library Name ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_TV                                          ; 1512 (201)        ; 2996 (69)    ; 53184       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
+; |DE2_TV                                          ; 1535 (217)        ; 2996 (69)    ; 53184       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
 ;    |AUDIO_DAC_ADC:u12|                           ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|AUDIO_DAC_ADC:u12                                                                                                                                         ;              ;
 ;    |DIV:u5|                                      ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5                                                                                                                                                    ;              ;
 ;       |lpm_divide:lpm_divide_component|          ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component                                                                                                                    ;              ;
@@ -445,52 +445,52 @@ applicable agreement for further details.
 ;             |cntr_hpf:cntr1|                     ; 15 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1                                                        ;              ;
 ;                |cmpr_ldc:cmpr5|                  ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5                                         ;              ;
 ;    |Reset_Delay:u3|                              ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Reset_Delay:u3                                                                                                                                            ;              ;
-;    |Sdram_Control_4Port:u6|                      ; 583 (192)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
+;    |Sdram_Control_4Port:u6|                      ; 580 (192)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
 ;       |Sdram_PLL:sdram_pll1|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1                                                                                                               ;              ;
 ;          |altpll:altpll_component|               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component                                                                                       ;              ;
-;       |Sdram_RD_FIFO:read_fifo1|                 ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1                                                                                                           ;              ;
-;          |dcfifo:dcfifo_component|               ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component                                                                                   ;              ;
-;             |dcfifo_iep1:auto_generated|         ; 82 (15)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                        ;              ;
+;       |Sdram_RD_FIFO:read_fifo1|                 ; 81 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1                                                                                                           ;              ;
+;          |dcfifo:dcfifo_component|               ; 81 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component                                                                                   ;              ;
+;             |dcfifo_iep1:auto_generated|         ; 81 (14)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                        ;              ;
 ;                |a_gray2bin_kdb:wrptr_g_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin                        ;              ;
 ;                |a_gray2bin_kdb:ws_dgrp_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin                        ;              ;
 ;                |a_graycounter_egc:wrptr_gp|      ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp                             ;              ;
-;                |a_graycounter_o96:rdptr_g1p|     ; 19 (19)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                            ;              ;
+;                |a_graycounter_o96:rdptr_g1p|     ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                            ;              ;
 ;                |alt_synch_pipe_rdb:rs_dgwp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp                             ;              ;
 ;                   |dffpipe_pe9:dffpipe18|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18       ;              ;
 ;                |alt_synch_pipe_vd8:ws_dgrp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp                             ;              ;
 ;                   |dffpipe_qe9:dffpipe22|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22       ;              ;
 ;                |altsyncram_h2c1:fifo_ram|        ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram                               ;              ;
 ;                   |altsyncram_drg1:altsyncram14| ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14  ;              ;
-;                |cmpr_536:rdempty_eq_comp|        ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|cmpr_536:rdempty_eq_comp                               ;              ;
+;                |cmpr_536:rdempty_eq_comp|        ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|cmpr_536:rdempty_eq_comp                               ;              ;
 ;                |cmpr_536:wrfull_eq_comp|         ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|cmpr_536:wrfull_eq_comp                                ;              ;
 ;                |dffpipe_ngh:rdaclr|              ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr                                     ;              ;
 ;                |dffpipe_oe9:ws_brp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_brp                                     ;              ;
 ;                |dffpipe_oe9:ws_bwp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_bwp                                     ;              ;
-;       |Sdram_RD_FIFO:read_fifo2|                 ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2                                                                                                           ;              ;
-;          |dcfifo:dcfifo_component|               ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component                                                                                   ;              ;
-;             |dcfifo_iep1:auto_generated|         ; 82 (15)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                        ;              ;
+;       |Sdram_RD_FIFO:read_fifo2|                 ; 81 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2                                                                                                           ;              ;
+;          |dcfifo:dcfifo_component|               ; 81 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component                                                                                   ;              ;
+;             |dcfifo_iep1:auto_generated|         ; 81 (14)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                        ;              ;
 ;                |a_gray2bin_kdb:wrptr_g_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin                        ;              ;
 ;                |a_gray2bin_kdb:ws_dgrp_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin                        ;              ;
 ;                |a_graycounter_egc:wrptr_gp|      ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp                             ;              ;
-;                |a_graycounter_o96:rdptr_g1p|     ; 19 (19)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                            ;              ;
+;                |a_graycounter_o96:rdptr_g1p|     ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                            ;              ;
 ;                |alt_synch_pipe_rdb:rs_dgwp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp                             ;              ;
 ;                   |dffpipe_pe9:dffpipe18|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18       ;              ;
 ;                |alt_synch_pipe_vd8:ws_dgrp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp                             ;              ;
 ;                   |dffpipe_qe9:dffpipe22|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22       ;              ;
 ;                |altsyncram_h2c1:fifo_ram|        ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram                               ;              ;
 ;                   |altsyncram_drg1:altsyncram14| ; 0 (0)             ; 0 (0)        ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14  ;              ;
-;                |cmpr_536:rdempty_eq_comp|        ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|cmpr_536:rdempty_eq_comp                               ;              ;
+;                |cmpr_536:rdempty_eq_comp|        ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|cmpr_536:rdempty_eq_comp                               ;              ;
 ;                |cmpr_536:wrfull_eq_comp|         ; 6 (6)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|cmpr_536:wrfull_eq_comp                                ;              ;
 ;                |dffpipe_ngh:rdaclr|              ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr                                     ;              ;
 ;                |dffpipe_oe9:ws_brp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_brp                                     ;              ;
 ;                |dffpipe_oe9:ws_bwp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_bwp                                     ;              ;
-;       |Sdram_WR_FIFO:write_fifo1|                ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1                                                                                                          ;              ;
-;          |dcfifo:dcfifo_component|               ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component                                                                                  ;              ;
-;             |dcfifo_iep1:auto_generated|         ; 82 (15)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                       ;              ;
+;       |Sdram_WR_FIFO:write_fifo1|                ; 81 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1                                                                                                          ;              ;
+;          |dcfifo:dcfifo_component|               ; 81 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component                                                                                  ;              ;
+;             |dcfifo_iep1:auto_generated|         ; 81 (15)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                       ;              ;
 ;                |a_gray2bin_kdb:rdptr_g_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin                       ;              ;
 ;                |a_gray2bin_kdb:rs_dgwp_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin                       ;              ;
 ;                |a_graycounter_egc:wrptr_gp|      ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp                            ;              ;
-;                |a_graycounter_o96:rdptr_g1p|     ; 19 (19)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                           ;              ;
+;                |a_graycounter_o96:rdptr_g1p|     ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                           ;              ;
 ;                |alt_synch_pipe_rdb:rs_dgwp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp                            ;              ;
 ;                   |dffpipe_pe9:dffpipe18|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18      ;              ;
 ;                |alt_synch_pipe_vd8:ws_dgrp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp                            ;              ;
@@ -512,7 +512,7 @@ applicable agreement for further details.
 ;       |command:command1|                         ; 61 (61)           ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|command:command1                                                                                                                   ;              ;
 ;       |control_interface:control1|               ; 64 (64)           ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1                                                                                                         ;              ;
 ;    |TD_Detect:u2|                                ; 12 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|TD_Detect:u2                                                                                                                                              ;              ;
-;    |VGA_Ctrl:u9|                                 ; 46 (46)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|VGA_Ctrl:u9                                                                                                                                               ;              ;
+;    |VGA_Ctrl:u9|                                 ; 56 (56)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|VGA_Ctrl:u9                                                                                                                                               ;              ;
 ;    |YCbCr2RGB:u8|                                ; 275 (113)         ; 158 (78)     ; 0           ; 18           ; 0       ; 9         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8                                                                                                                                              ;              ;
 ;       |MAC_3:u0|                                 ; 54 (0)            ; 27 (0)       ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u0                                                                                                                                     ;              ;
 ;          |altmult_add:ALTMULT_ADD_component|     ; 54 (0)            ; 27 (0)       ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u0|altmult_add:ALTMULT_ADD_component                                                                                                   ;              ;
@@ -808,8 +808,8 @@ Encoding Type:  One-Hot
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0 ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
-; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
+; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
 ; Total number of inverted registers = 20                                                                                                       ;         ;
 +-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
@@ -3374,7 +3374,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:11     ;
+; Top            ; 00:00:12     ;
 +----------------+--------------+
 
 
@@ -3384,7 +3384,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Mon Apr 22 22:05:36 2013
+    Info: Processing started: Mon Apr 22 22:51:26 2013
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE2_TV -c DE2_TV
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Found 1 design units, including 1 entities, in source file stack_ram.v
@@ -3451,10 +3451,10 @@ Info: Found 1 design units, including 1 entities, in source file goomba.v
 Info: Found 1 design units, including 1 entities, in source file buffer3.v
     Info: Found entity 1: buffer3
 Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(368): created implicit net for "WR1_FULL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(700): created implicit net for "audio_inL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(701): created implicit net for "audio_inR"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(703): created implicit net for "audio_outL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(704): created implicit net for "audio_outR"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(707): created implicit net for "audio_inL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(708): created implicit net for "audio_inR"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(710): created implicit net for "audio_outL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(711): created implicit net for "audio_outR"
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(57): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(65): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(73): instance has no name
@@ -3469,13 +3469,13 @@ Warning (10230): Verilog HDL assignment warning at DE2_TV.v(257): truncated valu
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(263): truncated value with size 32 to match size of target (4)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(269): truncated value with size 32 to match size of target (4)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(516): truncated value with size 32 to match size of target (1)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(579): variable "grid" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(587): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(587): truncated value with size 32 to match size of target (10)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(588): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(588): truncated value with size 32 to match size of target (10)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(589): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(589): truncated value with size 32 to match size of target (10)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(586): variable "kd_sum" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(594): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(594): truncated value with size 32 to match size of target (10)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(595): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(595): truncated value with size 32 to match size of target (10)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(596): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(596): truncated value with size 32 to match size of target (10)
 Warning (10034): Output port "LED_GREEN[8]" at DE2_TV.v(55) has no driver
 Warning (10034): Output port "LED_RED" at DE2_TV.v(56) has no driver
 Warning (10034): Output port "FL_ADDR" at DE2_TV.v(78) has no driver
@@ -4242,17 +4242,11 @@ Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_f
 Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14|ram_block15a13" has a port clk1 that is stuck at GND
 Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14|ram_block15a14" has a port clk1 that is stuck at GND
 Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14|ram_block15a15" has a port clk1 that is stuck at GND
-Warning: Design contains 23 input pin(s) that do not drive logic
+Warning: Design contains 17 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "EXT_CLOCK"
     Warning (15610): No output dependent on input pin "KEY[1]"
     Warning (15610): No output dependent on input pin "KEY[2]"
     Warning (15610): No output dependent on input pin "KEY[3]"
-    Warning (15610): No output dependent on input pin "DPDT_SW[2]"
-    Warning (15610): No output dependent on input pin "DPDT_SW[3]"
-    Warning (15610): No output dependent on input pin "DPDT_SW[4]"
-    Warning (15610): No output dependent on input pin "DPDT_SW[5]"
-    Warning (15610): No output dependent on input pin "DPDT_SW[6]"
-    Warning (15610): No output dependent on input pin "DPDT_SW[7]"
     Warning (15610): No output dependent on input pin "UART_RXD"
     Warning (15610): No output dependent on input pin "IRDA_RXD"
     Warning (15610): No output dependent on input pin "OTG_INT0"
@@ -4266,18 +4260,18 @@ Warning: Design contains 23 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PS2_CLK"
     Warning (15610): No output dependent on input pin "ENET_INT"
     Warning (15610): No output dependent on input pin "AUD_ADCDAT"
-Info: Implemented 4316 device resources after synthesis - the final resource count might be different
+Info: Implemented 4339 device resources after synthesis - the final resource count might be different
     Info: Implemented 49 input pins
     Info: Implemented 218 output pins
     Info: Implemented 159 bidirectional pins
-    Info: Implemented 3775 logic cells
+    Info: Implemented 3798 logic cells
     Info: Implemented 96 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 18 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 423 warnings
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 417 warnings
     Info: Peak virtual memory: 401 megabytes
-    Info: Processing ended: Mon Apr 22 22:05:52 2013
-    Info: Elapsed time: 00:00:16
+    Info: Processing ended: Mon Apr 22 22:51:43 2013
+    Info: Elapsed time: 00:00:17
     Info: Total CPU time (on all processors): 00:00:16
 
 
