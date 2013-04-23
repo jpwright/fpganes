@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE2_TV
-Thu Apr 18 18:53:27 2013
+Mon Apr 22 22:05:52 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -128,24 +128,25 @@ Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 120. Port Connectivity Checks: "AUDIO_DAC_ADC:u12"
 121. Port Connectivity Checks: "Line_Buffer:u11"
 122. Port Connectivity Checks: "Line_Buffer:u10"
-123. Port Connectivity Checks: "recolor:u100"
-124. Port Connectivity Checks: "VGA_Ctrl:u9"
-125. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u2"
-126. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u1"
-127. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u0"
-128. Port Connectivity Checks: "YUV422_to_444:u7"
-129. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2"
-130. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1"
-131. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2"
-132. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1"
-133. Port Connectivity Checks: "Sdram_Control_4Port:u6|sdr_data_path:data_path1"
-134. Port Connectivity Checks: "Sdram_Control_4Port:u6|control_interface:control1"
-135. Port Connectivity Checks: "Sdram_Control_4Port:u6"
-136. Port Connectivity Checks: "DIV:u5"
-137. Port Connectivity Checks: "ITU_656_Decoder:u4"
-138. Port Connectivity Checks: "I2C_AV_Config:u1|I2C_Controller:u0"
-139. Elapsed Time Per Partition
-140. Analysis & Synthesis Messages
+123. Port Connectivity Checks: "buffer3:delayer"
+124. Port Connectivity Checks: "recolor:u100"
+125. Port Connectivity Checks: "VGA_Ctrl:u9"
+126. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u2"
+127. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u1"
+128. Port Connectivity Checks: "YCbCr2RGB:u8|MAC_3:u0"
+129. Port Connectivity Checks: "YUV422_to_444:u7"
+130. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2"
+131. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1"
+132. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2"
+133. Port Connectivity Checks: "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1"
+134. Port Connectivity Checks: "Sdram_Control_4Port:u6|sdr_data_path:data_path1"
+135. Port Connectivity Checks: "Sdram_Control_4Port:u6|control_interface:control1"
+136. Port Connectivity Checks: "Sdram_Control_4Port:u6"
+137. Port Connectivity Checks: "DIV:u5"
+138. Port Connectivity Checks: "ITU_656_Decoder:u4"
+139. Port Connectivity Checks: "I2C_AV_Config:u1|I2C_Controller:u0"
+140. Elapsed Time Per Partition
+141. Analysis & Synthesis Messages
 
 
 
@@ -171,15 +172,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Apr 18 18:53:27 2013     ;
+; Analysis & Synthesis Status        ; Successful - Mon Apr 22 22:05:52 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
-; Total logic elements               ; 1,849                                     ;
-;     Total combinational functions  ; 1,537                                     ;
-;     Dedicated logic registers      ; 1,076                                     ;
-; Total registers                    ; 1076                                      ;
+; Total logic elements               ; 3,743                                     ;
+;     Total combinational functions  ; 1,512                                     ;
+;     Dedicated logic registers      ; 2,996                                     ;
+; Total registers                    ; 2996                                      ;
 ; Total pins                         ; 426                                       ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 53,184                                    ;
@@ -322,6 +323,7 @@ applicable agreement for further details.
 ; ITU_656_Decoder.v                         ; yes             ; User Verilog HDL File        ; C:/fpganes/cam_to_vga/ITU_656_Decoder.v                             ;
 ; VGA_Ctrl.v                                ; yes             ; User Verilog HDL File        ; C:/fpganes/cam_to_vga/VGA_Ctrl.v                                    ;
 ; recolor.v                                 ; yes             ; User Verilog HDL File        ; C:/fpganes/cam_to_vga/recolor.v                                     ;
+; buffer3.v                                 ; yes             ; User Verilog HDL File        ; C:/fpganes/cam_to_vga/buffer3.v                                     ;
 ; lpm_divide.tdf                            ; yes             ; Megafunction                 ; c:/altera/11.0/quartus/libraries/megafunctions/lpm_divide.tdf       ;
 ; abs_divider.inc                           ; yes             ; Megafunction                 ; c:/altera/11.0/quartus/libraries/megafunctions/abs_divider.inc      ;
 ; sign_div_unsign.inc                       ; yes             ; Megafunction                 ; c:/altera/11.0/quartus/libraries/megafunctions/sign_div_unsign.inc  ;
@@ -377,38 +379,38 @@ applicable agreement for further details.
 +-------------------------------------------+-----------------+------------------------------+---------------------------------------------------------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary                                                                             ;
-+---------------------------------------------+---------------------------------------------------------------------------+
-; Resource                                    ; Usage                                                                     ;
-+---------------------------------------------+---------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,849                                                                     ;
-;                                             ;                                                                           ;
-; Total combinational functions               ; 1537                                                                      ;
-; Logic element usage by number of LUT inputs ;                                                                           ;
-;     -- 4 input functions                    ; 602                                                                       ;
-;     -- 3 input functions                    ; 428                                                                       ;
-;     -- <=2 input functions                  ; 507                                                                       ;
-;                                             ;                                                                           ;
-; Logic elements by mode                      ;                                                                           ;
-;     -- normal mode                          ; 924                                                                       ;
-;     -- arithmetic mode                      ; 613                                                                       ;
-;                                             ;                                                                           ;
-; Total registers                             ; 1076                                                                      ;
-;     -- Dedicated logic registers            ; 1076                                                                      ;
-;     -- I/O registers                        ; 0                                                                         ;
-;                                             ;                                                                           ;
-; I/O pins                                    ; 426                                                                       ;
-; Total memory bits                           ; 53184                                                                     ;
-; Embedded Multiplier 9-bit elements          ; 18                                                                        ;
-; Total PLLs                                  ; 1                                                                         ;
-;     -- PLLs                                 ; 1                                                                         ;
-;                                             ;                                                                           ;
-; Maximum fan-out node                        ; Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0 ;
-; Maximum fan-out                             ; 513                                                                       ;
-; Total fan-out                               ; 10171                                                                     ;
-; Average fan-out                             ; 3.22                                                                      ;
-+---------------------------------------------+---------------------------------------------------------------------------+
++------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary          ;
++---------------------------------------------+--------+
+; Resource                                    ; Usage  ;
++---------------------------------------------+--------+
+; Estimated Total logic elements              ; 3,743  ;
+;                                             ;        ;
+; Total combinational functions               ; 1512   ;
+; Logic element usage by number of LUT inputs ;        ;
+;     -- 4 input functions                    ; 595    ;
+;     -- 3 input functions                    ; 431    ;
+;     -- <=2 input functions                  ; 486    ;
+;                                             ;        ;
+; Logic elements by mode                      ;        ;
+;     -- normal mode                          ; 912    ;
+;     -- arithmetic mode                      ; 600    ;
+;                                             ;        ;
+; Total registers                             ; 2996   ;
+;     -- Dedicated logic registers            ; 2996   ;
+;     -- I/O registers                        ; 0      ;
+;                                             ;        ;
+; I/O pins                                    ; 426    ;
+; Total memory bits                           ; 53184  ;
+; Embedded Multiplier 9-bit elements          ; 18     ;
+; Total PLLs                                  ; 1      ;
+;     -- PLLs                                 ; 1      ;
+;                                             ;        ;
+; Maximum fan-out node                        ; OSC_27 ;
+; Maximum fan-out                             ; 2310   ;
+; Total fan-out                               ; 15864  ;
+; Average fan-out                             ; 3.14   ;
++---------------------------------------------+--------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -416,7 +418,7 @@ applicable agreement for further details.
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                       ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                               ; Library Name ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_TV                                          ; 1537 (216)        ; 1076 (69)    ; 53184       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
+; |DE2_TV                                          ; 1512 (201)        ; 2996 (69)    ; 53184       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
 ;    |AUDIO_DAC_ADC:u12|                           ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|AUDIO_DAC_ADC:u12                                                                                                                                         ;              ;
 ;    |DIV:u5|                                      ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5                                                                                                                                                    ;              ;
 ;       |lpm_divide:lpm_divide_component|          ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component                                                                                                                    ;              ;
@@ -510,7 +512,7 @@ applicable agreement for further details.
 ;       |command:command1|                         ; 61 (61)           ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|command:command1                                                                                                                   ;              ;
 ;       |control_interface:control1|               ; 64 (64)           ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1                                                                                                         ;              ;
 ;    |TD_Detect:u2|                                ; 12 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|TD_Detect:u2                                                                                                                                              ;              ;
-;    |VGA_Ctrl:u9|                                 ; 56 (56)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|VGA_Ctrl:u9                                                                                                                                               ;              ;
+;    |VGA_Ctrl:u9|                                 ; 46 (46)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|VGA_Ctrl:u9                                                                                                                                               ;              ;
 ;    |YCbCr2RGB:u8|                                ; 275 (113)         ; 158 (78)     ; 0           ; 18           ; 0       ; 9         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8                                                                                                                                              ;              ;
 ;       |MAC_3:u0|                                 ; 54 (0)            ; 27 (0)       ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u0                                                                                                                                     ;              ;
 ;          |altmult_add:ALTMULT_ADD_component|     ; 54 (0)            ; 27 (0)       ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u0|altmult_add:ALTMULT_ADD_component                                                                                                   ;              ;
@@ -531,6 +533,7 @@ applicable agreement for further details.
 ;                |ded_mult_ob91:ded_mult2|         ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u2|altmult_add:ALTMULT_ADD_component|mult_add_4f74:auto_generated|ded_mult_ob91:ded_mult2                                              ;              ;
 ;                |ded_mult_ob91:ded_mult3|         ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u2|altmult_add:ALTMULT_ADD_component|mult_add_4f74:auto_generated|ded_mult_ob91:ded_mult3                                              ;              ;
 ;    |YUV422_to_444:u7|                            ; 8 (8)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|YUV422_to_444:u7                                                                                                                                          ;              ;
+;    |buffer3:delayer|                             ; 0 (0)             ; 1920 (1920)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|buffer3:delayer                                                                                                                                           ;              ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -600,8 +603,8 @@ Encoding Type:  One-Hot
 +-----------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0] ; yes                                                              ; yes                                        ;
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0] ; yes                                                              ; yes                                        ;
-; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0]  ; yes                                                              ; yes                                        ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0]  ; yes                                                              ; yes                                        ;
+; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0]  ; yes                                                              ; yes                                        ;
 +-----------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
 
 
@@ -772,12 +775,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1076  ;
+; Total registers                              ; 2996  ;
 ; Number of registers using Synchronous Clear  ; 169   ;
 ; Number of registers using Synchronous Load   ; 79    ;
 ; Number of registers using Asynchronous Clear ; 713   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 284   ;
+; Number of registers using Clock Enable       ; 2204  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -805,8 +808,8 @@ Encoding Type:  One-Hot
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0 ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
-; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
+; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
 ; Total number of inverted registers = 20                                                                                                       ;         ;
 +-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
@@ -816,22 +819,22 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                         ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[0]              ;                            ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[6] ;                            ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[4]   ;                            ;
-; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; |DE2_TV|counter_1ms[9]                                             ;                            ;
-; 4:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[6]                                     ;                            ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[5]                                       ;                            ;
-; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[6]                                      ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[7]                            ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[15]                       ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[7]                        ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[20]                       ;                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[11]             ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[5] ;                            ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[0]   ;                            ;
+; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; |DE2_TV|counter_1ms[25]                                            ;                            ;
+; 4:1                ; 9 bits    ; 18 LEs        ; 18 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[2]                                     ;                            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[9]                                       ;                            ;
+; 4:1                ; 7 bits    ; 14 LEs        ; 14 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[9]                                      ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[17]                           ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[11]                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[14]                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[11]                       ;                            ;
 ; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_shift[0]        ;                            ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[0]                                ;                            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[6]                                ;                            ;
 ; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|RD_MASK[1]                          ;                            ;
 ; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|CMD[1]                              ;                            ;
-; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[7]                               ;                            ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[1]                               ;                            ;
 +--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
 
 
@@ -2885,12 +2888,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; H_ACT          ; 640   ; Signed Integer                  ;
 ; H_BLANK        ; 160   ; Signed Integer                  ;
 ; H_TOTAL        ; 800   ; Signed Integer                  ;
+; H_DLY          ; 2     ; Signed Integer                  ;
 ; V_FRONT        ; 11    ; Signed Integer                  ;
 ; V_SYNC         ; 2     ; Signed Integer                  ;
 ; V_BACK         ; 31    ; Signed Integer                  ;
 ; V_ACT          ; 480   ; Signed Integer                  ;
 ; V_BLANK        ; 44    ; Signed Integer                  ;
 ; V_TOTAL        ; 524   ; Signed Integer                  ;
+; V_DLY          ; 2     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -3076,6 +3081,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "buffer3:delayer"                                                                                             ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; shiftout ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
 +---------------------------------------------------------------------------------------------------------------------------------------------+
 ; Port Connectivity Checks: "recolor:u100"                                                                                                    ;
 +--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
@@ -3088,13 +3102,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "VGA_Ctrl:u9"                                                                                                 ;
-+----------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port     ; Type   ; Severity ; Details                                                                                                  ;
-+----------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; oAddress ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+----------+--------+----------+----------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "VGA_Ctrl:u9"                                                                                                          ;
++-------------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port              ; Type   ; Severity ; Details                                                                                                  ;
++-------------------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; oCurrent_Y[10..1] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                      ;
+; oAddress          ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-------------------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
 +---------------------------------------------------+
@@ -3359,7 +3374,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:08     ;
+; Top            ; 00:00:11     ;
 +----------------+--------------+
 
 
@@ -3369,7 +3384,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Thu Apr 18 18:53:14 2013
+    Info: Processing started: Mon Apr 22 22:05:36 2013
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE2_TV -c DE2_TV
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Found 1 design units, including 1 entities, in source file stack_ram.v
@@ -3433,18 +3448,19 @@ Info: Found 1 design units, including 1 entities, in source file recolor.v
     Info: Found entity 1: recolor
 Info: Found 1 design units, including 1 entities, in source file goomba.v
     Info: Found entity 1: goomba
+Info: Found 1 design units, including 1 entities, in source file buffer3.v
+    Info: Found entity 1: buffer3
 Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(368): created implicit net for "WR1_FULL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(658): created implicit net for "audio_inL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(659): created implicit net for "audio_inR"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(661): created implicit net for "audio_outL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(662): created implicit net for "audio_outR"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(700): created implicit net for "audio_inL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(701): created implicit net for "audio_inR"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(703): created implicit net for "audio_outL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(704): created implicit net for "audio_outR"
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(57): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(65): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(73): instance has no name
 Info: Elaborating entity "DE2_TV" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(497): object "mVGA_G_int" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(498): object "mVGA_B_int" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(532): object "row400" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(500): object "mVGA_G_int" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(501): object "mVGA_B_int" assigned a value but never read
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(227): truncated value with size 32 to match size of target (4)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(234): truncated value with size 32 to match size of target (27)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(240): truncated value with size 32 to match size of target (27)
@@ -3452,19 +3468,16 @@ Warning (10230): Verilog HDL assignment warning at DE2_TV.v(251): truncated valu
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(257): truncated value with size 32 to match size of target (4)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(263): truncated value with size 32 to match size of target (4)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(269): truncated value with size 32 to match size of target (4)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(536): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(536): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(538): variable "mVGA_R_int" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(538): variable "DPDT_SW" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(538): truncated value with size 32 to match size of target (1)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(538): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(541): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(541): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(543): variable "mVGA_R_int" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(543): variable "DPDT_SW" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(543): truncated value with size 32 to match size of target (10)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(547): variable "mVGA_R_int" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10034): Output port "LED_GREEN" at DE2_TV.v(55) has no driver
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(516): truncated value with size 32 to match size of target (1)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(579): variable "grid" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(587): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(587): truncated value with size 32 to match size of target (10)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(588): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(588): truncated value with size 32 to match size of target (10)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(589): variable "mVGA_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(589): truncated value with size 32 to match size of target (10)
+Warning (10034): Output port "LED_GREEN[8]" at DE2_TV.v(55) has no driver
+Warning (10034): Output port "LED_RED" at DE2_TV.v(56) has no driver
 Warning (10034): Output port "FL_ADDR" at DE2_TV.v(78) has no driver
 Warning (10034): Output port "SRAM_ADDR" at DE2_TV.v(85) has no driver
 Warning (10034): Output port "OTG_ADDR" at DE2_TV.v(93) has no driver
@@ -3851,10 +3864,11 @@ Info: Found 1 design units, including 1 entities, in source file db/dffpipe_b3c.
     Info: Found entity 1: dffpipe_b3c
 Info: Elaborating entity "dffpipe_b3c" for hierarchy "YCbCr2RGB:u8|MAC_3:u0|altmult_add:ALTMULT_ADD_component|mult_add_4f74:auto_generated|ded_mult_ob91:ded_mult1|dffpipe_b3c:pre_result"
 Info: Elaborating entity "VGA_Ctrl" for hierarchy "VGA_Ctrl:u9"
-Warning (10230): Verilog HDL assignment warning at VGA_Ctrl.v(67): truncated value with size 32 to match size of target (22)
-Warning (10230): Verilog HDL assignment warning at VGA_Ctrl.v(70): truncated value with size 32 to match size of target (11)
-Warning (10230): Verilog HDL assignment warning at VGA_Ctrl.v(71): truncated value with size 32 to match size of target (11)
+Warning (10230): Verilog HDL assignment warning at VGA_Ctrl.v(72): truncated value with size 32 to match size of target (22)
+Warning (10230): Verilog HDL assignment warning at VGA_Ctrl.v(75): truncated value with size 32 to match size of target (11)
+Warning (10230): Verilog HDL assignment warning at VGA_Ctrl.v(76): truncated value with size 32 to match size of target (11)
 Info: Elaborating entity "recolor" for hierarchy "recolor:u100"
+Info: Elaborating entity "buffer3" for hierarchy "buffer3:delayer"
 Info: Elaborating entity "Line_Buffer" for hierarchy "Line_Buffer:u10"
 Info: Elaborating entity "altshift_taps" for hierarchy "Line_Buffer:u10|altshift_taps:altshift_taps_component"
 Info: Elaborated megafunction instantiation "Line_Buffer:u10|altshift_taps:altshift_taps_component"
@@ -3887,7 +3901,7 @@ Info: Ignored 80 buffer(s)
     Info: Ignored 80 SOFT buffer(s)
 Info: Found 1 instances of uninferred RAM logic
     Info: RAM logic "I2C_AV_Config:u1|Ram0" is uninferred due to asynchronous read logic
-Warning: 14 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: 15 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning: The following nodes have both tri-state and non-tri-state drivers
     Warning: Inserted always-enabled tri-state buffer between "AUD_DACLRCK" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "AUD_BCLK" and its non-tri-state driver.
@@ -4073,15 +4087,23 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "HEX7[4]" is stuck at VCC
     Warning (13410): Pin "HEX7[5]" is stuck at VCC
     Warning (13410): Pin "HEX7[6]" is stuck at VCC
-    Warning (13410): Pin "LED_GREEN[0]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[1]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[2]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[3]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[4]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[5]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[6]" is stuck at GND
-    Warning (13410): Pin "LED_GREEN[7]" is stuck at GND
     Warning (13410): Pin "LED_GREEN[8]" is stuck at GND
+    Warning (13410): Pin "LED_RED[0]" is stuck at GND
+    Warning (13410): Pin "LED_RED[1]" is stuck at GND
+    Warning (13410): Pin "LED_RED[2]" is stuck at GND
+    Warning (13410): Pin "LED_RED[3]" is stuck at GND
+    Warning (13410): Pin "LED_RED[4]" is stuck at GND
+    Warning (13410): Pin "LED_RED[5]" is stuck at GND
+    Warning (13410): Pin "LED_RED[6]" is stuck at GND
+    Warning (13410): Pin "LED_RED[7]" is stuck at GND
+    Warning (13410): Pin "LED_RED[8]" is stuck at GND
+    Warning (13410): Pin "LED_RED[9]" is stuck at GND
+    Warning (13410): Pin "LED_RED[10]" is stuck at GND
+    Warning (13410): Pin "LED_RED[11]" is stuck at GND
+    Warning (13410): Pin "LED_RED[12]" is stuck at GND
+    Warning (13410): Pin "LED_RED[13]" is stuck at GND
+    Warning (13410): Pin "LED_RED[14]" is stuck at GND
+    Warning (13410): Pin "LED_RED[15]" is stuck at GND
     Warning (13410): Pin "LED_RED[16]" is stuck at GND
     Warning (13410): Pin "LED_RED[17]" is stuck at GND
     Warning (13410): Pin "UART_TXD" is stuck at GND
@@ -4162,22 +4184,6 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "ENET_CLK" is stuck at GND
     Warning (13410): Pin "AUD_DACDAT" is stuck at GND
     Warning (13410): Pin "TD_RESET" is stuck at VCC
-Warning: Output pin "LED_RED[0]" driven by bidirectional pin "DRAM_DQ[0]" cannot be tri-stated
-Warning: Output pin "LED_RED[1]" driven by bidirectional pin "DRAM_DQ[1]" cannot be tri-stated
-Warning: Output pin "LED_RED[2]" driven by bidirectional pin "DRAM_DQ[2]" cannot be tri-stated
-Warning: Output pin "LED_RED[3]" driven by bidirectional pin "DRAM_DQ[3]" cannot be tri-stated
-Warning: Output pin "LED_RED[4]" driven by bidirectional pin "DRAM_DQ[4]" cannot be tri-stated
-Warning: Output pin "LED_RED[5]" driven by bidirectional pin "DRAM_DQ[5]" cannot be tri-stated
-Warning: Output pin "LED_RED[6]" driven by bidirectional pin "DRAM_DQ[6]" cannot be tri-stated
-Warning: Output pin "LED_RED[7]" driven by bidirectional pin "DRAM_DQ[7]" cannot be tri-stated
-Warning: Output pin "LED_RED[8]" driven by bidirectional pin "DRAM_DQ[8]" cannot be tri-stated
-Warning: Output pin "LED_RED[9]" driven by bidirectional pin "DRAM_DQ[9]" cannot be tri-stated
-Warning: Output pin "LED_RED[10]" driven by bidirectional pin "DRAM_DQ[10]" cannot be tri-stated
-Warning: Output pin "LED_RED[11]" driven by bidirectional pin "DRAM_DQ[11]" cannot be tri-stated
-Warning: Output pin "LED_RED[12]" driven by bidirectional pin "DRAM_DQ[12]" cannot be tri-stated
-Warning: Output pin "LED_RED[13]" driven by bidirectional pin "DRAM_DQ[13]" cannot be tri-stated
-Warning: Output pin "LED_RED[14]" driven by bidirectional pin "DRAM_DQ[14]" cannot be tri-stated
-Warning: Output pin "LED_RED[15]" driven by bidirectional pin "DRAM_DQ[15]" cannot be tri-stated
 Info: 39 registers lost all their fanouts during netlist optimizations. The first 39 are displayed below.
     Info: Register "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22|dffe24a[0]" lost all its fanouts during netlist optimizations.
     Info: Register "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_qe9:dffpipe22|dffe23a[0]" lost all its fanouts during netlist optimizations.
@@ -4260,18 +4266,18 @@ Warning: Design contains 23 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PS2_CLK"
     Warning (15610): No output dependent on input pin "ENET_INT"
     Warning (15610): No output dependent on input pin "AUD_ADCDAT"
-Info: Implemented 2421 device resources after synthesis - the final resource count might be different
+Info: Implemented 4316 device resources after synthesis - the final resource count might be different
     Info: Implemented 49 input pins
     Info: Implemented 218 output pins
     Info: Implemented 159 bidirectional pins
-    Info: Implemented 1880 logic cells
+    Info: Implemented 3775 logic cells
     Info: Implemented 96 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 18 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 435 warnings
-    Info: Peak virtual memory: 392 megabytes
-    Info: Processing ended: Thu Apr 18 18:53:27 2013
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:12
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 423 warnings
+    Info: Peak virtual memory: 401 megabytes
+    Info: Processing ended: Mon Apr 22 22:05:52 2013
+    Info: Elapsed time: 00:00:16
+    Info: Total CPU time (on all processors): 00:00:16
 
 

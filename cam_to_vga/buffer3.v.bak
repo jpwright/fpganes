@@ -10,19 +10,19 @@ module buffer3 (
 	oGrid);
 	
 	input		wire			clock,clken;
-	input		wire	shiftin;
+	input		wire	[29:0]	shiftin;
 	
 	integer i;
 	
 	//probably should store intensity value into "Grid," not RGB value, for use in edgedetect
 	//RGB value will only be used in line buffer, and will be output to screen if not edge
 	//if it is an edge, we will output black (or whatever color we choose for the line)
-	output	wire	[8:0]	oGrid;
-	output	reg	shiftout;
+	output	wire	[269:0]	oGrid;
+	output	reg	[29:0]	shiftout;
 	
-	reg	line1 	[639:0];
-	reg	line2		[639:0];
-	reg	line3		[639:0];
+	reg	[29:0]	line1 	[639:0];
+	reg	[29:0]	line2		[639:0];
+	reg	[29:0]	line3		[639:0];
 	//reg	[29:0]	grid_2d	[8:0];
 	
 	//assign oGrid = {grid_2d[8],grid_2d[7],grid_2d[6],grid_2d[5],grid_2d[4],grid_2d[3],grid_2d[2],grid_2d[1],grid_2d[0]};

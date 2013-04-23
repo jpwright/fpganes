@@ -1,5 +1,5 @@
 Flow report for DE2_TV
-Thu Apr 18 18:53:51 2013
+Mon Apr 22 22:06:21 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -38,17 +38,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Flow Summary                                                                   ;
 +------------------------------------+-------------------------------------------+
-; Flow Status                        ; Successful - Thu Apr 18 18:53:47 2013     ;
+; Flow Status                        ; Successful - Mon Apr 22 22:06:18 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
 ; Device                             ; EP2C35F672C8                              ;
 ; Timing Models                      ; Final                                     ;
-; Total logic elements               ; 1,793 / 33,216 ( 5 % )                    ;
-;     Total combinational functions  ; 1,546 / 33,216 ( 5 % )                    ;
-;     Dedicated logic registers      ; 1,076 / 33,216 ( 3 % )                    ;
-; Total registers                    ; 1076                                      ;
+; Total logic elements               ; 3,683 / 33,216 ( 11 % )                   ;
+;     Total combinational functions  ; 1,521 / 33,216 ( 5 % )                    ;
+;     Dedicated logic registers      ; 2,996 / 33,216 ( 9 % )                    ;
+; Total registers                    ; 2996                                      ;
 ; Total pins                         ; 426 / 475 ( 90 % )                        ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 53,184 / 483,840 ( 11 % )                 ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/18/2013 18:53:15 ;
+; Start date & time ; 04/22/2013 22:05:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE2_TV              ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; AUTO_ENABLE_SMART_COMPILE           ; On                                    ; --            ; --          ; --         ;
 ; AUTO_PACKED_REGISTERS_STRATIXII     ; Normal                                ; Auto          ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 132683363511549.136632559405524       ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 132683363511549.136668273600168       ; --            ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Speed                                 ; Balanced      ; --          ; --         ;
 ; ENABLE_SIGNALTAP                    ; Off                                   ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Fast Fit                              ; Auto Fit      ; --          ; --         ;
@@ -99,11 +99,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:12     ; 1.0                     ; 392 MB              ; 00:00:11                           ;
-; Fitter                    ; 00:00:14     ; 1.9                     ; 548 MB              ; 00:00:16                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 387 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:07     ; 1.0                     ; 415 MB              ; 00:00:05                           ;
-; Total                     ; 00:00:36     ; --                      ; --                  ; 00:00:34                           ;
+; Analysis & Synthesis      ; 00:00:15     ; 1.0                     ; 401 MB              ; 00:00:14                           ;
+; Fitter                    ; 00:00:19     ; 1.5                     ; 560 MB              ; 00:00:22                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 392 MB              ; 00:00:02                           ;
+; TimeQuest Timing Analyzer ; 00:00:05     ; 2.3                     ; 431 MB              ; 00:00:06                           ;
+; Total                     ; 00:00:42     ; --                      ; --                  ; 00:00:44                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

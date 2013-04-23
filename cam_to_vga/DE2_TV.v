@@ -459,6 +459,7 @@ module DE2_TV
     .oCurrent_X (VGA_X),
     .oCurrent_Y (VGA_Y),
     .oRequest   (VGA_Read),
+	 .oShift_Flag(Shift_En),
     //  VGA Side
     .oVGA_R     (VGA_R),
     .oVGA_G     (VGA_G),
@@ -493,6 +494,8 @@ module DE2_TV
   wire [9:0]  mVGA_G;
   wire [9:0]  mVGA_B;
   
+  wire			Shift_En;
+  
   wire [9:0]  mVGA_R_int;
   wire [9:0]  mVGA_G_int;
   wire [9:0]  mVGA_B_int;
@@ -510,41 +513,80 @@ module DE2_TV
   assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
   assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
   
+  wire mVGA_th = (mVGA_R_int > DPDT_SW[17:8]) ? 1 : 0;
+  
   //assign mVGA_R = (VGA_X > 11'b00101000000) ? Red : 10'b1111111111;
   //assign mVGA_R = VGA_row_R[VGA_X];
   //assign mVGA_G = (VGA_X > 11'b00101000000) ? Green : 0;
   //assign mVGA_B = (VGA_X > 11'b00101000000) ? Blue : 0;
   
-  reg [9:0] mVGA_gs; //Grayscale
+  
   
   //assign mVGA_gs = Red + Green + Blue;
   
   
-  reg [639:0] VGA_row_gs;
+  //reg [639:0] VGA_row_gs;
   
-  reg VGA_pixel_gs;
+  //reg VGA_pixel_gs;
   
 //  always @ (OSC_27)
 //  begin
 //		VGA_pixel_gs <= (mVGA_R_int > DPDT_SW[17:8]) ? 1 : 0;
 //  end
   
-  reg [319:0] row400;
+//  reg [319:0] row400;
+	/*
+  reg [639:0] row1;
+  reg [639:0] row2;
+  reg [639:0] row3;
+  reg [639:0] row4;
+  reg [639:0] row5;
+  reg [639:0] row6;
+  reg [639:0] row7;
+  reg [639:0] row8;
+  reg [639:0] row9;
+  reg [639:0] row10;
+  */
+  //reg [10:0] VGA_X_L;
+  //reg [10:0] VGA_Y_L;
   
-  always @ (VGA_CLK)
-  begin
-		if (VGA_Y == 400 && VGA_X > 320)
+  //reg [7:0] status;
+  
+  assign LED_GREEN[7:2] = grid[8:3];
+  assign LED_GREEN[1] = Shift_En;
+  assign LED_GREEN[0] = mVGA_th;
+  
+  //reg [3839:0] rowbuffer;
+  
+  //parameter rowStart = 400;
+  
+  wire [8:0] grid;
+  
+  buffer3 	delayer(
+		.clock		(OSC_27),
+		.clken		(Shift_En),
+		.shiftin		(mVGA_th),
+		.oGrid		(grid) 
+	);
+	
+	reg [9:0] mVGA_gs_r;
+   reg [9:0] mVGA_gs_g;
+   reg [9:0] mVGA_gs_b;
+
+   //assign mVGA_gs = (mVGA_th == 1) ? 10'b1111111111 : 0;
+	always @ (OSC_27)
+	begin
+		if (grid == 9'b111111111)
 		begin
-			row400[VGA_X + 320] <= (mVGA_R_int > DPDT_SW[17:8]) ? 1 : 0;
-		end
-		
-		if (VGA_X > 320 && VGA_Y > 240)
-		begin
-			mVGA_gs <= (mVGA_R_int > DPDT_SW[17:8]) ? 10'b1111111111 : 0;
+			mVGA_gs_r <= 10'b1111111111;
+			mVGA_gs_g <= 10'b0000000000;
+			mVGA_gs_b <= 10'b0000000000;
 		end
 		else
 		begin
-			mVGA_gs <= mVGA_R_int;
+			mVGA_gs_r <= (mVGA_th == 1) ? 10'b1111111111 : 0;
+			mVGA_gs_g <= (mVGA_th == 1) ? 10'b1111111111 : 0;
+			mVGA_gs_b <= (mVGA_th == 1) ? 10'b1111111111 : 0;
 		end
 	end
 			
@@ -553,15 +595,15 @@ module DE2_TV
 //  assign mVGA_G = mVGA_G_int;
 //  assign mVGA_B = mVGA_B_int;
 	
-  assign mVGA_R = mVGA_gs;
-  assign mVGA_G = mVGA_gs;
-  assign mVGA_B = mVGA_gs;
+  assign mVGA_R = mVGA_gs_r;
+  assign mVGA_G = mVGA_gs_g;
+  assign mVGA_B = mVGA_gs_b;
 
 //  assign mVGA_R = (VGA_pixel_gs == 1) ? 1023 : 0;
 //  assign mVGA_G = (VGA_pixel_gs == 1) ? 1023 : 0;
 //  assign mVGA_B = (VGA_pixel_gs == 1) ? 1023 : 0;
   
-  assign LED_RED = DRAM_DQ;
+ 
 
   //  For ITU-R 656 Decoder
   wire  [15:0] YCbCr;
