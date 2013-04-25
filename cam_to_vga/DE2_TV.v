@@ -240,7 +240,7 @@ module DE2_TV
 				counter_1ms	<=	counter_1ms+1;
 			end
 			
-			else if(counter_1ms == 24999999 )
+			else if(counter_1ms == 28999999 )
 			begin
 				BTN_a <= 0;
 				counter_1ms	<=	0;	
@@ -506,14 +506,20 @@ module DE2_TV
   // If it's 0, black, get RGB value from the camcorder; 
   // otherwise print white lines and letters on the screen
   // To get grayscale, replace the next three lines with the commented-out lines
-//  assign  mVGA_R = Red;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-//  assign  mVGA_G = Green;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-//  assign  mVGA_B = Blue;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_R_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_R_int = Red;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_G_int = Green;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_B_int = Blue;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+//  assign  mVGA_R_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+//  assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+//  assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
   
-  wire mVGA_th = (mVGA_R_int > (DPDT_SW[17:11] << 3)) ? 1 : 0;
+  wire mVGA_r_th = (mVGA_R_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
+  wire mVGA_g_th = (mVGA_G_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
+  wire mVGA_b_th = (mVGA_B_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
+  
+  wire [9:0] mVGA_r_th_full = (mVGA_r_th == 1) ? 10'b1111111111 : 0;
+  wire [9:0] mVGA_g_th_full = (mVGA_g_th == 1) ? 10'b1111111111 : 0;
+  wire [9:0] mVGA_b_th_full = (mVGA_b_th == 1) ? 10'b1111111111 : 0;
   
   //assign mVGA_R = (VGA_X > 11'b00101000000) ? Red : 10'b1111111111;
   //assign mVGA_R = VGA_row_R[VGA_X];
@@ -552,38 +558,83 @@ module DE2_TV
   
   //reg [7:0] status;
   
-  assign LED_GREEN[7:2] = grid[8:3];
+  //assign LED_GREEN[7:2] = grid[8:3];
   assign LED_GREEN[1] = Shift_En;
-  assign LED_GREEN[0] = mVGA_th;
+  //assign LED_GREEN[0] = mVGA_th;
   
   //reg [3839:0] rowbuffer;
   
   //parameter rowStart = 400;
   
-  wire [8:0] grid;
+  //wire [8:0] grid;
   
-  wire [8:0] kernel = DPDT_SW[10:2];
+  //wire [8:0] kernel = DPDT_SW[10:2];
   
-  wire [8:0] kd = kernel ~^ grid;
+  wire [5:0] kd_thresh = DPDT_SW[12:7];
   
-  wire [2:0] kd_sum = kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
+  wire [120:0] kernel = 121'b0000000000000000000000001100001100011000011011110000111111100001111111111111111111111111111111111111111111111111111111111;
   
-  buffer3 	delayer(
+  wire [120:0] kd = kernel ~^ grid_r;
+  
+  //wire [2:0] kd_sum = kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
+  wire [6:0] kd_sum = kd[120] + kd[119] + kd[118] + kd[117] + kd[116] + kd[115] + kd[114] + kd[113] + kd[112] + kd[111] + kd[110] + kd[109] + kd[108] + kd[107] + kd[106] + kd[105] + kd[104] + kd[103] + kd[102] + kd[101] + kd[100] + kd[99] + kd[98] + kd[97] + kd[96] + kd[95] + kd[94] + kd[93] + kd[92] + kd[91] + kd[90] + kd[89] + kd[88] + kd[87] + kd[86] + kd[85] + kd[84] + kd[83] + kd[82] + kd[81] + kd[80] + kd[79] + kd[78] + kd[77] + kd[76] + kd[75] + kd[74] + kd[73] + kd[72] + kd[71] + kd[70] + kd[69] + kd[68] + kd[67] + kd[66] + kd[65] + kd[64] + kd[63] + kd[62] + kd[61] + kd[60] + kd[59] + kd[58] + kd[57] + kd[56] + kd[55] + kd[54] + kd[53] + kd[52] + kd[51] + kd[50] + kd[49] + kd[48] + kd[47] + kd[46] + kd[45] + kd[44] + kd[43] + kd[42] + kd[41] + kd[40] + kd[39] + kd[38] + kd[37] + kd[36] + kd[35] + kd[34] + kd[33] + kd[32] + kd[31] + kd[30] + kd[29] + kd[28] + kd[27] + kd[26] + kd[25] + kd[24] + kd[23] + kd[22] + kd[21] + kd[20] + kd[19] + kd[18] + kd[17] + kd[16] + kd[15] + kd[14] + kd[13] + kd[12] + kd[11] + kd[10] + kd[9] + kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
+  
+//  buffer3 	delayer(
+//		.clock		(OSC_27),
+//		.clken		(Shift_En),
+//		.shiftin		(mVGA_th),
+//		.oGrid		(grid) 
+//	);
+	
+	wire [120:0] grid_r;
+	
+	buffer11 	delayer_r(
 		.clock		(OSC_27),
 		.clken		(Shift_En),
-		.shiftin		(mVGA_th),
-		.oGrid		(grid) 
+		.shiftin		(mVGA_r_th),
+		.oGrid		(grid_r) 
 	);
 	
-	reg [9:0] mVGA_gs_r;
-   reg [9:0] mVGA_gs_g;
-   reg [9:0] mVGA_gs_b;
-
+	wire [120:0] grid_g;
+	
+	buffer11 	delayer_g(
+		.clock		(OSC_27),
+		.clken		(Shift_En),
+		.shiftin		(mVGA_g_th),
+		.oGrid		(grid_g) 
+	);
+	
+	wire [120:0] grid_b;
+	
+	buffer11 	delayer_b(
+		.clock		(OSC_27),
+		.clken		(Shift_En),
+		.shiftin		(mVGA_b_th),
+		.oGrid		(grid_b) 
+	);
+	
+	wire [9:0] mVGA_gs_r;
+   wire [9:0] mVGA_gs_g;
+   wire [9:0] mVGA_gs_b;
+	
+	wire DISP_R_THRESH = (~DPDT_SW[4] && ~DPDT_SW[3]);
+	wire DISP_G_THRESH = (~DPDT_SW[4] && DPDT_SW[3]);
+	wire DISP_B_THRESH = (DPDT_SW[4] && ~DPDT_SW[3]);
+	wire DISP_A_THRESH = (DPDT_SW[4] && DPDT_SW[3]);
+	wire [9:0] BASE_R = (DPDT_SW[2]) ? mVGA_R_int : ((DISP_G_THRESH ? mVGA_g_th_full : (DISP_B_THRESH ? mVGA_b_th_full : mVGA_r_th_full)));
+	wire [9:0] BASE_G = (DPDT_SW[2]) ? mVGA_G_int : ((DISP_R_THRESH ? mVGA_r_th_full : (DISP_B_THRESH ? mVGA_b_th_full : mVGA_g_th_full)));
+	wire [9:0] BASE_B = (DPDT_SW[2]) ? mVGA_B_int : ((DISP_G_THRESH ? mVGA_g_th_full : (DISP_R_THRESH ? mVGA_r_th_full : mVGA_b_th_full)));
+	
+	assign mVGA_gs_r = (kd_sum < kd_thresh) ? 10'b1111111111 : BASE_R;
+	assign mVGA_gs_g = (kd_sum < kd_thresh) ? 10'b0000000000 : BASE_G;
+	assign mVGA_gs_b = (kd_sum < kd_thresh) ? 10'b0000000000 : BASE_B;
+	
    //assign mVGA_gs = (mVGA_th == 1) ? 10'b1111111111 : 0;
+	/*
 	always @ (OSC_27)
 	begin
 		//if (grid == kernel)
-		if (kd_sum < 2)
+		if (kd_sum < kd_thresh)
 		begin
 			mVGA_gs_r <= 10'b1111111111;
 			mVGA_gs_g <= 10'b0000000000;
@@ -591,20 +642,53 @@ module DE2_TV
 		end
 		else
 		begin
-			mVGA_gs_r <= (mVGA_th == 1) ? 10'b1111111111 : 0;
-			mVGA_gs_g <= (mVGA_th == 1) ? 10'b1111111111 : 0;
-			mVGA_gs_b <= (mVGA_th == 1) ? 10'b1111111111 : 0;
+			//mVGA_gs_r <= (mVGA_th == 1) ? 10'b1111111111 : 0;
+			//mVGA_gs_g <= (mVGA_th == 1) ? 10'b1111111111 : 0;
+			//mVGA_gs_b <= (mVGA_th == 1) ? 10'b1111111111 : 0;
+			if (DPDT_SW[2])
+			begin
+				mVGA_gs_r <= mVGA_R_int;
+				mVGA_gs_g <= mVGA_G_int;
+				mVGA_gs_b <= mVGA_B_int;
+			end
+			else
+			begin
+				if (DPDT_SW[4:3] == 0)
+				begin
+					mVGA_gs_r <= mVGA_r_th_full;
+					mVGA_gs_g <= mVGA_r_th_full;
+					mVGA_gs_b <= mVGA_r_th_full; 
+				end
+				else if (DPDT_SW[4:3] == 1)
+				begin
+					mVGA_gs_r <= mVGA_g_th_full;
+					mVGA_gs_g <= mVGA_g_th_full;
+					mVGA_gs_b <= mVGA_g_th_full;
+				end
+				else if (DPDT_SW[4:3] == 2)
+				begin
+					mVGA_gs_r <= mVGA_b_th_full;
+					mVGA_gs_g <= mVGA_b_th_full;
+					mVGA_gs_b <= mVGA_b_th_full;
+				end
+				else if (DPDT_SW[4:3] == 3)
+				begin
+					mVGA_gs_r <= mVGA_r_th_full;
+					mVGA_gs_g <= mVGA_g_th_full;
+					mVGA_gs_b <= mVGA_b_th_full;
+				end
+			end
 		end
 	end
-			
+		*/	
   
 //  assign mVGA_R = mVGA_R_int;
 //  assign mVGA_G = mVGA_G_int;
 //  assign mVGA_B = mVGA_B_int;
 	
-  assign mVGA_R = mVGA_gs_r;
-  assign mVGA_G = mVGA_gs_g;
-  assign mVGA_B = mVGA_gs_b;
+    assign mVGA_R = mVGA_gs_r;
+    assign mVGA_G = mVGA_gs_g;
+    assign mVGA_B = mVGA_gs_b;
 
 //  assign mVGA_R = (VGA_pixel_gs == 1) ? 1023 : 0;
 //  assign mVGA_G = (VGA_pixel_gs == 1) ? 1023 : 0;
