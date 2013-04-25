@@ -51,7 +51,7 @@ parameter	H_BACK	=	48;
 parameter	H_ACT	=	640;
 parameter	H_BLANK	=	H_FRONT+H_SYNC+H_BACK;
 parameter	H_TOTAL	=	H_FRONT+H_SYNC+H_BACK+H_ACT;
-parameter	H_DLY		=	2; //number of pixels to delay due to buffering
+parameter	H_DLY		=	4; //number of pixels to delay due to buffering
 ////////////////////////////////////////////////////////////
 //	Vertical Parameter
 parameter	V_FRONT	=	11;
@@ -60,7 +60,7 @@ parameter	V_BACK	=	31;
 parameter	V_ACT	=	480;
 parameter	V_BLANK	=	V_FRONT+V_SYNC+V_BACK;
 parameter	V_TOTAL	=	V_FRONT+V_SYNC+V_BACK+V_ACT;
-parameter	V_DLY		=	2; //Number of lines to delay due to buffering
+parameter	V_DLY		=	4; //Number of lines to delay due to buffering
 ////////////////////////////////////////////////////////////
 assign	oVGA_SYNC	=	1'b1;			//	This pin is unused.
 assign	oVGA_BLANK	=	~((H_Cont<H_BLANK)||(V_Cont<V_BLANK));
