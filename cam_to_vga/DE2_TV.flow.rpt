@@ -1,5 +1,5 @@
 Flow report for DE2_TV
-Mon Apr 22 22:52:10 2013
+Mon Apr 29 16:24:41 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -38,17 +38,17 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Flow Summary                                                                   ;
 +------------------------------------+-------------------------------------------+
-; Flow Status                        ; Successful - Mon Apr 22 22:52:07 2013     ;
+; Flow Status                        ; Successful - Mon Apr 29 16:24:26 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
 ; Device                             ; EP2C35F672C8                              ;
 ; Timing Models                      ; Final                                     ;
-; Total logic elements               ; 3,698 / 33,216 ( 11 % )                   ;
-;     Total combinational functions  ; 1,544 / 33,216 ( 5 % )                    ;
-;     Dedicated logic registers      ; 2,996 / 33,216 ( 9 % )                    ;
-; Total registers                    ; 2996                                      ;
+; Total logic elements               ; 24,080 / 33,216 ( 72 % )                  ;
+;     Total combinational functions  ; 3,051 / 33,216 ( 9 % )                    ;
+;     Dedicated logic registers      ; 22,266 / 33,216 ( 67 % )                  ;
+; Total registers                    ; 22266                                     ;
 ; Total pins                         ; 426 / 475 ( 90 % )                        ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 53,184 / 483,840 ( 11 % )                 ;
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 04/22/2013 22:51:27 ;
+; Start date & time ; 04/29/2013 16:21:51 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE2_TV              ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 +-------------------------------------+---------------------------------------+---------------+-------------+------------+
 ; AUTO_ENABLE_SMART_COMPILE           ; On                                    ; --            ; --          ; --         ;
 ; AUTO_PACKED_REGISTERS_STRATIXII     ; Normal                                ; Auto          ; --          ; --         ;
-; COMPILER_SIGNATURE_ID               ; 132683363511549.136668548604848       ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 132683363797267.136726690803728       ; --            ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE    ; Speed                                 ; Balanced      ; --          ; --         ;
 ; ENABLE_SIGNALTAP                    ; Off                                   ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Fast Fit                              ; Auto Fit      ; --          ; --         ;
@@ -99,11 +99,11 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:15     ; 1.0                     ; 401 MB              ; 00:00:15                           ;
-; Fitter                    ; 00:00:18     ; 1.4                     ; 561 MB              ; 00:00:20                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 392 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:05     ; 2.3                     ; 431 MB              ; 00:00:06                           ;
-; Total                     ; 00:00:41     ; --                      ; --                  ; 00:00:43                           ;
+; Analysis & Synthesis      ; 00:00:59     ; 1.0                     ; 515 MB              ; 00:00:59                           ;
+; Fitter                    ; 00:01:21     ; 1.8                     ; 761 MB              ; 00:01:32                           ;
+; Assembler                 ; 00:00:04     ; 1.0                     ; 440 MB              ; 00:00:04                           ;
+; TimeQuest Timing Analyzer ; 00:00:19     ; 1.9                     ; 640 MB              ; 00:00:22                           ;
+; Total                     ; 00:02:43     ; --                      ; --                  ; 00:02:57                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -112,10 +112,10 @@ applicable agreement for further details.
 +---------------------------+------------------+-----------+------------+----------------+
 ; Module Name               ; Machine Hostname ; OS Name   ; OS Version ; Processor type ;
 +---------------------------+------------------+-----------+------------+----------------+
-; Analysis & Synthesis      ; PH238-01         ; Windows 7 ; 6.1        ; x86_64         ;
-; Fitter                    ; PH238-01         ; Windows 7 ; 6.1        ; x86_64         ;
-; Assembler                 ; PH238-01         ; Windows 7 ; 6.1        ; x86_64         ;
-; TimeQuest Timing Analyzer ; PH238-01         ; Windows 7 ; 6.1        ; x86_64         ;
+; Analysis & Synthesis      ; PH238-03         ; Windows 7 ; 6.1        ; x86_64         ;
+; Fitter                    ; PH238-03         ; Windows 7 ; 6.1        ; x86_64         ;
+; Assembler                 ; PH238-03         ; Windows 7 ; 6.1        ; x86_64         ;
+; TimeQuest Timing Analyzer ; PH238-03         ; Windows 7 ; 6.1        ; x86_64         ;
 +---------------------------+------------------+-----------+------------+----------------+
 
 

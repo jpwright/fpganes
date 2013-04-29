@@ -204,24 +204,79 @@ module DE2_TV
   reg[3:0] seconds_thousands;
 	 
   reg[26:0] counter_ones;
-  reg[26:0] counter_1ms;
+  reg[26:0] counter_jump;
   
-
+  
+	reg jump_flag;
+	reg jump_done;
+	reg [9:0] jump_count;
+  
+	assign LED_RED[17] = BTN_a;
+	assign LED_RED[16] = jump_flag;
+	
+	always @ (pipe_corner_found or pipe_corner_x or jump_done or KEY[1])
+	begin
+		if ((pipe_corner_x < 550 && pipe_corner_x > 100 && pipe_corner_found) || ~KEY[1])
+		begin
+			jump_count <= jump_count + 1;
+		end
+		else
+		begin
+			jump_count <= 0;
+		end
+		
+		if (jump_count > 10)
+		begin
+			jump_flag <= 1;
+			jump_count <= 0;
+		end
+		
+		if (jump_done)
+		begin
+			jump_flag <= 0;
+		end
+		
+	end
 	 
 	//every 50 MHz
-	always@(posedge OSC_50 or negedge KEY[0])
+	always@(posedge OSC_50 or negedge KEY[0] or posedge jump_flag)
 	begin
-		if(!KEY[0])
+		
+		if(jump_flag)
+		begin
+			counter_jump <= 0;
+			jump_done <= 0;
+		end
+		else if(!KEY[0])
 		begin
 			seconds_ones		<=	0;
 			seconds_tens		<= 0;
 			seconds_hundreds 	<= 0;
 			seconds_thousands <= 0;
 			counter_ones		<=	0;
-			counter_1ms       <= 0;
+			
 		end
 		else
 		begin
+			
+			if(counter_jump == 21999999 )
+			begin
+				BTN_a <= 1;
+				jump_done <= 1;
+				counter_jump <= counter_jump+1;
+			end
+			
+			if(counter_jump == 28999999 )
+			begin
+			//is this right?
+				BTN_a <= 1;
+			end
+
+			else
+			begin
+				counter_jump <= counter_jump+1;
+			end
+			
 			if(counter_ones == 49999999 )
 			begin
 				seconds_ones	<=	seconds_ones+1;
@@ -234,22 +289,6 @@ module DE2_TV
 				counter_ones	<=	counter_ones+1;	
 			end
 			
-			if(counter_1ms == 21999999 )
-			begin
-				BTN_a <= 1;
-				counter_1ms	<=	counter_1ms+1;
-			end
-			
-			else if(counter_1ms == 28999999 )
-			begin
-				BTN_a <= 0;
-				counter_1ms	<=	0;	
-			end
-
-			else
-			begin
-				counter_1ms	<=	counter_1ms+1;	
-			end
 
 			if (seconds_ones == 10)
 			begin
@@ -426,13 +465,19 @@ module DE2_TV
     .oDVAL    (mDVAL),
     //  Input Side
     .iY       (mY),
-    .iCb      (mCb),
-    .iCr      (mCr),
+    //.iCb      (mCb),
+    //.iCr      (mCr),
+	 .iCb      (mCb_int),
+    .iCr      (mCr_int),
     .iDVAL    (VGA_Read),
     //  Control Signal
     .iRESET   (!DLY2),
     .iCLK     (OSC_27)
   );
+  
+  wire flipCL = DPDT_SW[5];
+  wire [7:0] mCb_int = flipCL ? mCb : mCr;
+  wire [7:0] mCr_int = flipCL ? mCr : mCb;
 
   // Comment out this module if you don't want the mirror effect
   /*Mirror_Col u100  
@@ -572,12 +617,38 @@ module DE2_TV
   
   wire [5:0] kd_thresh = DPDT_SW[12:7];
   
-  wire [120:0] kernel = 121'b0000000000000000000000001100001100011000011011110000111111100001111111111111111111111111111111111111111111111111111111111;
+  wire [120:0] kernel_goomba_g = 121'b0000000000000000000000001100001100011000011011110000111111100001111111111111111111111111000000000000000000000011111111111;
+  wire [120:0] kernel_goomba_r = 121'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
+  wire [120:0] kernel_goomba_b = 121'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
   
-  wire [120:0] kd = kernel ~^ grid_r;
+  
+  wire [120:0] kernel_pipe_corner_g = 121'b1111111111110000000000100000000001000000000010001111111100011111111000111111110001111111100011111111000111111110001111111;
+  wire [120:0] kernel_pipe_corner_b = 121'b1111111111110000000000100000000001000000000010000000000100000000001000000000010000000000100000000001000000000010000000000;
+  wire [120:0] kernel_pipe_corner_r = 121'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
+  
+  wire [120:0] kd_goomba_r = kernel_goomba_r ^ grid_r;
+  wire [120:0] kd_goomba_g = kernel_goomba_g ^ grid_g;
+  wire [120:0] kd_goomba_b = kernel_goomba_b ^ grid_b;
+  
+  wire [120:0] kd_pipe_corner_r = kernel_pipe_corner_r ^ grid_r;
+  wire [120:0] kd_pipe_corner_g = kernel_pipe_corner_g ^ grid_g;
+  wire [120:0] kd_pipe_corner_b = kernel_pipe_corner_b ^ grid_b;
   
   //wire [2:0] kd_sum = kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
-  wire [6:0] kd_sum = kd[120] + kd[119] + kd[118] + kd[117] + kd[116] + kd[115] + kd[114] + kd[113] + kd[112] + kd[111] + kd[110] + kd[109] + kd[108] + kd[107] + kd[106] + kd[105] + kd[104] + kd[103] + kd[102] + kd[101] + kd[100] + kd[99] + kd[98] + kd[97] + kd[96] + kd[95] + kd[94] + kd[93] + kd[92] + kd[91] + kd[90] + kd[89] + kd[88] + kd[87] + kd[86] + kd[85] + kd[84] + kd[83] + kd[82] + kd[81] + kd[80] + kd[79] + kd[78] + kd[77] + kd[76] + kd[75] + kd[74] + kd[73] + kd[72] + kd[71] + kd[70] + kd[69] + kd[68] + kd[67] + kd[66] + kd[65] + kd[64] + kd[63] + kd[62] + kd[61] + kd[60] + kd[59] + kd[58] + kd[57] + kd[56] + kd[55] + kd[54] + kd[53] + kd[52] + kd[51] + kd[50] + kd[49] + kd[48] + kd[47] + kd[46] + kd[45] + kd[44] + kd[43] + kd[42] + kd[41] + kd[40] + kd[39] + kd[38] + kd[37] + kd[36] + kd[35] + kd[34] + kd[33] + kd[32] + kd[31] + kd[30] + kd[29] + kd[28] + kd[27] + kd[26] + kd[25] + kd[24] + kd[23] + kd[22] + kd[21] + kd[20] + kd[19] + kd[18] + kd[17] + kd[16] + kd[15] + kd[14] + kd[13] + kd[12] + kd[11] + kd[10] + kd[9] + kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
+  wire [6:0] kd_goomba_sum_r = kd_goomba_r[120] + kd_goomba_r[119] + kd_goomba_r[118] + kd_goomba_r[117] + kd_goomba_r[116] + kd_goomba_r[115] + kd_goomba_r[114] + kd_goomba_r[113] + kd_goomba_r[112] + kd_goomba_r[111] + kd_goomba_r[110] + kd_goomba_r[109] + kd_goomba_r[108] + kd_goomba_r[107] + kd_goomba_r[106] + kd_goomba_r[105] + kd_goomba_r[104] + kd_goomba_r[103] + kd_goomba_r[102] + kd_goomba_r[101] + kd_goomba_r[100] + kd_goomba_r[99] + kd_goomba_r[98] + kd_goomba_r[97] + kd_goomba_r[96] + kd_goomba_r[95] + kd_goomba_r[94] + kd_goomba_r[93] + kd_goomba_r[92] + kd_goomba_r[91] + kd_goomba_r[90] + kd_goomba_r[89] + kd_goomba_r[88] + kd_goomba_r[87] + kd_goomba_r[86] + kd_goomba_r[85] + kd_goomba_r[84] + kd_goomba_r[83] + kd_goomba_r[82] + kd_goomba_r[81] + kd_goomba_r[80] + kd_goomba_r[79] + kd_goomba_r[78] + kd_goomba_r[77] + kd_goomba_r[76] + kd_goomba_r[75] + kd_goomba_r[74] + kd_goomba_r[73] + kd_goomba_r[72] + kd_goomba_r[71] + kd_goomba_r[70] + kd_goomba_r[69] + kd_goomba_r[68] + kd_goomba_r[67] + kd_goomba_r[66] + kd_goomba_r[65] + kd_goomba_r[64] + kd_goomba_r[63] + kd_goomba_r[62] + kd_goomba_r[61] + kd_goomba_r[60] + kd_goomba_r[59] + kd_goomba_r[58] + kd_goomba_r[57] + kd_goomba_r[56] + kd_goomba_r[55] + kd_goomba_r[54] + kd_goomba_r[53] + kd_goomba_r[52] + kd_goomba_r[51] + kd_goomba_r[50] + kd_goomba_r[49] + kd_goomba_r[48] + kd_goomba_r[47] + kd_goomba_r[46] + kd_goomba_r[45] + kd_goomba_r[44] + kd_goomba_r[43] + kd_goomba_r[42] + kd_goomba_r[41] + kd_goomba_r[40] + kd_goomba_r[39] + kd_goomba_r[38] + kd_goomba_r[37] + kd_goomba_r[36] + kd_goomba_r[35] + kd_goomba_r[34] + kd_goomba_r[33] + kd_goomba_r[32] + kd_goomba_r[31] + kd_goomba_r[30] + kd_goomba_r[29] + kd_goomba_r[28] + kd_goomba_r[27] + kd_goomba_r[26] + kd_goomba_r[25] + kd_goomba_r[24] + kd_goomba_r[23] + kd_goomba_r[22] + kd_goomba_r[21] + kd_goomba_r[20] + kd_goomba_r[19] + kd_goomba_r[18] + kd_goomba_r[17] + kd_goomba_r[16] + kd_goomba_r[15] + kd_goomba_r[14] + kd_goomba_r[13] + kd_goomba_r[12] + kd_goomba_r[11] + kd_goomba_r[10] + kd_goomba_r[9] + kd_goomba_r[8] + kd_goomba_r[7] + kd_goomba_r[6] + kd_goomba_r[5] + kd_goomba_r[4] + kd_goomba_r[3] + kd_goomba_r[2] + kd_goomba_r[1] + kd_goomba_r[0];
+  wire [6:0] kd_goomba_sum_g = kd_goomba_g[120] + kd_goomba_g[119] + kd_goomba_g[118] + kd_goomba_g[117] + kd_goomba_g[116] + kd_goomba_g[115] + kd_goomba_g[114] + kd_goomba_g[113] + kd_goomba_g[112] + kd_goomba_g[111] + kd_goomba_g[110] + kd_goomba_g[109] + kd_goomba_g[108] + kd_goomba_g[107] + kd_goomba_g[106] + kd_goomba_g[105] + kd_goomba_g[104] + kd_goomba_g[103] + kd_goomba_g[102] + kd_goomba_g[101] + kd_goomba_g[100] + kd_goomba_g[99] + kd_goomba_g[98] + kd_goomba_g[97] + kd_goomba_g[96] + kd_goomba_g[95] + kd_goomba_g[94] + kd_goomba_g[93] + kd_goomba_g[92] + kd_goomba_g[91] + kd_goomba_g[90] + kd_goomba_g[89] + kd_goomba_g[88] + kd_goomba_g[87] + kd_goomba_g[86] + kd_goomba_g[85] + kd_goomba_g[84] + kd_goomba_g[83] + kd_goomba_g[82] + kd_goomba_g[81] + kd_goomba_g[80] + kd_goomba_g[79] + kd_goomba_g[78] + kd_goomba_g[77] + kd_goomba_g[76] + kd_goomba_g[75] + kd_goomba_g[74] + kd_goomba_g[73] + kd_goomba_g[72] + kd_goomba_g[71] + kd_goomba_g[70] + kd_goomba_g[69] + kd_goomba_g[68] + kd_goomba_g[67] + kd_goomba_g[66] + kd_goomba_g[65] + kd_goomba_g[64] + kd_goomba_g[63] + kd_goomba_g[62] + kd_goomba_g[61] + kd_goomba_g[60] + kd_goomba_g[59] + kd_goomba_g[58] + kd_goomba_g[57] + kd_goomba_g[56] + kd_goomba_g[55] + kd_goomba_g[54] + kd_goomba_g[53] + kd_goomba_g[52] + kd_goomba_g[51] + kd_goomba_g[50] + kd_goomba_g[49] + kd_goomba_g[48] + kd_goomba_g[47] + kd_goomba_g[46] + kd_goomba_g[45] + kd_goomba_g[44] + kd_goomba_g[43] + kd_goomba_g[42] + kd_goomba_g[41] + kd_goomba_g[40] + kd_goomba_g[39] + kd_goomba_g[38] + kd_goomba_g[37] + kd_goomba_g[36] + kd_goomba_g[35] + kd_goomba_g[34] + kd_goomba_g[33] + kd_goomba_g[32] + kd_goomba_g[31] + kd_goomba_g[30] + kd_goomba_g[29] + kd_goomba_g[28] + kd_goomba_g[27] + kd_goomba_g[26] + kd_goomba_g[25] + kd_goomba_g[24] + kd_goomba_g[23] + kd_goomba_g[22] + kd_goomba_g[21] + kd_goomba_g[20] + kd_goomba_g[19] + kd_goomba_g[18] + kd_goomba_g[17] + kd_goomba_g[16] + kd_goomba_g[15] + kd_goomba_g[14] + kd_goomba_g[13] + kd_goomba_g[12] + kd_goomba_g[11] + kd_goomba_g[10] + kd_goomba_g[9] + kd_goomba_g[8] + kd_goomba_g[7] + kd_goomba_g[6] + kd_goomba_g[5] + kd_goomba_g[4] + kd_goomba_g[3] + kd_goomba_g[2] + kd_goomba_g[1] + kd_goomba_g[0];
+  wire [6:0] kd_goomba_sum_b = kd_goomba_b[120] + kd_goomba_b[119] + kd_goomba_b[118] + kd_goomba_b[117] + kd_goomba_b[116] + kd_goomba_b[115] + kd_goomba_b[114] + kd_goomba_b[113] + kd_goomba_b[112] + kd_goomba_b[111] + kd_goomba_b[110] + kd_goomba_b[109] + kd_goomba_b[108] + kd_goomba_b[107] + kd_goomba_b[106] + kd_goomba_b[105] + kd_goomba_b[104] + kd_goomba_b[103] + kd_goomba_b[102] + kd_goomba_b[101] + kd_goomba_b[100] + kd_goomba_b[99] + kd_goomba_b[98] + kd_goomba_b[97] + kd_goomba_b[96] + kd_goomba_b[95] + kd_goomba_b[94] + kd_goomba_b[93] + kd_goomba_b[92] + kd_goomba_b[91] + kd_goomba_b[90] + kd_goomba_b[89] + kd_goomba_b[88] + kd_goomba_b[87] + kd_goomba_b[86] + kd_goomba_b[85] + kd_goomba_b[84] + kd_goomba_b[83] + kd_goomba_b[82] + kd_goomba_b[81] + kd_goomba_b[80] + kd_goomba_b[79] + kd_goomba_b[78] + kd_goomba_b[77] + kd_goomba_b[76] + kd_goomba_b[75] + kd_goomba_b[74] + kd_goomba_b[73] + kd_goomba_b[72] + kd_goomba_b[71] + kd_goomba_b[70] + kd_goomba_b[69] + kd_goomba_b[68] + kd_goomba_b[67] + kd_goomba_b[66] + kd_goomba_b[65] + kd_goomba_b[64] + kd_goomba_b[63] + kd_goomba_b[62] + kd_goomba_b[61] + kd_goomba_b[60] + kd_goomba_b[59] + kd_goomba_b[58] + kd_goomba_b[57] + kd_goomba_b[56] + kd_goomba_b[55] + kd_goomba_b[54] + kd_goomba_b[53] + kd_goomba_b[52] + kd_goomba_b[51] + kd_goomba_b[50] + kd_goomba_b[49] + kd_goomba_b[48] + kd_goomba_b[47] + kd_goomba_b[46] + kd_goomba_b[45] + kd_goomba_b[44] + kd_goomba_b[43] + kd_goomba_b[42] + kd_goomba_b[41] + kd_goomba_b[40] + kd_goomba_b[39] + kd_goomba_b[38] + kd_goomba_b[37] + kd_goomba_b[36] + kd_goomba_b[35] + kd_goomba_b[34] + kd_goomba_b[33] + kd_goomba_b[32] + kd_goomba_b[31] + kd_goomba_b[30] + kd_goomba_b[29] + kd_goomba_b[28] + kd_goomba_b[27] + kd_goomba_b[26] + kd_goomba_b[25] + kd_goomba_b[24] + kd_goomba_b[23] + kd_goomba_b[22] + kd_goomba_b[21] + kd_goomba_b[20] + kd_goomba_b[19] + kd_goomba_b[18] + kd_goomba_b[17] + kd_goomba_b[16] + kd_goomba_b[15] + kd_goomba_b[14] + kd_goomba_b[13] + kd_goomba_b[12] + kd_goomba_b[11] + kd_goomba_b[10] + kd_goomba_b[9] + kd_goomba_b[8] + kd_goomba_b[7] + kd_goomba_b[6] + kd_goomba_b[5] + kd_goomba_b[4] + kd_goomba_b[3] + kd_goomba_b[2] + kd_goomba_b[1] + kd_goomba_b[0];
+
+  wire [9:0] kd_goomba_sum = kd_goomba_sum_r + kd_goomba_sum_g + kd_goomba_sum_b;
+
+  wire [6:0] kd_pipe_corner_sum_r = kd_pipe_corner_r[120] + kd_pipe_corner_r[119] + kd_pipe_corner_r[118] + kd_pipe_corner_r[117] + kd_pipe_corner_r[116] + kd_pipe_corner_r[115] + kd_pipe_corner_r[114] + kd_pipe_corner_r[113] + kd_pipe_corner_r[112] + kd_pipe_corner_r[111] + kd_pipe_corner_r[110] + kd_pipe_corner_r[109] + kd_pipe_corner_r[108] + kd_pipe_corner_r[107] + kd_pipe_corner_r[106] + kd_pipe_corner_r[105] + kd_pipe_corner_r[104] + kd_pipe_corner_r[103] + kd_pipe_corner_r[102] + kd_pipe_corner_r[101] + kd_pipe_corner_r[100] + kd_pipe_corner_r[99] + kd_pipe_corner_r[98] + kd_pipe_corner_r[97] + kd_pipe_corner_r[96] + kd_pipe_corner_r[95] + kd_pipe_corner_r[94] + kd_pipe_corner_r[93] + kd_pipe_corner_r[92] + kd_pipe_corner_r[91] + kd_pipe_corner_r[90] + kd_pipe_corner_r[89] + kd_pipe_corner_r[88] + kd_pipe_corner_r[87] + kd_pipe_corner_r[86] + kd_pipe_corner_r[85] + kd_pipe_corner_r[84] + kd_pipe_corner_r[83] + kd_pipe_corner_r[82] + kd_pipe_corner_r[81] + kd_pipe_corner_r[80] + kd_pipe_corner_r[79] + kd_pipe_corner_r[78] + kd_pipe_corner_r[77] + kd_pipe_corner_r[76] + kd_pipe_corner_r[75] + kd_pipe_corner_r[74] + kd_pipe_corner_r[73] + kd_pipe_corner_r[72] + kd_pipe_corner_r[71] + kd_pipe_corner_r[70] + kd_pipe_corner_r[69] + kd_pipe_corner_r[68] + kd_pipe_corner_r[67] + kd_pipe_corner_r[66] + kd_pipe_corner_r[65] + kd_pipe_corner_r[64] + kd_pipe_corner_r[63] + kd_pipe_corner_r[62] + kd_pipe_corner_r[61] + kd_pipe_corner_r[60] + kd_pipe_corner_r[59] + kd_pipe_corner_r[58] + kd_pipe_corner_r[57] + kd_pipe_corner_r[56] + kd_pipe_corner_r[55] + kd_pipe_corner_r[54] + kd_pipe_corner_r[53] + kd_pipe_corner_r[52] + kd_pipe_corner_r[51] + kd_pipe_corner_r[50] + kd_pipe_corner_r[49] + kd_pipe_corner_r[48] + kd_pipe_corner_r[47] + kd_pipe_corner_r[46] + kd_pipe_corner_r[45] + kd_pipe_corner_r[44] + kd_pipe_corner_r[43] + kd_pipe_corner_r[42] + kd_pipe_corner_r[41] + kd_pipe_corner_r[40] + kd_pipe_corner_r[39] + kd_pipe_corner_r[38] + kd_pipe_corner_r[37] + kd_pipe_corner_r[36] + kd_pipe_corner_r[35] + kd_pipe_corner_r[34] + kd_pipe_corner_r[33] + kd_pipe_corner_r[32] + kd_pipe_corner_r[31] + kd_pipe_corner_r[30] + kd_pipe_corner_r[29] + kd_pipe_corner_r[28] + kd_pipe_corner_r[27] + kd_pipe_corner_r[26] + kd_pipe_corner_r[25] + kd_pipe_corner_r[24] + kd_pipe_corner_r[23] + kd_pipe_corner_r[22] + kd_pipe_corner_r[21] + kd_pipe_corner_r[20] + kd_pipe_corner_r[19] + kd_pipe_corner_r[18] + kd_pipe_corner_r[17] + kd_pipe_corner_r[16] + kd_pipe_corner_r[15] + kd_pipe_corner_r[14] + kd_pipe_corner_r[13] + kd_pipe_corner_r[12] + kd_pipe_corner_r[11] + kd_pipe_corner_r[10] + kd_pipe_corner_r[9] + kd_pipe_corner_r[8] + kd_pipe_corner_r[7] + kd_pipe_corner_r[6] + kd_pipe_corner_r[5] + kd_pipe_corner_r[4] + kd_pipe_corner_r[3] + kd_pipe_corner_r[2] + kd_pipe_corner_r[1] + kd_pipe_corner_r[0];
+  wire [6:0] kd_pipe_corner_sum_g = kd_pipe_corner_g[120] + kd_pipe_corner_g[119] + kd_pipe_corner_g[118] + kd_pipe_corner_g[117] + kd_pipe_corner_g[116] + kd_pipe_corner_g[115] + kd_pipe_corner_g[114] + kd_pipe_corner_g[113] + kd_pipe_corner_g[112] + kd_pipe_corner_g[111] + kd_pipe_corner_g[110] + kd_pipe_corner_g[109] + kd_pipe_corner_g[108] + kd_pipe_corner_g[107] + kd_pipe_corner_g[106] + kd_pipe_corner_g[105] + kd_pipe_corner_g[104] + kd_pipe_corner_g[103] + kd_pipe_corner_g[102] + kd_pipe_corner_g[101] + kd_pipe_corner_g[100] + kd_pipe_corner_g[99] + kd_pipe_corner_g[98] + kd_pipe_corner_g[97] + kd_pipe_corner_g[96] + kd_pipe_corner_g[95] + kd_pipe_corner_g[94] + kd_pipe_corner_g[93] + kd_pipe_corner_g[92] + kd_pipe_corner_g[91] + kd_pipe_corner_g[90] + kd_pipe_corner_g[89] + kd_pipe_corner_g[88] + kd_pipe_corner_g[87] + kd_pipe_corner_g[86] + kd_pipe_corner_g[85] + kd_pipe_corner_g[84] + kd_pipe_corner_g[83] + kd_pipe_corner_g[82] + kd_pipe_corner_g[81] + kd_pipe_corner_g[80] + kd_pipe_corner_g[79] + kd_pipe_corner_g[78] + kd_pipe_corner_g[77] + kd_pipe_corner_g[76] + kd_pipe_corner_g[75] + kd_pipe_corner_g[74] + kd_pipe_corner_g[73] + kd_pipe_corner_g[72] + kd_pipe_corner_g[71] + kd_pipe_corner_g[70] + kd_pipe_corner_g[69] + kd_pipe_corner_g[68] + kd_pipe_corner_g[67] + kd_pipe_corner_g[66] + kd_pipe_corner_g[65] + kd_pipe_corner_g[64] + kd_pipe_corner_g[63] + kd_pipe_corner_g[62] + kd_pipe_corner_g[61] + kd_pipe_corner_g[60] + kd_pipe_corner_g[59] + kd_pipe_corner_g[58] + kd_pipe_corner_g[57] + kd_pipe_corner_g[56] + kd_pipe_corner_g[55] + kd_pipe_corner_g[54] + kd_pipe_corner_g[53] + kd_pipe_corner_g[52] + kd_pipe_corner_g[51] + kd_pipe_corner_g[50] + kd_pipe_corner_g[49] + kd_pipe_corner_g[48] + kd_pipe_corner_g[47] + kd_pipe_corner_g[46] + kd_pipe_corner_g[45] + kd_pipe_corner_g[44] + kd_pipe_corner_g[43] + kd_pipe_corner_g[42] + kd_pipe_corner_g[41] + kd_pipe_corner_g[40] + kd_pipe_corner_g[39] + kd_pipe_corner_g[38] + kd_pipe_corner_g[37] + kd_pipe_corner_g[36] + kd_pipe_corner_g[35] + kd_pipe_corner_g[34] + kd_pipe_corner_g[33] + kd_pipe_corner_g[32] + kd_pipe_corner_g[31] + kd_pipe_corner_g[30] + kd_pipe_corner_g[29] + kd_pipe_corner_g[28] + kd_pipe_corner_g[27] + kd_pipe_corner_g[26] + kd_pipe_corner_g[25] + kd_pipe_corner_g[24] + kd_pipe_corner_g[23] + kd_pipe_corner_g[22] + kd_pipe_corner_g[21] + kd_pipe_corner_g[20] + kd_pipe_corner_g[19] + kd_pipe_corner_g[18] + kd_pipe_corner_g[17] + kd_pipe_corner_g[16] + kd_pipe_corner_g[15] + kd_pipe_corner_g[14] + kd_pipe_corner_g[13] + kd_pipe_corner_g[12] + kd_pipe_corner_g[11] + kd_pipe_corner_g[10] + kd_pipe_corner_g[9] + kd_pipe_corner_g[8] + kd_pipe_corner_g[7] + kd_pipe_corner_g[6] + kd_pipe_corner_g[5] + kd_pipe_corner_g[4] + kd_pipe_corner_g[3] + kd_pipe_corner_g[2] + kd_pipe_corner_g[1] + kd_pipe_corner_g[0];
+  wire [6:0] kd_pipe_corner_sum_b = kd_pipe_corner_b[120] + kd_pipe_corner_b[119] + kd_pipe_corner_b[118] + kd_pipe_corner_b[117] + kd_pipe_corner_b[116] + kd_pipe_corner_b[115] + kd_pipe_corner_b[114] + kd_pipe_corner_b[113] + kd_pipe_corner_b[112] + kd_pipe_corner_b[111] + kd_pipe_corner_b[110] + kd_pipe_corner_b[109] + kd_pipe_corner_b[108] + kd_pipe_corner_b[107] + kd_pipe_corner_b[106] + kd_pipe_corner_b[105] + kd_pipe_corner_b[104] + kd_pipe_corner_b[103] + kd_pipe_corner_b[102] + kd_pipe_corner_b[101] + kd_pipe_corner_b[100] + kd_pipe_corner_b[99] + kd_pipe_corner_b[98] + kd_pipe_corner_b[97] + kd_pipe_corner_b[96] + kd_pipe_corner_b[95] + kd_pipe_corner_b[94] + kd_pipe_corner_b[93] + kd_pipe_corner_b[92] + kd_pipe_corner_b[91] + kd_pipe_corner_b[90] + kd_pipe_corner_b[89] + kd_pipe_corner_b[88] + kd_pipe_corner_b[87] + kd_pipe_corner_b[86] + kd_pipe_corner_b[85] + kd_pipe_corner_b[84] + kd_pipe_corner_b[83] + kd_pipe_corner_b[82] + kd_pipe_corner_b[81] + kd_pipe_corner_b[80] + kd_pipe_corner_b[79] + kd_pipe_corner_b[78] + kd_pipe_corner_b[77] + kd_pipe_corner_b[76] + kd_pipe_corner_b[75] + kd_pipe_corner_b[74] + kd_pipe_corner_b[73] + kd_pipe_corner_b[72] + kd_pipe_corner_b[71] + kd_pipe_corner_b[70] + kd_pipe_corner_b[69] + kd_pipe_corner_b[68] + kd_pipe_corner_b[67] + kd_pipe_corner_b[66] + kd_pipe_corner_b[65] + kd_pipe_corner_b[64] + kd_pipe_corner_b[63] + kd_pipe_corner_b[62] + kd_pipe_corner_b[61] + kd_pipe_corner_b[60] + kd_pipe_corner_b[59] + kd_pipe_corner_b[58] + kd_pipe_corner_b[57] + kd_pipe_corner_b[56] + kd_pipe_corner_b[55] + kd_pipe_corner_b[54] + kd_pipe_corner_b[53] + kd_pipe_corner_b[52] + kd_pipe_corner_b[51] + kd_pipe_corner_b[50] + kd_pipe_corner_b[49] + kd_pipe_corner_b[48] + kd_pipe_corner_b[47] + kd_pipe_corner_b[46] + kd_pipe_corner_b[45] + kd_pipe_corner_b[44] + kd_pipe_corner_b[43] + kd_pipe_corner_b[42] + kd_pipe_corner_b[41] + kd_pipe_corner_b[40] + kd_pipe_corner_b[39] + kd_pipe_corner_b[38] + kd_pipe_corner_b[37] + kd_pipe_corner_b[36] + kd_pipe_corner_b[35] + kd_pipe_corner_b[34] + kd_pipe_corner_b[33] + kd_pipe_corner_b[32] + kd_pipe_corner_b[31] + kd_pipe_corner_b[30] + kd_pipe_corner_b[29] + kd_pipe_corner_b[28] + kd_pipe_corner_b[27] + kd_pipe_corner_b[26] + kd_pipe_corner_b[25] + kd_pipe_corner_b[24] + kd_pipe_corner_b[23] + kd_pipe_corner_b[22] + kd_pipe_corner_b[21] + kd_pipe_corner_b[20] + kd_pipe_corner_b[19] + kd_pipe_corner_b[18] + kd_pipe_corner_b[17] + kd_pipe_corner_b[16] + kd_pipe_corner_b[15] + kd_pipe_corner_b[14] + kd_pipe_corner_b[13] + kd_pipe_corner_b[12] + kd_pipe_corner_b[11] + kd_pipe_corner_b[10] + kd_pipe_corner_b[9] + kd_pipe_corner_b[8] + kd_pipe_corner_b[7] + kd_pipe_corner_b[6] + kd_pipe_corner_b[5] + kd_pipe_corner_b[4] + kd_pipe_corner_b[3] + kd_pipe_corner_b[2] + kd_pipe_corner_b[1] + kd_pipe_corner_b[0];
+  
+  wire [9:0] kd_pipe_corner_sum = kd_pipe_corner_sum_r + kd_pipe_corner_sum_g + kd_pipe_corner_sum_b;
+  
+  wire det_goomba = (kd_goomba_sum < kd_thresh);
+  wire det_pipe_corner = (kd_pipe_corner_sum < 6'b110000);
   
 //  buffer3 	delayer(
 //		.clock		(OSC_27),
@@ -625,13 +696,53 @@ module DE2_TV
 	wire [9:0] BASE_G = (DPDT_SW[2]) ? mVGA_G_int : ((DISP_R_THRESH ? mVGA_r_th_full : (DISP_B_THRESH ? mVGA_b_th_full : mVGA_g_th_full)));
 	wire [9:0] BASE_B = (DPDT_SW[2]) ? mVGA_B_int : ((DISP_G_THRESH ? mVGA_g_th_full : (DISP_R_THRESH ? mVGA_r_th_full : mVGA_b_th_full)));
 	
-	assign mVGA_gs_r = (kd_sum < kd_thresh) ? 10'b1111111111 : BASE_R;
-	assign mVGA_gs_g = (kd_sum < kd_thresh) ? 10'b0000000000 : BASE_G;
-	assign mVGA_gs_b = (kd_sum < kd_thresh) ? 10'b0000000000 : BASE_B;
+	assign mVGA_gs_r = det_goomba ? 10'b1111111111 : (det_pipe_corner ? 10'b0000000000 : BASE_R);
+	assign mVGA_gs_g = det_goomba ? 10'b0000000000 : (det_pipe_corner ? 10'b1111111111 : BASE_G);
+	assign mVGA_gs_b = det_goomba ? 10'b0000000000 : (det_pipe_corner ? 10'b0000000000 : BASE_B);
+	
+	reg [10:0] goomba_x_1;
+	reg [10:0] goomba_y_1;
+	
+	reg [10:0] pipe_corner_x;
+	reg [10:0] pipe_corner_y;
+	
+	reg [10:0] pipe_corner_x_l;
+	reg [10:0] pipe_corner_y_l;
+	
+	always @ (posedge det_goomba)
+	begin
+		goomba_x_1 <= VGA_X;
+		goomba_y_1 <= VGA_Y;
+	end
+	
+	always @ (posedge det_pipe_corner)
+	begin
+		pipe_corner_x_l <= pipe_corner_x;
+		pipe_corner_y_l <= pipe_corner_y;
+		pipe_corner_x <= VGA_X;
+		pipe_corner_y <= VGA_Y;
+	end
+	
+	reg pipe_corner_found;
+	
+	always @ (posedge VGA_VS)
+	begin
+		if ((pipe_corner_x_l != pipe_corner_x) || (pipe_corner_y_l != pipe_corner_y))
+		begin
+			pipe_corner_found <= 1;
+		end
+		else
+		begin
+			pipe_corner_found <= 0;
+		end
+	end
+	
+
+   assign LED_RED[9:0] = goomba_x_1;
 	
    //assign mVGA_gs = (mVGA_th == 1) ? 10'b1111111111 : 0;
-	/*
-	always @ (OSC_27)
+	
+	/*always @ (OSC_27)
 	begin
 		//if (grid == kernel)
 		if (kd_sum < kd_thresh)
@@ -679,8 +790,8 @@ module DE2_TV
 				end
 			end
 		end
-	end
-		*/	
+	end*/
+		
   
 //  assign mVGA_R = mVGA_R_int;
 //  assign mVGA_G = mVGA_G_int;
