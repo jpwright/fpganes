@@ -207,47 +207,83 @@ module DE2_TV
   reg[26:0] counter_jump;
   
   
-	reg jump_flag;
-	reg jump_done;
+	reg jump_flag_pgm;
+	reg jump_flag_ctrl;
+	
+	wire jump_now = jump_flag_pgm & jump_flag_ctrl;
+	
 	reg [9:0] jump_count;
   
 	assign LED_RED[17] = BTN_a;
-	assign LED_RED[16] = jump_flag;
+	assign LED_RED[16] = jump_now;
+	assign LED_RED[15] = jump_flag_pgm;
+	assign LED_RED[14] = jump_flag_ctrl;
+	assign LED_RED[13] = flipCLdet;
+	assign LED_RED[12] = pipe_corner_found;
 	
-	always @ (pipe_corner_found or pipe_corner_x or jump_done or KEY[1])
+	assign LED_GREEN[7] = KEY[3];
+	assign LED_GREEN[6] = KEY[3];
+	assign LED_GREEN[5] = KEY[2];
+	assign LED_GREEN[4] = KEY[2];
+	assign LED_GREEN[3] = KEY[1];
+	assign LED_GREEN[2] = KEY[1];
+	assign LED_GREEN[1] = KEY[0];
+	assign LED_GREEN[0] = KEY[0];
+	
+	always @ (pipe_corner_found or pipe_corner_x)
 	begin
-		if ((pipe_corner_x < 550 && pipe_corner_x > 100 && pipe_corner_found) || ~KEY[1])
+		if ((pipe_corner_x < 550 && pipe_corner_x > 100 && pipe_corner_found))
 		begin
 			jump_count <= jump_count + 1;
+			jump_flag_pgm <= 0;
 		end
 		else
 		begin
 			jump_count <= 0;
+			jump_flag_pgm <= 0;
 		end
 		
 		if (jump_count > 10)
 		begin
-			jump_flag <= 1;
+			jump_flag_pgm <= 1;
 			jump_count <= 0;
 		end
 		
-		if (jump_done)
+	end
+	
+	always @ (posedge OSC_27 or negedge KEY[1] or posedge jump_now)
+	begin
+		if(!KEY[1] || jump_now)
 		begin
-			jump_flag <= 0;
+			counter_jump <= 0;
+			jump_flag_ctrl <= 0;
 		end
-		
+		else
+		begin
+			if(counter_jump == 1 )
+			begin
+				BTN_a <= 0;
+			end
+			
+			if(counter_jump == 11999999 )
+			begin
+			//is this right?
+				BTN_a <= 1;
+				jump_flag_ctrl <= 1;
+			end
+			
+			else
+			begin
+				counter_jump <= counter_jump+1;
+			end
+		end
 	end
 	 
 	//every 50 MHz
-	always@(posedge OSC_50 or negedge KEY[0] or posedge jump_flag)
+	always@(posedge OSC_50 or negedge KEY[0])
 	begin
 		
-		if(jump_flag)
-		begin
-			counter_jump <= 0;
-			jump_done <= 0;
-		end
-		else if(!KEY[0])
+		if(!KEY[0])
 		begin
 			seconds_ones		<=	0;
 			seconds_tens		<= 0;
@@ -258,24 +294,6 @@ module DE2_TV
 		end
 		else
 		begin
-			
-			if(counter_jump == 21999999 )
-			begin
-				BTN_a <= 1;
-				jump_done <= 1;
-				counter_jump <= counter_jump+1;
-			end
-			
-			if(counter_jump == 28999999 )
-			begin
-			//is this right?
-				BTN_a <= 1;
-			end
-
-			else
-			begin
-				counter_jump <= counter_jump+1;
-			end
 			
 			if(counter_ones == 49999999 )
 			begin
@@ -475,7 +493,7 @@ module DE2_TV
     .iCLK     (OSC_27)
   );
   
-  wire flipCL = DPDT_SW[5];
+  wire flipCL = DPDT_SW[5] || flipCLdet;
   wire [7:0] mCb_int = flipCL ? mCb : mCr;
   wire [7:0] mCr_int = flipCL ? mCr : mCb;
 
@@ -562,9 +580,16 @@ module DE2_TV
   wire mVGA_g_th = (mVGA_G_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
   wire mVGA_b_th = (mVGA_B_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
   
+  //Good values for the pipe
+  //wire mVGA_r_th_pipe = (mVGA_R_int > (10'b1000000000)) ? 1 : 0;
+  //wire mVGA_g_th_pipe = (mVGA_G_int > (10'b1000000000)) ? 1 : 0;
+  //wire mVGA_b_th_pipe = (mVGA_B_int > (10'b1000000000)) ? 1 : 0;
+  
   wire [9:0] mVGA_r_th_full = (mVGA_r_th == 1) ? 10'b1111111111 : 0;
   wire [9:0] mVGA_g_th_full = (mVGA_g_th == 1) ? 10'b1111111111 : 0;
   wire [9:0] mVGA_b_th_full = (mVGA_b_th == 1) ? 10'b1111111111 : 0;
+  
+  
   
   //assign mVGA_R = (VGA_X > 11'b00101000000) ? Red : 10'b1111111111;
   //assign mVGA_R = VGA_row_R[VGA_X];
@@ -604,7 +629,7 @@ module DE2_TV
   //reg [7:0] status;
   
   //assign LED_GREEN[7:2] = grid[8:3];
-  assign LED_GREEN[1] = Shift_En;
+  //assign LED_GREEN[1] = Shift_En;
   //assign LED_GREEN[0] = mVGA_th;
   
   //reg [3839:0] rowbuffer;
@@ -700,14 +725,56 @@ module DE2_TV
 	assign mVGA_gs_g = det_goomba ? 10'b0000000000 : (det_pipe_corner ? 10'b1111111111 : BASE_G);
 	assign mVGA_gs_b = det_goomba ? 10'b0000000000 : (det_pipe_corner ? 10'b0000000000 : BASE_B);
 	
+	
+	reg flipCLctrl = 0;
+	reg flipCLdet_a;
+	reg flipCLdet_b;
+	reg flipCLdet_c;
+	
+	//wire flipCLdet = ((flipCLdet_a && flipCLdet_b) || (flipCLdet_a && flipCLdet_c) || (flipCLdet_b && flipCLdet_c));
+	wire flipCLdet = flipCLdet_a || flipCLdet_b || flipCLdet_c;
+	
+	always @ (VGA_CLK)
+	begin
+		if (VGA_X == 15 && VGA_Y == 50)
+		//A pixel check
+		begin
+			flipCLdet_a <= mVGA_r_th;
+			flipCLdet_b <= flipCLdet_b;
+			flipCLdet_c <= flipCLdet_c;
+		end
+		if (VGA_X == 15 && VGA_Y == 75)
+		//B pixel check
+		begin
+			flipCLdet_a <= flipCLdet_a;
+			flipCLdet_b <= mVGA_r_th;
+			flipCLdet_c <= flipCLdet_c;
+		end
+		if (VGA_X == 15 && VGA_Y == 100)
+		//C pixel check
+		begin
+			flipCLdet_a <= flipCLdet_a;
+			flipCLdet_b <= flipCLdet_b;
+			flipCLdet_c <= mVGA_r_th;
+		end
+		else
+		begin
+			flipCLdet_a <= flipCLdet_a;
+			flipCLdet_b <= flipCLdet_b;
+			flipCLdet_c <= flipCLdet_c;
+		end
+		if (flipCLdet)
+		begin
+			flipCLctrl <= ~flipCLctrl;
+		end
+	end
+	
+	
 	reg [10:0] goomba_x_1;
 	reg [10:0] goomba_y_1;
 	
 	reg [10:0] pipe_corner_x;
 	reg [10:0] pipe_corner_y;
-	
-	reg [10:0] pipe_corner_x_l;
-	reg [10:0] pipe_corner_y_l;
 	
 	always @ (posedge det_goomba)
 	begin
@@ -715,30 +782,44 @@ module DE2_TV
 		goomba_y_1 <= VGA_Y;
 	end
 	
-	always @ (posedge det_pipe_corner)
-	begin
-		pipe_corner_x_l <= pipe_corner_x;
-		pipe_corner_y_l <= pipe_corner_y;
-		pipe_corner_x <= VGA_X;
-		pipe_corner_y <= VGA_Y;
-	end
-	
+	reg [12:0] pipe_corner_found_sum;
+	reg [12:0] pipe_corner_found_sum_frame;
 	reg pipe_corner_found;
 	
-	always @ (posedge VGA_VS)
+	always @ (VGA_Y or VGA_X)
 	begin
-		if ((pipe_corner_x_l != pipe_corner_x) || (pipe_corner_y_l != pipe_corner_y))
+		if (VGA_Y == 0)
 		begin
-			pipe_corner_found <= 1;
+			if(KEY[3])
+			begin
+				pipe_corner_found_sum_frame <= pipe_corner_found_sum;
+			end
+			if (pipe_corner_found_sum > 5)
+			begin
+				pipe_corner_found <= 1;
+			end
+			else
+			begin
+				pipe_corner_found <= 0;
+			end			
+			pipe_corner_found_sum <= 0;
+		end
+		else if (det_pipe_corner && (VGA_X < 600) && (VGA_X > 40) && (VGA_Y > 20) && (VGA_Y < 460))
+		begin
+			pipe_corner_found_sum <= pipe_corner_found_sum + 1;
+			pipe_corner_x <= VGA_X;
+			pipe_corner_y <= VGA_Y;
 		end
 		else
 		begin
-			pipe_corner_found <= 0;
+			pipe_corner_found_sum <= pipe_corner_found_sum;
 		end
+		
 	end
 	
+	
 
-   assign LED_RED[9:0] = goomba_x_1;
+   assign LED_RED[11:0] = pipe_corner_found_sum_frame;
 	
    //assign mVGA_gs = (mVGA_th == 1) ? 10'b1111111111 : 0;
 	
