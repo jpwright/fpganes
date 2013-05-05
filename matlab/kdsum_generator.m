@@ -1,5 +1,5 @@
 n = 11;
-text = 'pipe_corner';
+text = 'brick_edge';
 
 numbits = ceil(log2((n^2)+1));
 fprintf('\nwire [');
@@ -40,4 +40,6 @@ for j = 1:(n^2)
         fprintf(';');
     end
 end
+
+fprintf('\n\n');
 
