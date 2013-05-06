@@ -1,14 +1,14 @@
-Fitter Status : Successful - Sat May 04 22:48:14 2013
+Fitter Status : Successful - Sun May 05 20:22:06 2013
 Quartus II 64-Bit Version : 11.0 Build 157 04/27/2011 SJ Full Version
 Revision Name : DE2_TV
 Top-level Entity Name : DE2_TV
 Family : Cyclone II
 Device : EP2C35F672C8
 Timing Models : Final
-Total logic elements : 3,477 / 33,216 ( 10 % )
-    Total combinational functions : 3,106 / 33,216 ( 9 % )
-    Dedicated logic registers : 1,534 / 33,216 ( 5 % )
-Total registers : 1534
+Total logic elements : 3,483 / 33,216 ( 10 % )
+    Total combinational functions : 3,128 / 33,216 ( 9 % )
+    Dedicated logic registers : 1,532 / 33,216 ( 5 % )
+Total registers : 1532
 Total pins : 426 / 475 ( 90 % )
 Total virtual pins : 0
 Total memory bits : 73,842 / 483,840 ( 15 % )

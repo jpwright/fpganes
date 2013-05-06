@@ -1,5 +1,5 @@
 n = 11;
-text = 'brick_edge';
+text = 'bar';
 
 numbits = ceil(log2((n^2)+1));
 fprintf('\nwire [');
