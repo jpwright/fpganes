@@ -171,7 +171,7 @@ module DE2_TV
 // --------------------------------------------------------------------
   
   assign GPIO_0[34] = DPDT_SW[0]; //Start
-  assign GPIO_0[32] = DPDT_SW[1]; //Select
+  //assign GPIO_0[32] = DPDT_SW[1]; //Select
   /*
   assign GPIO_0[30] = DPDT_SW[2]; //B
   assign GPIO_0[28] = DPDT_SW[3]; //A
@@ -189,12 +189,13 @@ module DE2_TV
   reg BTN_left = 1'b1;
   
   reg BTN_right = 1'b0;
-  reg BTN_b = 1'b0;
+  reg BTN_b = 1'b0; 
   reg BTN_a = 1'b1;
   
   assign GPIO_0[24] = BTN_left;
   assign GPIO_0[26] = BTN_right || ~DPDT_SW[0]; //Release if we push start
-  assign GPIO_0[30] = BTN_b || ~DPDT_SW[0]; //Release if we push start
+  //assign GPIO_0[30] = BTN_b || ~DPDT_SW[0]; //Release if we push start
+  assign GPIO_0[30] = DPDT_SW[1]; 
   assign GPIO_0[28] = BTN_a;
   
 // --------------------------------------------------------------------
@@ -208,7 +209,7 @@ module DE2_TV
 	assign LED_RED[13] = flipCLdet;
 	assign LED_RED[12] = pipe_corner_found;
 	assign LED_RED[11] = brick_edge_found;
-	assign LED_RED[10] = VGA_Y[0];
+	assign LED_RED[10] = goomba_found;
 	assign LED_RED[9] = VGA_X[0];
 	assign LED_RED[8] = new_frame;
 	assign LED_RED[7:0] = brick_edge_found_sum_frame;
@@ -279,13 +280,14 @@ module DE2_TV
 			begin
 				BTN_a <= 0;
 			end
-			//Release the A Button
+			//Release the A Button 17 - 8 [17:0] DPDT_SW
+			//moving to switches (DPDT_SW[17:13]<<19)
 			if(counter_jump == 11599999 )
 			begin
 				BTN_a <= 1;
 			end
 			
-			//Do not allow the A button to be pressed again for a while
+			//Do not allow the A button to be pressed again for a while  (DPDT_SW[12:8]<<19)
 			if(counter_jump == 11899999 )
 			begin
 				jump_flag_ctrl <= 1;
@@ -624,9 +626,9 @@ module DE2_TV
 //  assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
 //  assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
   
-  wire mVGA_r_th = (mVGA_R_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
-  wire mVGA_g_th = (mVGA_G_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
-  wire mVGA_b_th = (mVGA_B_int > (DPDT_SW[17:13] << 5)) ? 1 : 0;
+  wire mVGA_r_th = (mVGA_R_int > (10'b1000000000)) ? 1 : 0;
+  wire mVGA_g_th = (mVGA_G_int > (10'b1000000000)) ? 1 : 0;
+  wire mVGA_b_th = (mVGA_B_int > (10'b1000000000)) ? 1 : 0;
   
   //Good values for the pipe
   //wire mVGA_r_th_pipe = (mVGA_R_int > (10'b1000000000)) ? 1 : 0;
@@ -739,7 +741,7 @@ module DE2_TV
 // Pattern Recognition
 // --------------------------------------------------------------------
   
-  wire [5:0] kd_thresh = DPDT_SW[12:8];
+  wire [5:0] kd_thresh = DPDT_SW[12:8]; //5'b01011;
   
   wire [120:0] kernel_goomba_g = 121'b0000000000000000000000001100001100011000011011110000111111100001111111111111111111111111000000000000000000000011111111111;
   wire [120:0] kernel_goomba_r = 121'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
@@ -815,7 +817,7 @@ module DE2_TV
   wire [9:0] kd_bar_sum = kd_bar_sum_r + kd_bar_sum_g + kd_bar_sum_b;
   
   //wire det_goomba = (kd_goomba_sum < kd_thresh);
-  wire det_goomba = 0;
+  wire det_goomba = (kd_brick_edge_sum < (kd_thresh << 3));
   wire det_pipe_corner = (kd_pipe_corner_sum < 6'b110000);
   wire det_brick_edge  = (kd_brick_edge_sum < (kd_thresh << 3));
   //wire det_mario       = (kd_mario_sum < (kd_thresh << 4));
@@ -870,10 +872,15 @@ module DE2_TV
 	reg [17:0] brick_edge_found_sum_frame;
 	reg brick_edge_found;
 	
+	reg [17:0] goomba_found_sum;
+	reg [17:0] goomba_found_sum_frame;
+	reg goomba_found;
+	
 	reg det_set;
 	
 	reg new_frame;
 	reg new_frame_ofcorner;
+	reg new_frame_goomba;
 	
 	//Pipe detection and jumping
 	//Do this for every single Pixel that we draw.
@@ -911,7 +918,7 @@ module DE2_TV
 				pipe_corner_found <= pipe_corner_found;
 				
 				//If we are not at the end of a frame, check each pixel (in range) for presence of pipe matrix
-				if (det_pipe_corner && (VGA_X < 600) && (VGA_X > 200) && (VGA_Y < 479))
+				if (det_pipe_corner && (VGA_X < 400) && (VGA_X > 300) && (VGA_Y < 479))
 				begin
 					pipe_corner_found_sum <= pipe_corner_found_sum + 1;
 					pipe_corner_x <= VGA_X;
@@ -944,7 +951,7 @@ module DE2_TV
 				//If enough pipe pixels were detected, say we found a pipe corner.
 				brick_edge_found_sum_frame <= brick_edge_found_sum;
 				
-				if (brick_edge_found_sum > 20)
+				if (brick_edge_found_sum > 10)
 				begin
 					brick_edge_found <= 1;
 				end
@@ -964,7 +971,7 @@ module DE2_TV
 				brick_edge_found <= brick_edge_found;
 				
 				//If we are not at the end of a frame, check each pixel (in range) for presence of brick corner matrix	
-				if (det_brick_edge && (VGA_X < 500) && (VGA_X > 250) && (VGA_Y < 479))
+				if (det_brick_edge && (VGA_X < 400) && (VGA_X > 250) && (VGA_Y < 479))
 				begin
 					brick_edge_found_sum <= brick_edge_found_sum + 1;
 					//pipe_corner_x <= VGA_X;
@@ -984,56 +991,56 @@ module DE2_TV
 		end
 	end
 	/////////////////////////////////
-	///////////////////////////////GOOMBBA DETECTION//////////////////////////////////////
-//	always @ (posedge OSC_27)
-//	begin
-//		if(Shift_En)
-//		begin
-//			//Sum up the info from this frame.
-//			if (VGA_Y == 246 && VGA_X == 71) //NOT(0,0)!~!!!!
-//			begin
-//				//If enough pipe pixels were detected, say we found a pipe corner.
-//				brick_edge_found_sum_frame <= brick_edge_found_sum;
-//				
-//				if (brick_edge_found_sum > 3)
-//				begin
-//					brick_edge_found <= 1;
-//				end
-//				else
-//				begin
-//					brick_edge_found <= 0;
-//				end
-//				
-//				brick_edge_found_sum <= 0;
-//				new_frame_ofcorner <= 1;
-//			end
-//			else
-//			begin
-////				det_set <= 0;
-//				new_frame_ofcorner <= 0;
-//				brick_edge_found_sum_frame <= brick_edge_found_sum_frame;
-//				brick_edge_found <= brick_edge_found;
-//				
-//				//If we are not at the end of a frame, check each pixel (in range) for presence of brick corner matrix	
-//				if (det_brick_edge && (VGA_X < 600) && (VGA_X > 40) && (VGA_Y < 479))
-//				begin
-//					brick_edge_found_sum <= brick_edge_found_sum + 1;
-//					//pipe_corner_x <= VGA_X;
-//					//pipe_corner_y <= VGA_Y;
-//				end
-//				else
-//				begin
-//					brick_edge_found_sum <= brick_edge_found_sum;
-//				end
-//			end
-//		end
-//		else
-//		begin
-//			new_frame_ofcorner <= new_frame_ofcorner;
-//			brick_edge_found_sum <= brick_edge_found_sum;
-//			brick_edge_found <= brick_edge_found;
-//		end
-//	end
+	///////////////////////////////GOOMBA DETECTION//////////////////////////////////////
+	always @ (posedge OSC_27)
+	begin
+		if(Shift_En)
+		begin
+			//Sum up the info from this frame.
+			if (VGA_Y == 246 && VGA_X == 71) //NOT(0,0)!~!!!!
+			begin
+				//If enough goomba pixels were detected, say we found a goomba.
+
+				goomba_found_sum_frame <= goomba_found_sum;
+				
+				if (goomba_found_sum > 5)
+				begin
+					goomba_found <= 1;
+				end
+				else
+				begin
+					goomba_found <= 0;
+				end
+				
+				goomba_found_sum <= 0;
+				new_frame_goomba <= 1;
+			end
+			else
+			begin
+//				det_set <= 0;
+				new_frame_goomba <= 0;
+				goomba_found_sum_frame <= goomba_found_sum_frame;
+				goomba_found <= goomba_found;
+				
+				//If we are not at the end of a frame, check each pixel (in range) for presence of pipe matrix
+				if (det_goomba && (VGA_X < 450) && (VGA_X > 320) && (VGA_Y < 479))
+				begin
+					goomba_found_sum <= goomba_found_sum + 1;
+				end
+				else
+				begin
+					goomba_found_sum <= goomba_found_sum;
+				end
+			end
+		end
+		else
+		begin
+			//Otherwise, save the state
+			new_frame_goomba <= new_frame_goomba;
+			goomba_found_sum_frame <= goomba_found_sum_frame;
+			goomba_found <= goomba_found;
+		end
+	end
 	
 	
 	/////////////////////////////

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE2_TV
-Sun May 05 20:20:43 2013
+Sun May 05 22:54:33 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -178,15 +178,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun May 05 20:20:43 2013     ;
+; Analysis & Synthesis Status        ; Successful - Sun May 05 22:54:33 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
-; Total logic elements               ; 3,834                                     ;
-;     Total combinational functions  ; 3,121                                     ;
-;     Dedicated logic registers      ; 1,555                                     ;
-; Total registers                    ; 1555                                      ;
+; Total logic elements               ; 3,852                                     ;
+;     Total combinational functions  ; 3,139                                     ;
+;     Dedicated logic registers      ; 1,574                                     ;
+; Total registers                    ; 1574                                      ;
 ; Total pins                         ; 426                                       ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 73,842                                    ;
@@ -393,20 +393,20 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 3,834  ;
+; Estimated Total logic elements              ; 3,852  ;
 ;                                             ;        ;
-; Total combinational functions               ; 3121   ;
+; Total combinational functions               ; 3139   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 1058   ;
-;     -- 3 input functions                    ; 1148   ;
-;     -- <=2 input functions                  ; 915    ;
+;     -- 4 input functions                    ; 1063   ;
+;     -- 3 input functions                    ; 1143   ;
+;     -- <=2 input functions                  ; 933    ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 1733   ;
-;     -- arithmetic mode                      ; 1388   ;
+;     -- normal mode                          ; 1734   ;
+;     -- arithmetic mode                      ; 1405   ;
 ;                                             ;        ;
-; Total registers                             ; 1555   ;
-;     -- Dedicated logic registers            ; 1555   ;
+; Total registers                             ; 1574   ;
+;     -- Dedicated logic registers            ; 1574   ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
 ; I/O pins                                    ; 426    ;
@@ -416,8 +416,8 @@ applicable agreement for further details.
 ;     -- PLLs                                 ; 1      ;
 ;                                             ;        ;
 ; Maximum fan-out node                        ; OSC_27 ;
-; Maximum fan-out                             ; 917    ;
-; Total fan-out                               ; 16581  ;
+; Maximum fan-out                             ; 936    ;
+; Total fan-out                               ; 16695  ;
 ; Average fan-out                             ; 3.16   ;
 +---------------------------------------------+--------+
 
@@ -427,7 +427,7 @@ applicable agreement for further details.
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                       ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                               ; Library Name ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_TV                                          ; 3121 (1753)       ; 1555 (130)   ; 73842       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
+; |DE2_TV                                          ; 3139 (1775)       ; 1574 (149)   ; 73842       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
 ;    |AUDIO_DAC_ADC:u12|                           ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|AUDIO_DAC_ADC:u12                                                                                                                                         ;              ;
 ;    |DIV:u5|                                      ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5                                                                                                                                                    ;              ;
 ;       |lpm_divide:lpm_divide_component|          ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component                                                                                                                    ;              ;
@@ -454,7 +454,7 @@ applicable agreement for further details.
 ;             |cntr_hpf:cntr1|                     ; 15 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1                                                        ;              ;
 ;                |cmpr_ldc:cmpr5|                  ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5                                         ;              ;
 ;    |Reset_Delay:u3|                              ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Reset_Delay:u3                                                                                                                                            ;              ;
-;    |Sdram_Control_4Port:u6|                      ; 589 (198)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
+;    |Sdram_Control_4Port:u6|                      ; 585 (197)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
 ;       |Sdram_PLL:sdram_pll1|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1                                                                                                               ;              ;
 ;          |altpll:altpll_component|               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component                                                                                       ;              ;
 ;       |Sdram_RD_FIFO:read_fifo1|                 ; 80 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1                                                                                                           ;              ;
@@ -475,12 +475,12 @@ applicable agreement for further details.
 ;                |dffpipe_ngh:rdaclr|              ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr                                     ;              ;
 ;                |dffpipe_oe9:ws_brp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_brp                                     ;              ;
 ;                |dffpipe_oe9:ws_bwp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_bwp                                     ;              ;
-;       |Sdram_RD_FIFO:read_fifo2|                 ; 80 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2                                                                                                           ;              ;
-;          |dcfifo:dcfifo_component|               ; 80 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component                                                                                   ;              ;
-;             |dcfifo_iep1:auto_generated|         ; 80 (14)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                        ;              ;
+;       |Sdram_RD_FIFO:read_fifo2|                 ; 79 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2                                                                                                           ;              ;
+;          |dcfifo:dcfifo_component|               ; 79 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component                                                                                   ;              ;
+;             |dcfifo_iep1:auto_generated|         ; 79 (14)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                        ;              ;
 ;                |a_gray2bin_kdb:wrptr_g_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:wrptr_g_gray2bin                        ;              ;
 ;                |a_gray2bin_kdb:ws_dgrp_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:ws_dgrp_gray2bin                        ;              ;
-;                |a_graycounter_egc:wrptr_gp|      ; 19 (19)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp                             ;              ;
+;                |a_graycounter_egc:wrptr_gp|      ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp                             ;              ;
 ;                |a_graycounter_o96:rdptr_g1p|     ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                            ;              ;
 ;                |alt_synch_pipe_rdb:rs_dgwp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp                             ;              ;
 ;                   |dffpipe_pe9:dffpipe18|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18       ;              ;
@@ -493,13 +493,13 @@ applicable agreement for further details.
 ;                |dffpipe_ngh:rdaclr|              ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr                                     ;              ;
 ;                |dffpipe_oe9:ws_brp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_brp                                     ;              ;
 ;                |dffpipe_oe9:ws_bwp|              ; 0 (0)             ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_oe9:ws_bwp                                     ;              ;
-;       |Sdram_WR_FIFO:write_fifo1|                ; 84 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1                                                                                                          ;              ;
-;          |dcfifo:dcfifo_component|               ; 84 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component                                                                                  ;              ;
-;             |dcfifo_iep1:auto_generated|         ; 84 (15)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                       ;              ;
+;       |Sdram_WR_FIFO:write_fifo1|                ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1                                                                                                          ;              ;
+;          |dcfifo:dcfifo_component|               ; 82 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component                                                                                  ;              ;
+;             |dcfifo_iep1:auto_generated|         ; 82 (15)           ; 108 (21)     ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated                                                       ;              ;
 ;                |a_gray2bin_kdb:rdptr_g_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:rdptr_g_gray2bin                       ;              ;
 ;                |a_gray2bin_kdb:rs_dgwp_gray2bin| ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_gray2bin_kdb:rs_dgwp_gray2bin                       ;              ;
 ;                |a_graycounter_egc:wrptr_gp|      ; 18 (18)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp                            ;              ;
-;                |a_graycounter_o96:rdptr_g1p|     ; 21 (21)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                           ;              ;
+;                |a_graycounter_o96:rdptr_g1p|     ; 19 (19)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p                           ;              ;
 ;                |alt_synch_pipe_rdb:rs_dgwp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp                            ;              ;
 ;                   |dffpipe_pe9:dffpipe18|        ; 0 (0)             ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_rdb:rs_dgwp|dffpipe_pe9:dffpipe18      ;              ;
 ;                |alt_synch_pipe_vd8:ws_dgrp|      ; 0 (0)             ; 20 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|alt_synch_pipe_vd8:ws_dgrp                            ;              ;
@@ -799,12 +799,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1555  ;
-; Number of registers using Synchronous Clear  ; 216   ;
+; Total registers                              ; 1574  ;
+; Number of registers using Synchronous Clear  ; 234   ;
 ; Number of registers using Synchronous Load   ; 84    ;
 ; Number of registers using Asynchronous Clear ; 716   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 760   ;
+; Number of registers using Clock Enable       ; 779   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -830,10 +830,10 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0 ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0 ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0 ; 1       ;
-; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
-; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
+; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_egc:wrptr_gp|sub_parity12a0  ; 1       ;
 ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
+; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|sub_parity6a0  ; 1       ;
 ; Total number of inverted registers = 20                                                                                                       ;         ;
 +-----------------------------------------------------------------------------------------------------------------------------------------------+---------+
 
@@ -884,23 +884,23 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                         ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; |DE2_TV|jump_count[0]                                              ;                            ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[11]             ;                            ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[0] ;                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; |DE2_TV|jump_count[9]                                              ;                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[2]              ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[7] ;                            ;
 ; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[0]   ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[0]                                     ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[4]                                      ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[0]                                       ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[15]                           ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[18]                       ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[21]                       ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[21]                       ;                            ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_shift[1]        ;                            ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[6]                                ;                            ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|RD_MASK[1]                          ;                            ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|CMD[0]                              ;                            ;
-; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[5]                               ;                            ;
-; 5:1                ; 30 bits   ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; |DE2_TV|mVGA_R[6]                                                  ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[5]                                     ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[8]                                      ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[1]                                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[18]                           ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[10]                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[7]                        ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[8]                        ;                            ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_done            ;                            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[5]                                ;                            ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|RD_MASK[0]                          ;                            ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|CMD[1]                              ;                            ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[3]                               ;                            ;
+; 6:1                ; 30 bits   ; 120 LEs       ; 120 LEs              ; 0 LEs                  ; |DE2_TV|mVGA_R[1]                                                  ;                            ;
 +--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
 
 
@@ -3482,7 +3482,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:33     ;
+; Top            ; 00:00:34     ;
 +----------------+--------------+
 
 
@@ -3492,7 +3492,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Sun May 05 20:20:08 2013
+    Info: Processing started: Sun May 05 22:53:59 2013
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE2_TV -c DE2_TV
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Found 1 design units, including 1 entities, in source file buffer11.v
@@ -3560,63 +3560,65 @@ Info: Found 1 design units, including 1 entities, in source file goomba.v
     Info: Found entity 1: goomba
 Info: Found 1 design units, including 1 entities, in source file buffer3.v
     Info: Found entity 1: buffer3
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(434): created implicit net for "WR1_FULL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1202): created implicit net for "audio_inL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1203): created implicit net for "audio_inR"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1205): created implicit net for "audio_outL"
-Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1206): created implicit net for "audio_outR"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(436): created implicit net for "WR1_FULL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1209): created implicit net for "audio_inL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1210): created implicit net for "audio_inR"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1212): created implicit net for "audio_outL"
+Warning (10236): Verilog HDL Implicit Net warning at DE2_TV.v(1213): created implicit net for "audio_outR"
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(57): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(65): instance has no name
 Critical Warning (10846): Verilog HDL Instantiation warning at Mirror_Col.v(73): instance has no name
 Info: Elaborating entity "DE2_TV" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(791): object "kd_goomba_sum" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(809): object "kd_mario_sum" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(823): object "det_bar" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(836): object "DISP_A_THRESH" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(855): object "pipe_corner_x" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(856): object "pipe_corner_y" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(214): truncated value with size 18 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(250): truncated value with size 32 to match size of target (10)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(296): truncated value with size 32 to match size of target (27)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(320): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(327): truncated value with size 32 to match size of target (27)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(334): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(340): truncated value with size 32 to match size of target (4)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(346): truncated value with size 32 to match size of target (4)
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(523): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(523): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(526): variable "mVGA_r_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(527): variable "flipCLdet_b" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(528): variable "flipCLdet_c" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(530): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(530): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(533): variable "flipCLdet_a" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(534): variable "mVGA_r_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(535): variable "flipCLdet_c" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(537): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(537): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(540): variable "flipCLdet_a" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(541): variable "flipCLdet_b" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(542): variable "mVGA_r_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(546): variable "flipCLdet_a" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(547): variable "flipCLdet_b" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(548): variable "flipCLdet_c" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(550): variable "flipCLdet" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(550): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(550): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(552): variable "flipCLctrl" is read inside the Always Construct but isn't in the Always Construct's Event Control
-Warning (10240): Verilog HDL Always Construct warning at DE2_TV.v(521): inferring latch(es) for variable "flipCLdet_c", which holds its previous value in one or more paths through the always construct
-Warning (10240): Verilog HDL Always Construct warning at DE2_TV.v(521): inferring latch(es) for variable "flipCLctrl", which holds its previous value in one or more paths through the always construct
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(627): truncated value with size 32 to match size of target (1)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(628): truncated value with size 32 to match size of target (1)
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(192): object "BTN_b" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(793): object "kd_goomba_sum" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(811): object "kd_mario_sum" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(825): object "det_bar" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(838): object "DISP_A_THRESH" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(857): object "pipe_corner_x" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(858): object "pipe_corner_y" assigned a value but never read
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(215): truncated value with size 18 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(251): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(298): truncated value with size 32 to match size of target (27)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(322): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(329): truncated value with size 32 to match size of target (27)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(336): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(342): truncated value with size 32 to match size of target (4)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(348): truncated value with size 32 to match size of target (4)
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(525): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(525): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(528): variable "mVGA_r_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(529): variable "flipCLdet_b" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(530): variable "flipCLdet_c" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(532): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(532): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(535): variable "flipCLdet_a" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(536): variable "mVGA_r_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(537): variable "flipCLdet_c" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(539): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(539): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(542): variable "flipCLdet_a" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(543): variable "flipCLdet_b" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(544): variable "mVGA_r_th" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(548): variable "flipCLdet_a" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(549): variable "flipCLdet_b" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(550): variable "flipCLdet_c" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(552): variable "flipCLdet" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(552): variable "VGA_Y" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(552): variable "VGA_X" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10235): Verilog HDL Always Construct warning at DE2_TV.v(554): variable "flipCLctrl" is read inside the Always Construct but isn't in the Always Construct's Event Control
+Warning (10240): Verilog HDL Always Construct warning at DE2_TV.v(523): inferring latch(es) for variable "flipCLdet_c", which holds its previous value in one or more paths through the always construct
+Warning (10240): Verilog HDL Always Construct warning at DE2_TV.v(523): inferring latch(es) for variable "flipCLctrl", which holds its previous value in one or more paths through the always construct
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(629): truncated value with size 32 to match size of target (1)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(636): truncated value with size 32 to match size of target (10)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(637): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(630): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(631): truncated value with size 32 to match size of target (1)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(638): truncated value with size 32 to match size of target (10)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(916): truncated value with size 32 to match size of target (18)
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(969): truncated value with size 32 to match size of target (18)
-Warning (10030): Net "flipCLdet_a" at DE2_TV.v(514) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "flipCLdet_b" at DE2_TV.v(515) has no driver or initial value, using a default initial value '0'
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(639): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(640): truncated value with size 32 to match size of target (10)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(923): truncated value with size 32 to match size of target (18)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(976): truncated value with size 32 to match size of target (18)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(1028): truncated value with size 32 to match size of target (18)
+Warning (10030): Net "flipCLdet_a" at DE2_TV.v(516) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "flipCLdet_b" at DE2_TV.v(517) has no driver or initial value, using a default initial value '0'
 Warning (10034): Output port "LED_GREEN[8]" at DE2_TV.v(55) has no driver
 Warning (10034): Output port "FL_ADDR" at DE2_TV.v(78) has no driver
 Warning (10034): Output port "SRAM_ADDR" at DE2_TV.v(85) has no driver
@@ -3653,8 +3655,8 @@ Warning (10034): Output port "ENET_WR_N" at DE2_TV.v(142) has no driver
 Warning (10034): Output port "ENET_RD_N" at DE2_TV.v(143) has no driver
 Warning (10034): Output port "ENET_RST_N" at DE2_TV.v(144) has no driver
 Warning (10034): Output port "ENET_CLK" at DE2_TV.v(146) has no driver
-Info (10041): Inferred latch for "flipCLctrl" at DE2_TV.v(521)
-Info (10041): Inferred latch for "flipCLdet_c" at DE2_TV.v(521)
+Info (10041): Inferred latch for "flipCLctrl" at DE2_TV.v(523)
+Info (10041): Inferred latch for "flipCLdet_c" at DE2_TV.v(523)
 Info: Elaborating entity "HexDigit" for hierarchy "HexDigit:H0"
 Info: Elaborating entity "I2C_AV_Config" for hierarchy "I2C_AV_Config:u1"
 Warning (10230): Verilog HDL assignment warning at I2C_AV_Config.v(55): truncated value with size 32 to match size of target (16)
@@ -4068,7 +4070,6 @@ Warning: The following nodes have both tri-state and non-tri-state drivers
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[26]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[28]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[30]" and its non-tri-state driver.
-    Warning: Inserted always-enabled tri-state buffer between "GPIO_0[32]" and its non-tri-state driver.
     Warning: Inserted always-enabled tri-state buffer between "GPIO_0[34]" and its non-tri-state driver.
 Warning: The following bidir pins have no drivers
     Warning: Bidir "FL_DQ[0]" has no driver
@@ -4167,6 +4168,7 @@ Warning: The following bidir pins have no drivers
     Warning: Bidir "GPIO_0[27]" has no driver
     Warning: Bidir "GPIO_0[29]" has no driver
     Warning: Bidir "GPIO_0[31]" has no driver
+    Warning: Bidir "GPIO_0[32]" has no driver
     Warning: Bidir "GPIO_0[33]" has no driver
     Warning: Bidir "GPIO_0[35]" has no driver
     Warning: Bidir "GPIO_1[0]" has no driver
@@ -4216,7 +4218,6 @@ Warning: TRI or OPNDRN buffers permanently enabled
     Warning: Node "GPIO_0[26]~synth"
     Warning: Node "GPIO_0[28]~synth"
     Warning: Node "GPIO_0[30]~synth"
-    Warning: Node "GPIO_0[32]~synth"
     Warning: Node "GPIO_0[34]~synth"
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "HEX4[0]" is stuck at VCC
@@ -4378,8 +4379,13 @@ Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_f
 Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14|ram_block15a13" has a port clk1 that is stuck at GND
 Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14|ram_block15a14" has a port clk1 that is stuck at GND
 Warning (15400): WYSIWYG primitive "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|altsyncram_h2c1:fifo_ram|altsyncram_drg1:altsyncram14|ram_block15a15" has a port clk1 that is stuck at GND
-Warning: Design contains 14 input pin(s) that do not drive logic
+Warning: Design contains 19 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "EXT_CLOCK"
+    Warning (15610): No output dependent on input pin "DPDT_SW[13]"
+    Warning (15610): No output dependent on input pin "DPDT_SW[14]"
+    Warning (15610): No output dependent on input pin "DPDT_SW[15]"
+    Warning (15610): No output dependent on input pin "DPDT_SW[16]"
+    Warning (15610): No output dependent on input pin "DPDT_SW[17]"
     Warning (15610): No output dependent on input pin "UART_RXD"
     Warning (15610): No output dependent on input pin "IRDA_RXD"
     Warning (15610): No output dependent on input pin "OTG_INT0"
@@ -4393,18 +4399,18 @@ Warning: Design contains 14 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PS2_CLK"
     Warning (15610): No output dependent on input pin "ENET_INT"
     Warning (15610): No output dependent on input pin "AUD_ADCDAT"
-Info: Implemented 4444 device resources after synthesis - the final resource count might be different
+Info: Implemented 4462 device resources after synthesis - the final resource count might be different
     Info: Implemented 49 input pins
     Info: Implemented 218 output pins
     Info: Implemented 159 bidirectional pins
-    Info: Implemented 3870 logic cells
+    Info: Implemented 3888 logic cells
     Info: Implemented 129 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 18 DSP elements
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 426 warnings
-    Info: Peak virtual memory: 527 megabytes
-    Info: Processing ended: Sun May 05 20:20:43 2013
-    Info: Elapsed time: 00:00:35
-    Info: Total CPU time (on all processors): 00:00:34
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 432 warnings
+    Info: Peak virtual memory: 526 megabytes
+    Info: Processing ended: Sun May 05 22:54:33 2013
+    Info: Elapsed time: 00:00:34
+    Info: Total CPU time (on all processors): 00:00:33
 
 

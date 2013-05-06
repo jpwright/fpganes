@@ -1,5 +1,5 @@
 Design Assistant report for DE2_TV
-Sun May 05 20:22:18 2013
+Sun May 05 22:56:05 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------+
 ; Design Assistant Summary                                                ;
 +-----------------------------------+-------------------------------------+
-; Design Assistant Status           ; Analyzed - Sun May 05 20:22:18 2013 ;
+; Design Assistant Status           ; Analyzed - Sun May 05 22:56:05 2013 ;
 ; Revision Name                     ; DE2_TV                              ;
 ; Top-level Entity Name             ; DE2_TV                              ;
 ; Family                            ; Cyclone II                          ;
@@ -122,164 +122,164 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------------------------------------------+----------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-; High Violations                                                                                                                                ;
-+-----------------------------------------------------------------------------------------------------------------------+------------------------+
-; Rule name                                                                                                             ; Name                   ;
-+-----------------------------------------------------------------------------------------------------------------------+------------------------+
-; Rule A108: Design should not contain latches - Latch 1                                                                ;                        ;
-;  Latch 1                                                                                                              ; flipCLdet_c            ;
-; Rule C105: Clock signal should be a global signal                                                                     ; TD_CLK                 ;
-; Rule R101: Combinational logic used as a reset signal should be synchronized                                          ; always1~0              ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[7]        ;
-;  Reset signal destination node(s) list                                                                                ; jump_flag_ctrl         ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[18]       ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[6]        ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[23]       ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[15]       ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[12]       ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[5]        ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[10]       ;
-;  Reset signal destination node(s) list                                                                                ; counter_jump[3]        ;
-; Rule S102: Synchronous port and asynchronous port of the same register should not be driven by the same signal source ; jump_flag_ctrl         ;
-;  Synchronous and reset port source node(s) list                                                                       ; jump_flag_ctrl         ;
-; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 1           ;                        ;
-;  Source node(s) from clock "OSC_50"                                                                                   ; Reset_Delay:u3|oRST_2  ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[9]   ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[8]   ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[7]   ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|X_OUT[9]  ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|X_OUT[19] ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[6]   ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|X_OUT[8]  ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|X_OUT[16] ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|X_OUT[7]  ;
-;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[4]   ;
-+-----------------------------------------------------------------------------------------------------------------------+------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------+
+; High Violations                                                                                                                               ;
++-----------------------------------------------------------------------------------------------------------------------+-----------------------+
+; Rule name                                                                                                             ; Name                  ;
++-----------------------------------------------------------------------------------------------------------------------+-----------------------+
+; Rule A108: Design should not contain latches - Latch 1                                                                ;                       ;
+;  Latch 1                                                                                                              ; flipCLdet_c           ;
+; Rule C105: Clock signal should be a global signal                                                                     ; TD_CLK                ;
+; Rule R101: Combinational logic used as a reset signal should be synchronized                                          ; always1~0             ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[7]       ;
+;  Reset signal destination node(s) list                                                                                ; jump_flag_ctrl        ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[18]      ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[6]       ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[23]      ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[15]      ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[12]      ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[5]       ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[10]      ;
+;  Reset signal destination node(s) list                                                                                ; counter_jump[4]       ;
+; Rule S102: Synchronous port and asynchronous port of the same register should not be driven by the same signal source ; jump_flag_ctrl        ;
+;  Synchronous and reset port source node(s) list                                                                       ; jump_flag_ctrl        ;
+; Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains - Structure 1           ;                       ;
+;  Source node(s) from clock "OSC_50"                                                                                   ; Reset_Delay:u3|oRST_2 ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[8]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[9]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[2]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[1]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[3]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[0]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[7]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[6]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[5]  ;
+;  Destination node(s) from clock "OSC_27"                                                                              ; YCbCr2RGB:u8|oRed[4]  ;
++-----------------------------------------------------------------------------------------------------------------------+-----------------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Medium Violations                                                                                                                                                                                                                                                       ;
-+---------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Rule name                                                                                                                 ; Name                                                                                                                                        ;
-+---------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Rule C104: Clock signal source should drive only clock input ports                                                        ; VGA_Ctrl:u9|oVGA_HS                                                                                                                         ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[0]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[9]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[10]                                                                                                                      ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[8]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[6]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[7]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[5]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[3]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[4]                                                                                                                       ;
-;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[2]                                                                                                                       ;
-;  Non-clock ports destination node(s) list                                                                                 ; VGA_Ctrl:u9|oVGA_HS~0                                                                                                                       ;
-; Rule C104: Clock signal source should drive only clock input ports                                                        ; I2C_AV_Config:u1|mI2C_CTRL_CLK                                                                                                              ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[0]                                                                                            ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|mI2C_GO                                                                                                                    ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[5]                                                                                            ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[4]                                                                                            ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|mSetup_ST.0010                                                                                                             ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|END                                                                                                      ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|mSetup_ST.0001                                                                                                             ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|LUT_INDEX[5]                                                                                                               ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|LUT_INDEX[3]                                                                                                               ;
-;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|LUT_INDEX[4]                                                                                                               ;
-;  Non-clock ports destination node(s) list                                                                                 ; I2C_AV_Config:u1|mI2C_CTRL_CLK~0                                                                                                            ;
-;  Non-clock ports destination node(s) list                                                                                 ; I2C_AV_Config:u1|I2C_Controller:u0|I2C_SCLK~2                                                                                               ;
-; Rule C106: Clock signal source should not drive registers triggered by different clock edges                              ; OSC_27                                                                                                                                      ;
-;  Positive edge destination node(s) list                                                                                   ; jump_flag_ctrl                                                                                                                              ;
-;  Positive edge destination node(s) list                                                                                   ; brick_edge_found                                                                                                                            ;
-;  Positive edge destination node(s) list                                                                                   ; pipe_corner_found                                                                                                                           ;
-;  Negative edge destination node(s) list                                                                                   ; jump_flag_pgm                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[9]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[8]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[6]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[7]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[4]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[5]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[2]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[3]                                                                                                                               ;
-;  Negative edge destination node(s) list                                                                                   ; jump_count[1]                                                                                                                               ;
-; Rule C106: Clock signal source should not drive registers triggered by different clock edges                              ; VGA_Ctrl:u9|oVGA_HS                                                                                                                         ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[1] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[2] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[3] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[4] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[5] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[6] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[1] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[2] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[3] ;
-;  Positive edge destination node(s) list                                                                                   ; Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo2|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|a_graycounter_o96:rdptr_g1p|counter7a[4] ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[0]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[9]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[10]                                                                                                                      ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[8]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[6]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[7]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[5]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[3]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[4]                                                                                                                       ;
-;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[2]                                                                                                                       ;
-; Rule C106: Clock signal source should not drive registers triggered by different clock edges                              ; new_frame                                                                                                                                   ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[7]                                                                                                                             ;
-;  Positive edge destination node(s) list                                                                                   ; jump_flag_ctrl                                                                                                                              ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[18]                                                                                                                            ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[6]                                                                                                                             ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[23]                                                                                                                            ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[15]                                                                                                                            ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[12]                                                                                                                            ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[5]                                                                                                                             ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[10]                                                                                                                            ;
-;  Positive edge destination node(s) list                                                                                   ; counter_jump[3]                                                                                                                             ;
-;  Negative edge destination node(s) list                                                                                   ; jump_flag_pgm                                                                                                                               ;
-; Rule R102: External reset signals should be synchronized using two cascaded registers                                     ; KEY[0]                                                                                                                                      ;
-;  Reset signal destination node(s) list                                                                                    ; seconds_ones[0]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; seconds_ones[3]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; seconds_ones[1]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; seconds_ones[2]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; counter_ones[5]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; counter_ones[4]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; counter_ones[3]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; counter_ones[6]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; counter_ones[2]                                                                                                                             ;
-;  Reset signal destination node(s) list                                                                                    ; counter_ones[1]                                                                                                                             ;
-; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized ; Reset_Delay:u3|oRST_2                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[7]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[10]                                                                                                                      ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[9]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[8]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[6]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[5]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[4]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[3]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[2]                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[1]                                                                                                                       ;
-; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized ; TD_Detect:u2|TD_Stable                                                                                                                      ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|oRST_2                                                                                                                       ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[21]                                                                                                                     ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[20]                                                                                                                     ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[11]                                                                                                                     ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[9]                                                                                                                      ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[10]                                                                                                                     ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[8]                                                                                                                      ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[17]                                                                                                                     ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[18]                                                                                                                     ;
-;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[19]                                                                                                                     ;
-; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized ; Reset_Delay:u3|oRST_1                                                                                                                       ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[0]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[1]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[2]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[3]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[4]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[5]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[6]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[7]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[8]                                                                                                                 ;
-;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[9]                                                                                                                 ;
-+---------------------------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Medium Violations                                                                                                                                                            ;
++---------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------+
+; Rule name                                                                                                                 ; Name                                             ;
++---------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------+
+; Rule C104: Clock signal source should drive only clock input ports                                                        ; I2C_AV_Config:u1|mI2C_CTRL_CLK                   ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[0] ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|mI2C_GO                         ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[5] ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[4] ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|mSetup_ST.0001                  ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|mSetup_ST.0010                  ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|I2C_Controller:u0|END           ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|LUT_INDEX[3]                    ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|LUT_INDEX[5]                    ;
+;  Clock ports destination node(s) list                                                                                     ; I2C_AV_Config:u1|LUT_INDEX[4]                    ;
+;  Non-clock ports destination node(s) list                                                                                 ; I2C_AV_Config:u1|mI2C_CTRL_CLK~0                 ;
+;  Non-clock ports destination node(s) list                                                                                 ; I2C_AV_Config:u1|I2C_Controller:u0|I2C_SCLK~2    ;
+; Rule C104: Clock signal source should drive only clock input ports                                                        ; VGA_Ctrl:u9|oVGA_HS                              ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[6]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[9]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[10]                           ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[5]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[2]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[4]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[3]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[7]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[8]                            ;
+;  Clock ports destination node(s) list                                                                                     ; VGA_Ctrl:u9|V_Cont[1]                            ;
+;  Non-clock ports destination node(s) list                                                                                 ; VGA_Ctrl:u9|oVGA_HS~0                            ;
+; Rule C106: Clock signal source should not drive registers triggered by different clock edges                              ; OSC_27                                           ;
+;  Positive edge destination node(s) list                                                                                   ; jump_flag_ctrl                                   ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found                                 ;
+;  Positive edge destination node(s) list                                                                                   ; pipe_corner_found                                ;
+;  Negative edge destination node(s) list                                                                                   ; jump_flag_pgm                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[9]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[8]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[7]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[6]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[3]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[4]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[5]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[2]                                    ;
+;  Negative edge destination node(s) list                                                                                   ; jump_count[1]                                    ;
+; Rule C106: Clock signal source should not drive registers triggered by different clock edges                              ; VGA_Ctrl:u9|oVGA_HS                              ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[0]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[1]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[2]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[3]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[4]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[5]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[6]                          ;
+;  Positive edge destination node(s) list                                                                                   ; brick_edge_found_sum[7]                          ;
+;  Positive edge destination node(s) list                                                                                   ; goomba_found_sum[17]                             ;
+;  Positive edge destination node(s) list                                                                                   ; goomba_found_sum[16]                             ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[6]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[9]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[10]                           ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[5]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[2]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[4]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[3]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[7]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[8]                            ;
+;  Negative edge destination node(s) list                                                                                   ; VGA_Ctrl:u9|V_Cont[1]                            ;
+; Rule C106: Clock signal source should not drive registers triggered by different clock edges                              ; new_frame                                        ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[7]                                  ;
+;  Positive edge destination node(s) list                                                                                   ; jump_flag_ctrl                                   ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[18]                                 ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[6]                                  ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[23]                                 ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[15]                                 ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[12]                                 ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[5]                                  ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[10]                                 ;
+;  Positive edge destination node(s) list                                                                                   ; counter_jump[4]                                  ;
+;  Negative edge destination node(s) list                                                                                   ; jump_flag_pgm                                    ;
+; Rule R102: External reset signals should be synchronized using two cascaded registers                                     ; KEY[0]                                           ;
+;  Reset signal destination node(s) list                                                                                    ; seconds_ones[0]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; seconds_ones[2]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; seconds_ones[3]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; seconds_ones[1]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; counter_ones[4]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; counter_ones[6]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; counter_ones[5]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; counter_ones[3]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; counter_ones[2]                                  ;
+;  Reset signal destination node(s) list                                                                                    ; counter_ones[0]                                  ;
+; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized ; Reset_Delay:u3|oRST_2                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[0]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[8]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[9]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[10]                           ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[6]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[7]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[5]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[4]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[3]                            ;
+;  Reset signal destination node(s) from clock "OSC_27"                                                                     ; VGA_Ctrl:u9|H_Cont[2]                            ;
+; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized ; TD_Detect:u2|TD_Stable                           ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|oRST_2                            ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[21]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[20]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[14]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[15]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[13]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[12]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[9]                           ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[10]                          ;
+;  Reset signal destination node(s) from clock "OSC_50"                                                                     ; Reset_Delay:u3|Cont[11]                          ;
+; Rule R105: The reset signal that is generated in one clock domain and used in another clock domain should be synchronized ; Reset_Delay:u3|oRST_1                            ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[0]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[1]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[2]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[3]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[4]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[5]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[6]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[7]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[8]                      ;
+;  Reset signal destination node(s) from clock "TD_CLK"                                                                     ; ITU_656_Decoder:u4|YCbCr[9]                      ;
++---------------------------------------------------------------------------------------------------------------------------+--------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -292,25 +292,25 @@ applicable agreement for further details.
 ; Rule T101: Nodes with more than the specified number of fan-outs ; Reset_Delay:u3|oRST_2~clkctrl                                                                                                     ; 122     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; Reset_Delay:u3|oRST_2                                                                                                             ; 95      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|mI2C_CTRL_CLK~clkctrl                                                                                            ; 56      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[5]                                                                                                     ; 38      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[3]                                                                                                     ; 42      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[5]                                                                                                     ; 38      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[4]                                                                                                     ; 38      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[2]                                                                                                     ; 49      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[1]                                                                                                     ; 50      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[0]                                                                                                     ; 43      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; OSC_27~clkctrl                                                                                                                    ; 830     ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; VGA_Ctrl:u9|oRequest~0                                                                                                            ; 458     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[1]                                                                                                     ; 50      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; I2C_AV_Config:u1|LUT_INDEX[2]                                                                                                     ; 49      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; OSC_27~clkctrl                                                                                                                    ; 846     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; VGA_Ctrl:u9|oRequest~0                                                                                                            ; 473     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; ~GND                                                                                                                              ; 108     ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; Reset_Delay:u3|oRST_0~clkctrl                                                                                                     ; 293     ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0~clkctrl                                                 ; 414     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Reset_Delay:u3|oRST_0~clkctrl                                                                                                     ; 292     ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0~clkctrl                                                 ; 405     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; TD_CLK                                                                                                                            ; 136     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; Reset_Delay:u3|oRST_1~clkctrl                                                                                                     ; 80      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; always4~12                                                                                                                        ; 38      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; always4~10                                                                                                                        ; 55      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; DPDT_SW[2]                                                                                                                        ; 33      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; OSC_27~clkctrl                                                                                                                    ; 830     ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|oRequest~0                                                                                                            ; 458     ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0~clkctrl                                                 ; 414     ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Reset_Delay:u3|oRST_0~clkctrl                                                                                                     ; 293     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; OSC_27~clkctrl                                                                                                                    ; 846     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|oRequest~0                                                                                                            ; 473     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0~clkctrl                                                 ; 405     ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Reset_Delay:u3|oRST_0~clkctrl                                                                                                     ; 292     ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; TD_CLK                                                                                                                            ; 136     ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Reset_Delay:u3|oRST_2~clkctrl                                                                                                     ; 122     ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; ~GND                                                                                                                              ; 108     ;
@@ -319,44 +319,44 @@ applicable agreement for further details.
 ; Rule T102: Top nodes with the highest number of fan-outs         ; OSC_50~clkctrl                                                                                                                    ; 84      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Reset_Delay:u3|oRST_1~clkctrl                                                                                                     ; 80      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|mI2C_CTRL_CLK~clkctrl                                                                                            ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; always4~10                                                                                                                        ; 55      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|LUT_INDEX[1]                                                                                                     ; 50      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|LUT_INDEX[2]                                                                                                     ; 49      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|LUT_INDEX[0]                                                                                                     ; 43      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|LUT_INDEX[3]                                                                                                     ; 42      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|LUT_INDEX[4]                                                                                                     ; 38      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|LUT_INDEX[5]                                                                                                     ; 38      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; always4~12                                                                                                                        ; 38      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; DPDT_SW[2]                                                                                                                        ; 33      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|oRequest~3                                                                                                            ; 30      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; always1~0                                                                                                                         ; 28      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|control_interface:control1|INIT_REQ                                                                        ; 26      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Equal2~8                                                                                                                          ; 26      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|control_interface:control1|INIT_REQ                                                                        ; 26      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; TD_Detect:u2|TD_Stable~clkctrl                                                                                                    ; 25      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|mWR                                                                                                        ; 24      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0] ; 22      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Reset_Delay:u3|Equal0~7                                                                                                           ; 21      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|command:command1|do_reada                                                                                  ; 21      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|command:command1|do_writea                                                                                 ; 21      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|V_Cont[0]                                                                                                             ; 21      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; DPDT_SW[7]                                                                                                                        ; 21      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; LessThan6~5                                                                                                                       ; 23      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; ITU_656_Decoder:u4|Cont[0]                                                                                                        ; 21      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Reset_Delay:u3|Equal0~7                                                                                                           ; 21      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|command:command1|do_writea                                                                                 ; 21      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|command:command1|do_reada                                                                                  ; 21      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|oCurrent_X[0]~1                                                                                                       ; 21      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; LessThan6~7                                                                                                                       ; 21      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[3]                                                                                  ; 21      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[4]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[7]                               ; 20      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[3]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[1]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[6]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; LessThan4~2                                                                                                                       ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[2]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; LessThan5~8                                                                                                                       ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[0]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[5]                               ; 20      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[8]                               ; 20      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[9]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[6]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[2]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[0]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[4]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[8]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[1]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; mVGA_R[1]~2                                                                                                                       ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[5]                               ; 20      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; buffer11:delayer_g|altshift_taps:line5_rtl_0|shift_taps_34q:auto_generated|cntr_epf:cntr1|safe_q[7]                               ; 20      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2C_AV_Config:u1|I2C_Controller:u0|SD_COUNTER[0]                                                                                  ; 19      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; ITU_656_Decoder:u4|SAV                                                                                                            ; 19      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|oCurrent_Y~6                                                                                                          ; 19      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|LessThan7~0                                                                                                ; 18      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|V_Cont[0]                                                                                                             ; 19      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; VGA_Ctrl:u9|oCurrent_Y~5                                                                                                          ; 19      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0] ; 18      ;
 +------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
@@ -366,7 +366,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Design Assistant
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Sun May 05 20:22:14 2013
+    Info: Processing started: Sun May 05 22:56:01 2013
 Info: Command: quartus_drc --read_settings_files=off --write_settings_files=off DE2_TV -c DE2_TV
 Warning: Timing Analysis is analyzing one or more combinational loops as latches
     Warning: Node "flipCLdet_c|combout" is a latch
@@ -383,8 +383,8 @@ Warning: Found combinational loop of 2 nodes
     Warning: Node "flipCLctrl~0|combout"
     Warning: Node "flipCLctrl~0|dataa"
 Warning: Node: TD_HS was determined to be a clock but was found without an associated clock assignment.
-Warning: Node: VGA_Ctrl:u9|oVGA_HS was determined to be a clock but was found without an associated clock assignment.
 Warning: Node: I2C_AV_Config:u1|mI2C_CTRL_CLK was determined to be a clock but was found without an associated clock assignment.
+Warning: Node: VGA_Ctrl:u9|oVGA_HS was determined to be a clock but was found without an associated clock assignment.
 Warning: Node: new_frame was determined to be a clock but was found without an associated clock assignment.
 Warning: Node: VGA_Ctrl:u9|H_Cont[0] was determined to be a clock but was found without an associated clock assignment.
 Critical Warning: (Critical) Rule A101: Design should not contain combinational loops. Found 1 combinational loop(s) related to this rule.
@@ -402,8 +402,8 @@ Critical Warning: (High) Rule S102: Synchronous port and asynchronous port of th
 Critical Warning: (High) Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains. (Value defined:2). Found 1 asynchronous clock domain interface structure(s) related to this rule.
     Critical Warning: Node  "Reset_Delay:u3|oRST_2"
 Warning: (Medium) Rule C104: Clock signal source should drive only clock input ports. Found 2 nodes related to this rule.
-    Warning: Node  "VGA_Ctrl:u9|oVGA_HS"
     Warning: Node  "I2C_AV_Config:u1|mI2C_CTRL_CLK"
+    Warning: Node  "VGA_Ctrl:u9|oVGA_HS"
 Warning: (Medium) Rule C106: Clock signal source should not drive registers triggered by different clock edges. Found 3 node(s) related to this rule.
     Warning: Node  "OSC_27"
     Warning: Node  "VGA_Ctrl:u9|oVGA_HS"
@@ -420,12 +420,12 @@ Info: (Information) Rule T101: Nodes with more than the specified number of fan-
     Info: Node  "Reset_Delay:u3|oRST_2~clkctrl"
     Info: Node  "Reset_Delay:u3|oRST_2"
     Info: Node  "I2C_AV_Config:u1|mI2C_CTRL_CLK~clkctrl"
-    Info: Node  "I2C_AV_Config:u1|LUT_INDEX[5]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[3]"
+    Info: Node  "I2C_AV_Config:u1|LUT_INDEX[5]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[4]"
-    Info: Node  "I2C_AV_Config:u1|LUT_INDEX[2]"
-    Info: Node  "I2C_AV_Config:u1|LUT_INDEX[1]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[0]"
+    Info: Node  "I2C_AV_Config:u1|LUT_INDEX[1]"
+    Info: Node  "I2C_AV_Config:u1|LUT_INDEX[2]"
     Info: Node  "OSC_27~clkctrl"
     Info: Node  "VGA_Ctrl:u9|oRequest~0"
     Info: Node  "~GND"
@@ -433,7 +433,7 @@ Info: (Information) Rule T101: Nodes with more than the specified number of fan-
     Info: Node  "Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0~clkctrl"
     Info: Node  "TD_CLK"
     Info: Node  "Reset_Delay:u3|oRST_1~clkctrl"
-    Info: Node  "always4~12"
+    Info: Node  "always4~10"
     Info: Node  "DPDT_SW[2]"
 Info: (Information) Rule T102: Top nodes with the highest number of fan-outs. (Value defined:50). Found 50 node(s) with highest fan-out.
     Info: Node  "OSC_27~clkctrl"
@@ -448,30 +448,30 @@ Info: (Information) Rule T102: Top nodes with the highest number of fan-outs. (V
     Info: Node  "OSC_50~clkctrl"
     Info: Node  "Reset_Delay:u3|oRST_1~clkctrl"
     Info: Node  "I2C_AV_Config:u1|mI2C_CTRL_CLK~clkctrl"
+    Info: Node  "always4~10"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[1]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[2]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[0]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[3]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[4]"
     Info: Node  "I2C_AV_Config:u1|LUT_INDEX[5]"
-    Info: Node  "always4~12"
     Info: Node  "DPDT_SW[2]"
     Info: Node  "VGA_Ctrl:u9|oRequest~3"
     Info: Node  "always1~0"
-    Info: Node  "Sdram_Control_4Port:u6|control_interface:control1|INIT_REQ"
     Info: Node  "Equal2~8"
+    Info: Node  "Sdram_Control_4Port:u6|control_interface:control1|INIT_REQ"
     Info: Node  "TD_Detect:u2|TD_Stable~clkctrl"
     Info: Node  "Sdram_Control_4Port:u6|mWR"
-    Info: Node  "Sdram_Control_4Port:u6|Sdram_WR_FIFO:write_fifo1|dcfifo:dcfifo_component|dcfifo_iep1:auto_generated|dffpipe_ngh:rdaclr|dffe16a[0]"
+    Info: Node  "LessThan6~5"
+    Info: Node  "ITU_656_Decoder:u4|Cont[0]"
     Info: Node  "Reset_Delay:u3|Equal0~7"
-    Info: Node  "Sdram_Control_4Port:u6|command:command1|do_reada"
     Info: Node  "Sdram_Control_4Port:u6|command:command1|do_writea"
     Info: Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
 Info: Design Assistant information: finished post-fitting analysis of current design -- generated 70 information messages and 16 warning messages
 Info: Quartus II 64-Bit Design Assistant was successful. 0 errors, 37 warnings
     Info: Peak virtual memory: 334 megabytes
-    Info: Processing ended: Sun May 05 20:22:19 2013
-    Info: Elapsed time: 00:00:05
+    Info: Processing ended: Sun May 05 22:56:05 2013
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:04
 
 

@@ -3,23 +3,23 @@ TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
 Type  : Slow Model Setup 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
-Slack : 2.821
+Slack : 2.875
 TNS   : 0.000
 
 Type  : Slow Model Setup 'OSC_27'
-Slack : 12.106
+Slack : 11.005
 TNS   : 0.000
 
 Type  : Slow Model Setup 'OSC_50'
-Slack : 13.548
+Slack : 13.286
 TNS   : 0.000
 
 Type  : Slow Model Setup 'TD_CLK'
-Slack : 20.424
+Slack : 20.023
 TNS   : 0.000
 
 Type  : Slow Model Setup 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk2'
-Slack : 49.463
+Slack : 49.636
 TNS   : 0.000
 
 Type  : Slow Model Hold 'OSC_27'
@@ -43,19 +43,19 @@ Slack : 0.499
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
-Slack : 2.718
+Slack : 2.335
 TNS   : 0.000
 
 Type  : Slow Model Recovery 'OSC_27'
-Slack : 16.222
+Slack : 16.237
 TNS   : 0.000
 
 Type  : Slow Model Removal 'OSC_27'
-Slack : 1.929
+Slack : 2.401
 TNS   : 0.000
 
 Type  : Slow Model Removal 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
-Slack : 5.969
+Slack : 5.962
 TNS   : 0.000
 
 Type  : Slow Model Minimum Pulse Width 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
@@ -83,19 +83,19 @@ Slack : 6.802
 TNS   : 0.000
 
 Type  : Fast Model Setup 'OSC_50'
-Slack : 17.878
+Slack : 17.947
 TNS   : 0.000
 
 Type  : Fast Model Setup 'OSC_27'
-Slack : 29.448
+Slack : 29.170
 TNS   : 0.000
 
 Type  : Fast Model Setup 'TD_CLK'
-Slack : 31.954
+Slack : 31.839
 TNS   : 0.000
 
 Type  : Fast Model Setup 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk2'
-Slack : 52.330
+Slack : 52.355
 TNS   : 0.000
 
 Type  : Fast Model Hold 'OSC_27'
@@ -119,19 +119,19 @@ Slack : 0.215
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
-Slack : 3.842
+Slack : 3.719
 TNS   : 0.000
 
 Type  : Fast Model Recovery 'OSC_27'
-Slack : 17.614
+Slack : 17.606
 TNS   : 0.000
 
 Type  : Fast Model Removal 'OSC_27'
-Slack : 0.760
+Slack : 0.894
 TNS   : 0.000
 
 Type  : Fast Model Removal 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
-Slack : 5.214
+Slack : 5.211
 TNS   : 0.000
 
 Type  : Fast Model Minimum Pulse Width 'Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component|_clk0'
