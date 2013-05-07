@@ -1,0 +1,60 @@
+module detector(
+	clock,
+	clken,
+	VGA_X,
+	VGA_Y,
+	det,
+	frame_thresh,
+	);
+	
+	always @ (posedge OSC_27)
+	begin
+		if(Shift_En)
+		begin
+			//Sum up the info from this frame.
+			if (VGA_Y == 1 && VGA_X == 1) //NOT(0,0)!~!!!!
+			begin
+				//If enough pipe pixels were detected, say we found a pipe corner.
+
+				pipe_corner_found_sum_frame <= pipe_corner_found_sum;
+				
+				if (pipe_corner_found_sum > frame_thresh)
+				begin
+					pipe_corner_found <= 1;
+				end
+				else
+				begin
+					pipe_corner_found <= 0;
+				end
+				
+				pipe_corner_found_sum <= 0;
+				new_frame <= 1;
+			end
+			else
+			begin
+//				det_set <= 0;
+				new_frame <= 0;
+				pipe_corner_found_sum_frame <= pipe_corner_found_sum_frame;
+				pipe_corner_found <= pipe_corner_found;
+				
+				//If we are not at the end of a frame, check each pixel (in range) for presence of pipe matrix
+				if (det_pipe_corner && (VGA_X < PIPE_X_MAX_RANGE) && (VGA_X > PIPE_X_MIN_RANGE) && (VGA_Y < 479))
+				begin
+					pipe_corner_found_sum <= pipe_corner_found_sum + 1;
+					pipe_corner_x <= VGA_X;
+					pipe_corner_y <= VGA_Y;
+				end
+				else
+				begin
+					pipe_corner_found_sum <= pipe_corner_found_sum;
+				end
+			end
+		end
+		else
+		begin
+			//Otherwise, save the state
+			new_frame <= new_frame;
+			pipe_corner_found_sum_frame <= pipe_corner_found_sum_frame;
+			pipe_corner_found <= pipe_corner_found;
+		end
+	end
