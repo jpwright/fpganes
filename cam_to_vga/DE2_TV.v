@@ -145,7 +145,7 @@ module DE2_TV
 // --------------------------------------------------------------------
 parameter PIPE_X_MAX_RANGE   = 400;
 parameter PIPE_X_MIN_RANGE   = 300;
-parameter GOOMBA_X_MAX_RANGE = 420; //390?
+parameter GOOMBA_X_MAX_RANGE = 430; //390?
 parameter GOOMBA_X_MIN_RANGE = 320;
 parameter BRICK_X_MAX_RANGE  = 450;
 parameter BRICK_X_MIN_RANGE  = 320;

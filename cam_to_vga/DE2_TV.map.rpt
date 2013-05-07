@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE2_TV
-Tue May 07 01:06:44 2013
+Tue May 07 01:18:27 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -180,13 +180,13 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue May 07 01:06:43 2013     ;
+; Analysis & Synthesis Status        ; Successful - Tue May 07 01:18:26 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
-; Total logic elements               ; 4,879                                     ;
-;     Total combinational functions  ; 4,021                                     ;
+; Total logic elements               ; 4,880                                     ;
+;     Total combinational functions  ; 4,022                                     ;
 ;     Dedicated logic registers      ; 1,763                                     ;
 ; Total registers                    ; 1763                                      ;
 ; Total pins                         ; 426                                       ;
@@ -395,16 +395,16 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 4,879  ;
+; Estimated Total logic elements              ; 4,880  ;
 ;                                             ;        ;
-; Total combinational functions               ; 4021   ;
+; Total combinational functions               ; 4022   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 1367   ;
-;     -- 3 input functions                    ; 1513   ;
+;     -- 4 input functions                    ; 1366   ;
+;     -- 3 input functions                    ; 1515   ;
 ;     -- <=2 input functions                  ; 1141   ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 2166   ;
+;     -- normal mode                          ; 2167   ;
 ;     -- arithmetic mode                      ; 1855   ;
 ;                                             ;        ;
 ; Total registers                             ; 1763   ;
@@ -419,7 +419,7 @@ applicable agreement for further details.
 ;                                             ;        ;
 ; Maximum fan-out node                        ; OSC_27 ;
 ; Maximum fan-out                             ; 1125   ;
-; Total fan-out                               ; 19971  ;
+; Total fan-out                               ; 19973  ;
 ; Average fan-out                             ; 3.14   ;
 +---------------------------------------------+--------+
 
@@ -429,7 +429,7 @@ applicable agreement for further details.
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                       ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                               ; Library Name ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_TV                                          ; 4021 (2640)       ; 1763 (206)   ; 80728       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
+; |DE2_TV                                          ; 4022 (2641)       ; 1763 (206)   ; 80728       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
 ;    |AUDIO_DAC_ADC:u12|                           ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|AUDIO_DAC_ADC:u12                                                                                                                                         ;              ;
 ;    |DIV:u5|                                      ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5                                                                                                                                                    ;              ;
 ;       |lpm_divide:lpm_divide_component|          ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component                                                                                                                    ;              ;
@@ -1687,7 +1687,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-------+-------------------------------------------+
 ; PIPE_X_MAX_RANGE   ; 400   ; Signed Integer                            ;
 ; PIPE_X_MIN_RANGE   ; 300   ; Signed Integer                            ;
-; GOOMBA_X_MAX_RANGE ; 380   ; Signed Integer                            ;
+; GOOMBA_X_MAX_RANGE ; 430   ; Signed Integer                            ;
 ; GOOMBA_X_MIN_RANGE ; 320   ; Signed Integer                            ;
 ; BRICK_X_MAX_RANGE  ; 450   ; Signed Integer                            ;
 ; BRICK_X_MIN_RANGE  ; 320   ; Signed Integer                            ;
@@ -3528,7 +3528,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:45     ;
+; Top            ; 00:00:44     ;
 +----------------+--------------+
 
 
@@ -3538,7 +3538,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Tue May 07 01:06:00 2013
+    Info: Processing started: Tue May 07 01:17:45 2013
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE2_TV -c DE2_TV
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Found 1 design units, including 1 entities, in source file buffer11.v
@@ -4458,18 +4458,18 @@ Warning: Design contains 21 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PS2_CLK"
     Warning (15610): No output dependent on input pin "ENET_INT"
     Warning (15610): No output dependent on input pin "AUD_ADCDAT"
-Info: Implemented 5514 device resources after synthesis - the final resource count might be different
+Info: Implemented 5515 device resources after synthesis - the final resource count might be different
     Info: Implemented 49 input pins
     Info: Implemented 218 output pins
     Info: Implemented 159 bidirectional pins
-    Info: Implemented 4929 logic cells
+    Info: Implemented 4930 logic cells
     Info: Implemented 140 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 18 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 444 warnings
     Info: Peak virtual memory: 565 megabytes
-    Info: Processing ended: Tue May 07 01:06:44 2013
-    Info: Elapsed time: 00:00:44
-    Info: Total CPU time (on all processors): 00:00:42
+    Info: Processing ended: Tue May 07 01:18:27 2013
+    Info: Elapsed time: 00:00:42
+    Info: Total CPU time (on all processors): 00:00:41
 
 
