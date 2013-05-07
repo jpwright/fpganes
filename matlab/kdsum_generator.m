@@ -1,5 +1,5 @@
 n = 11;
-text = 'bar';
+text = 'goomba_color';
 
 numbits = ceil(log2((n^2)+1));
 fprintf('\nwire [');

@@ -1,0 +1,133 @@
+--altsyncram ADDRESS_REG_B="CLOCK0" CBX_DECLARE_ALL_CONNECTED_PORTS="OFF" CYCLONEII_M4K_COMPATIBILITY="ON" CYCLONEII_SAFE_WRITE="RESTRUCTURE" DEVICE_FAMILY="Cyclone II" LOW_POWER_MODE="AUTO" NUMWORDS_A=7028 NUMWORDS_B=7028 OPERATION_MODE="DUAL_PORT" OUTDATA_REG_B="CLOCK0" READ_DURING_WRITE_MODE_MIXED_PORTS="OLD_DATA" WIDTH_A=1 WIDTH_B=1 WIDTH_BYTEENA_A=1 WIDTHAD_A=13 WIDTHAD_B=13 address_a address_b clock0 clocken0 data_a q_b wren_a CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48
+--VERSION_BEGIN 11.0 cbx_altsyncram 2011:04:27:21:07:19:SJ cbx_cycloneii 2011:04:27:21:07:19:SJ cbx_lpm_add_sub 2011:04:27:21:07:19:SJ cbx_lpm_compare 2011:04:27:21:07:19:SJ cbx_lpm_decode 2011:04:27:21:07:19:SJ cbx_lpm_mux 2011:04:27:21:07:19:SJ cbx_mgl 2011:04:27:21:11:03:SJ cbx_stratix 2011:04:27:21:07:19:SJ cbx_stratixii 2011:04:27:21:07:19:SJ cbx_stratixiii 2011:04:27:21:07:19:SJ cbx_stratixv 2011:04:27:21:07:19:SJ cbx_util_mgl 2011:04:27:21:07:19:SJ  VERSION_END
+
+
+-- Copyright (C) 1991-2011 Altera Corporation
+--  Your use of Altera Corporation's design tools, logic functions 
+--  and other software and tools, and its AMPP partner logic 
+--  functions, and any output files from any of the foregoing 
+--  (including device programming or simulation files), and any 
+--  associated documentation or information are expressly subject 
+--  to the terms and conditions of the Altera Program License 
+--  Subscription Agreement, Altera MegaCore Function License 
+--  Agreement, or other applicable license agreement, including, 
+--  without limitation, that your use is for the sole purpose of 
+--  programming logic devices manufactured by Altera and sold by 
+--  Altera or its authorized distributors.  Please refer to the 
+--  applicable agreement for further details.
+
+
+FUNCTION decode_1oa (data[0..0], enable)
+RETURNS ( eq[1..0]);
+FUNCTION mux_aib (data[1..0], sel[0..0])
+RETURNS ( result[0..0]);
+FUNCTION cycloneii_ram_block (clk0, clk1, clr0, clr1, ena0, ena1, portaaddr[PORT_A_ADDRESS_WIDTH-1..0], portaaddrstall, portabyteenamasks[PORT_A_BYTE_ENABLE_MASK_WIDTH-1..0], portadatain[PORT_A_DATA_WIDTH-1..0], portawe, portbaddr[PORT_B_ADDRESS_WIDTH-1..0], portbaddrstall, portbbyteenamasks[PORT_B_BYTE_ENABLE_MASK_WIDTH-1..0], portbdatain[PORT_B_DATA_WIDTH-1..0], portbrewe)
+WITH ( CONNECTIVITY_CHECKING, DATA_INTERLEAVE_OFFSET_IN_BITS, DATA_INTERLEAVE_WIDTH_IN_BITS, DONT_POWER_OPTIMIZE, INIT_FILE, INIT_FILE_LAYOUT, init_file_restructured, LOGICAL_RAM_NAME, mem_init0, mem_init1, MIXED_PORT_FEED_THROUGH_MODE, OPERATION_MODE, PORT_A_ADDRESS_WIDTH = 1, PORT_A_BYTE_ENABLE_MASK_WIDTH = 1, PORT_A_BYTE_SIZE, PORT_A_DATA_OUT_CLEAR, PORT_A_DATA_OUT_CLOCK, PORT_A_DATA_WIDTH = 1, PORT_A_DISABLE_CE_ON_INPUT_REGISTERS, PORT_A_DISABLE_CE_ON_OUTPUT_REGISTERS, PORT_A_FIRST_ADDRESS, PORT_A_FIRST_BIT_NUMBER, PORT_A_LAST_ADDRESS, PORT_A_LOGICAL_RAM_DEPTH, PORT_A_LOGICAL_RAM_WIDTH, PORT_B_ADDRESS_CLOCK, PORT_B_ADDRESS_WIDTH = 1, PORT_B_BYTE_ENABLE_CLOCK, PORT_B_BYTE_ENABLE_MASK_WIDTH = 1, PORT_B_BYTE_SIZE, PORT_B_DATA_IN_CLOCK, PORT_B_DATA_OUT_CLEAR, PORT_B_DATA_OUT_CLOCK, PORT_B_DATA_WIDTH = 1, PORT_B_DISABLE_CE_ON_INPUT_REGISTERS, PORT_B_DISABLE_CE_ON_OUTPUT_REGISTERS, PORT_B_FIRST_ADDRESS, PORT_B_FIRST_BIT_NUMBER, PORT_B_LAST_ADDRESS, PORT_B_LOGICAL_RAM_DEPTH, PORT_B_LOGICAL_RAM_WIDTH, PORT_B_READ_ENABLE_WRITE_ENABLE_CLOCK, POWER_UP_UNINITIALIZED, RAM_BLOCK_TYPE, SAFE_WRITE, WIDTH_ECCSTATUS)
+RETURNS ( portadataout[PORT_A_DATA_WIDTH-1..0], portbdataout[PORT_B_DATA_WIDTH-1..0]);
+
+--synthesis_resources = lut 2 M4K 2 reg 2 
+OPTIONS ALTERA_INTERNAL_OPTION = "OPTIMIZE_POWER_DURING_SYNTHESIS=NORMAL_COMPILATION";
+
+SUBDESIGN altsyncram_k0c1
+( 
+	address_a[12..0]	:	input;
+	address_b[12..0]	:	input;
+	clock0	:	input;
+	clocken0	:	input;
+	data_a[0..0]	:	input;
+	q_b[0..0]	:	output;
+	wren_a	:	input;
+) 
+VARIABLE 
+	address_reg_b[0..0] : dffe;
+	out_address_reg_b[0..0] : dffe;
+	decode4 : decode_1oa;
+	mux5 : mux_aib;
+	ram_block3a0 : cycloneii_ram_block
+		WITH (
+			CONNECTIVITY_CHECKING = "OFF",
+			DONT_POWER_OPTIMIZE = "ON",
+			LOGICAL_RAM_NAME = "ALTSYNCRAM",
+			MIXED_PORT_FEED_THROUGH_MODE = "old",
+			OPERATION_MODE = "dual_port",
+			PORT_A_ADDRESS_WIDTH = 12,
+			PORT_A_DATA_WIDTH = 1,
+			PORT_A_DISABLE_CE_ON_INPUT_REGISTERS = "off",
+			PORT_A_FIRST_ADDRESS = 0,
+			PORT_A_FIRST_BIT_NUMBER = 0,
+			PORT_A_LAST_ADDRESS = 4095,
+			PORT_A_LOGICAL_RAM_DEPTH = 7028,
+			PORT_A_LOGICAL_RAM_WIDTH = 1,
+			PORT_B_ADDRESS_CLOCK = "clock0",
+			PORT_B_ADDRESS_WIDTH = 12,
+			PORT_B_DATA_OUT_CLEAR = "none",
+			PORT_B_DATA_OUT_CLOCK = "clock0",
+			PORT_B_DATA_WIDTH = 1,
+			PORT_B_DISABLE_CE_ON_INPUT_REGISTERS = "off",
+			PORT_B_DISABLE_CE_ON_OUTPUT_REGISTERS = "off",
+			PORT_B_FIRST_ADDRESS = 0,
+			PORT_B_FIRST_BIT_NUMBER = 0,
+			PORT_B_LAST_ADDRESS = 4095,
+			PORT_B_LOGICAL_RAM_DEPTH = 7028,
+			PORT_B_LOGICAL_RAM_WIDTH = 1,
+			PORT_B_READ_ENABLE_WRITE_ENABLE_CLOCK = "clock0",
+			RAM_BLOCK_TYPE = "AUTO"
+		);
+	ram_block3a1 : cycloneii_ram_block
+		WITH (
+			CONNECTIVITY_CHECKING = "OFF",
+			DONT_POWER_OPTIMIZE = "ON",
+			LOGICAL_RAM_NAME = "ALTSYNCRAM",
+			MIXED_PORT_FEED_THROUGH_MODE = "old",
+			OPERATION_MODE = "dual_port",
+			PORT_A_ADDRESS_WIDTH = 12,
+			PORT_A_DATA_WIDTH = 1,
+			PORT_A_DISABLE_CE_ON_INPUT_REGISTERS = "off",
+			PORT_A_FIRST_ADDRESS = 4096,
+			PORT_A_FIRST_BIT_NUMBER = 0,
+			PORT_A_LAST_ADDRESS = 7027,
+			PORT_A_LOGICAL_RAM_DEPTH = 7028,
+			PORT_A_LOGICAL_RAM_WIDTH = 1,
+			PORT_B_ADDRESS_CLOCK = "clock0",
+			PORT_B_ADDRESS_WIDTH = 12,
+			PORT_B_DATA_OUT_CLEAR = "none",
+			PORT_B_DATA_OUT_CLOCK = "clock0",
+			PORT_B_DATA_WIDTH = 1,
+			PORT_B_DISABLE_CE_ON_INPUT_REGISTERS = "off",
+			PORT_B_DISABLE_CE_ON_OUTPUT_REGISTERS = "off",
+			PORT_B_FIRST_ADDRESS = 4096,
+			PORT_B_FIRST_BIT_NUMBER = 0,
+			PORT_B_LAST_ADDRESS = 7027,
+			PORT_B_LOGICAL_RAM_DEPTH = 7028,
+			PORT_B_LOGICAL_RAM_WIDTH = 1,
+			PORT_B_READ_ENABLE_WRITE_ENABLE_CLOCK = "clock0",
+			RAM_BLOCK_TYPE = "AUTO"
+		);
+	address_a_wire[12..0]	: WIRE;
+	address_b_sel[0..0]	: WIRE;
+	address_b_wire[12..0]	: WIRE;
+
+BEGIN 
+	address_reg_b[].clk = clock0;
+	address_reg_b[].d = address_b_sel[];
+	address_reg_b[].ena = clocken0;
+	out_address_reg_b[].clk = clock0;
+	out_address_reg_b[].d = address_reg_b[].q;
+	out_address_reg_b[].ena = clocken0;
+	decode4.data[0..0] = address_a_wire[12..12];
+	decode4.enable = wren_a;
+	mux5.data[] = ( ram_block3a[1..0].portbdataout[0..0]);
+	mux5.sel[] = out_address_reg_b[].q;
+	ram_block3a[1..0].clk0 = clock0;
+	ram_block3a[1..0].ena0 = clocken0;
+	ram_block3a[1..0].portaaddr[] = ( address_a_wire[11..0]);
+	ram_block3a[1..0].portadatain[] = ( data_a[0..0]);
+	ram_block3a[1..0].portawe = ( decode4.eq[1..0]);
+	ram_block3a[1..0].portbaddr[] = ( address_b_wire[11..0]);
+	ram_block3a[1..0].portbrewe = B"11";
+	address_a_wire[] = address_a[];
+	address_b_sel[0..0] = address_b[12..12];
+	address_b_wire[] = address_b[];
+	q_b[] = mux5.result[];
+END;
+--VALID FILE

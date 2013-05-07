@@ -1,36 +1,10 @@
 // --------------------------------------------------------------------
-// Copyright (c) 2005 by Terasic Technologies Inc. 
+// Nintendo Ninja: An FPGA AI for Super Mario Bros on the NES.
 // --------------------------------------------------------------------
 //
-// Permission:
-//
-//   Terasic grants permission to use and modify this code for use
-//   in synthesis for all Terasic Development Boards and Altera Development 
-//   Kits made by Terasic.  Other use of this code, including the selling 
-//   ,duplication, or modification of any portion is strictly prohibited.
-//
-// Disclaimer:
-//
-//   This VHDL/Verilog or C/C++ source code is intended as a design reference
-//   which illustrates how these types of functions can be implemented.
-//   It is the user's responsibility to verify their design for
-//   consistency and functionality through the use of formal
-//   verification methods.  Terasic provides no warranty regarding the use 
-//   or functionality of this code.
-//
-// --------------------------------------------------------------------
-//           
-//                     Terasic Technologies Inc
-//                     356 Fu-Shin E. Rd Sec. 1. JhuBei City,
-//                     HsinChu County, Taiwan
-//                     302
-//
-//                     web: http://www.terasic.com/
-//                     email: support@terasic.com
-//
-// --------------------------------------------------------------------
-// Major Functions:  DE2 TV Box
-// --------------------------------------------------------------------
+// Final Project for ECE5760: Advanced Microcontroller Design
+// Jeremy Blum, Sima Mitra, Jason Wright
+
 
 module DE2_TV
 (
@@ -165,6 +139,16 @@ module DE2_TV
   //  For Audio CODEC
   wire  AUD_CTRL_CLK;  //  For Audio Controller
   assign  AUD_XCK = AUD_CTRL_CLK;
+
+// --------------------------------------------------------------------
+// CONFIGURATION VARIABLES!
+// --------------------------------------------------------------------
+parameter PIPE_X_MAX_RANGE   = 400;
+parameter PIPE_X_MIN_RANGE   = 300;
+parameter GOOMBA_X_MAX_RANGE = 400;
+parameter GOOMBA_X_MIN_RANGE = 320;
+parameter BRICK_X_MAX_RANGE  = 450;
+parameter BRICK_X_MIN_RANGE  = 305;
   
 // --------------------------------------------------------------------
 // GPIO/NES Controller Setup
@@ -195,7 +179,7 @@ module DE2_TV
   assign GPIO_0[24] = BTN_left;
   assign GPIO_0[26] = BTN_right || ~DPDT_SW[0]; //Release if we push start
   //assign GPIO_0[30] = BTN_b || ~DPDT_SW[0]; //Release if we push start
-  assign GPIO_0[30] = DPDT_SW[1]; 
+  assign GPIO_0[30] = ~multi_goomba_found || DPDT_SW[1] || ~DPDT_SW[0]; 
   assign GPIO_0[28] = BTN_a;
   
 // --------------------------------------------------------------------
@@ -206,13 +190,17 @@ module DE2_TV
 	assign LED_RED[16] = jump_now;
 	assign LED_RED[15] = jump_flag_pgm;
 	assign LED_RED[14] = jump_flag_ctrl;
-	assign LED_RED[13] = flipCLdet;
+	assign LED_RED[13] = short_jumping;
 	assign LED_RED[12] = pipe_corner_found;
-	assign LED_RED[11] = brick_edge_found;
+	assign LED_RED[11] = brick_edge_found || block_wall_found;
 	assign LED_RED[10] = goomba_found;
-	assign LED_RED[9] = VGA_X[0];
-	assign LED_RED[8] = new_frame;
-	assign LED_RED[7:0] = brick_edge_found_sum_frame;
+	assign LED_RED[9]  = multi_goomba_found;
+	//assign LED_RED[9:0] = goomba_found_sum_frame >> 3;
+	assign LED_RED[8:0] = goomba_to_bar;
+	
+	assign GPIO_1[5] = brick_edge_found || block_wall_found;
+	assign GPIO_1[7] = goomba_found;
+	assign GPIO_1[9] = pipe_corner_found;
 	
 
 	assign LED_GREEN[7] = ~KEY[3];
@@ -237,16 +225,21 @@ module DE2_TV
   reg[26:0] counter_jump;
   
 	reg jump_flag_pgm;  //Tells it to jump
+	reg short_jump_flag_pgm;
+	
 	reg jump_flag_ctrl; //Dont want to jump if already mid-jump
 	
 	//Jump now only if being told to jump, and not presently jumping.
 	wire jump_now = jump_flag_pgm & jump_flag_ctrl; 
 	
+	wire short_jump_now = short_jump_flag_pgm & jump_flag_ctrl;
+	
 	reg [9:0] jump_count;
+	reg [9:0] short_jump_count;
 	
 	always @ (negedge new_frame)
 	begin
-		if (pipe_corner_found || brick_edge_found)
+		if (pipe_corner_found || brick_edge_found || block_wall_found)
 		begin
 			jump_count <= jump_count + 1;
 			jump_flag_pgm <= 0;
@@ -257,21 +250,49 @@ module DE2_TV
 			jump_flag_pgm <= 0;
 		end
 		
+		if (goomba_found)
+		begin
+			short_jump_count <= short_jump_count + 1;
+			short_jump_flag_pgm <= 0;
+		end
+		else
+		begin
+			short_jump_count <= 0;
+			short_jump_flag_pgm <= 0;
+		end
+		
 		//Jump only if there are enough triggers in a row, and if we're not already jumping
-		if (jump_count > 3 && jump_flag_ctrl)
+		if (jump_count > 1 && jump_flag_ctrl)
 		begin
 			jump_flag_pgm <= 1;
 			jump_count <= 0;
 		end
+		
+		if (short_jump_count > 1 && jump_flag_ctrl)
+		begin
+			short_jump_flag_pgm <= 1;
+			short_jump_count <= 0;
+		end
+		
 	end
 	
 	/////////////////////////JUMPING/////////////////////////////////<--fix this
-	always @ (posedge OSC_27 or negedge KEY[1] or posedge jump_now)
+	
+	reg short_jumping;
+	
+	always @ (posedge OSC_27 or negedge KEY[1] or posedge jump_now or posedge short_jump_now)
 	begin
 		if(!KEY[1] || jump_now)
 		begin
 			counter_jump <= 0;
 			jump_flag_ctrl <= 0;
+			short_jumping <= 0;
+		end
+		else if (short_jump_now)
+		begin
+			counter_jump <= 0;
+			jump_flag_ctrl <= 0;
+			short_jumping <= 1;
 		end
 		else
 		begin
@@ -282,13 +303,23 @@ module DE2_TV
 			end
 			//Release the A Button 17 - 8 [17:0] DPDT_SW
 			//moving to switches (DPDT_SW[17:13]<<19)
-			if(counter_jump == 11599999 )
+			if(counter_jump == 3599999 && short_jumping)
+			begin
+				BTN_a <= 1;
+			end
+			
+			if(counter_jump == 3629999 && short_jumping)
+			begin
+				jump_flag_ctrl <= 1;
+			end
+			
+			if(counter_jump == 11599999)
 			begin
 				BTN_a <= 1;
 			end
 			
 			//Do not allow the A button to be pressed again for a while  (DPDT_SW[12:8]<<19)
-			if(counter_jump == 11899999 )
+			if(counter_jump == 11899999)
 			begin
 				jump_flag_ctrl <= 1;
 			end
@@ -615,16 +646,9 @@ module DE2_TV
   
   wire [9:0] Red, Green, Blue;
 
-  // Check RGB value of a pixel in the background image in ROM memory.
-  // If it's 0, black, get RGB value from the camcorder; 
-  // otherwise print white lines and letters on the screen
-  // To get grayscale, replace the next three lines with the commented-out lines
-  assign  mVGA_R_int = Red;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_G_int = Green;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-  assign  mVGA_B_int = Blue;//( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-//  assign  mVGA_R_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-//  assign  mVGA_G_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
-//  assign  mVGA_B_int = ( Red >> 2 ) + ( Green >> 1 ) + ( Blue >> 3 );
+  assign  mVGA_R_int = Red;
+  assign  mVGA_G_int = Green;
+  assign  mVGA_B_int = Blue;
   
   wire mVGA_r_th = (mVGA_R_int > (10'b1000000000)) ? 1 : 0;
   wire mVGA_g_th = (mVGA_G_int > (10'b1000000000)) ? 1 : 0;
@@ -736,17 +760,26 @@ module DE2_TV
 		.shiftin		(mVGA_b_th),
 		.oGrid		(grid_b) 
 	);
+	
+	wire [120:0] grid_goomba;
+	
+	buffer11 	delayer_goomba(
+		.clock		(OSC_27),
+		.clken		(Shift_En),
+		.shiftin		(goomba_color),
+		.oGrid		(grid_goomba) 
+	);
   
 // --------------------------------------------------------------------
 // Pattern Recognition
 // --------------------------------------------------------------------
   
-  wire [5:0] kd_thresh = DPDT_SW[12:8]; //5'b01011;
+  wire [6:0] kd_thresh = DPDT_SW[15:10] << 1; //6'b010110;
   
-  wire [120:0] kernel_goomba_g = 121'b0000000000000000000000001100001100011000011011110000111111100001111111111111111111111111000000000000000000000011111111111;
-  wire [120:0] kernel_goomba_r = 121'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
-  wire [120:0] kernel_goomba_b = 121'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
-  
+  wire [120:0] kernel_goomba_g = 121'b1111111111111111111111111111111110111111111000111111100000111110000000000000000000000000000000000000000000000000000000000;
+  wire [120:0] kernel_goomba_r = 121'b1111111111111111111111111111111110111111111000111111100000111110001111111111111111111111111111111111111111111111111111111;
+  wire [120:0] kernel_goomba_b = 121'b1111111111111111111111111111111110111111100000111111000000111110000000000000000000000000000000000000000000000000000000000;
+ 
   
   wire [120:0] kernel_pipe_corner_g = 121'b1111111111110000000000100000000001000000000010001111111100011111111000111111110001111111100011111111000111111110001111111;
   wire [120:0] kernel_pipe_corner_b = 121'b1111111111110000000000100000000001000000000010000000000100000000001000000000010000000000100000000001000000000010000000000;
@@ -764,6 +797,7 @@ module DE2_TV
   wire [120:0] kernel_bar_b = 121'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
   wire [120:0] kernel_bar_r = 121'b0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000;
 
+  wire [120:0] kernel_goomba_color = 121'b1111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111;
   
   wire [120:0] kd_goomba_r = kernel_goomba_r ^ grid_r;
   wire [120:0] kd_goomba_g = kernel_goomba_g ^ grid_g;
@@ -784,6 +818,9 @@ module DE2_TV
   wire [120:0] kd_bar_r = kernel_bar_r ^ grid_r;
   wire [120:0] kd_bar_g = kernel_bar_g ^ grid_g;
   wire [120:0] kd_bar_b = kernel_bar_b ^ grid_b;
+  
+  //wire [120:0] kd_goomba_color_r = kernel_goomba_color ^ grid_goomba;
+  wire [120:0] kd_goomba_color_r = grid_goomba;
   
   //wire [2:0] kd_sum = kd[8] + kd[7] + kd[6] + kd[5] + kd[4] + kd[3] + kd[2] + kd[1] + kd[0];
   wire [6:0] kd_goomba_sum_r = kd_goomba_r[120] + kd_goomba_r[119] + kd_goomba_r[118] + kd_goomba_r[117] + kd_goomba_r[116] + kd_goomba_r[115] + kd_goomba_r[114] + kd_goomba_r[113] + kd_goomba_r[112] + kd_goomba_r[111] + kd_goomba_r[110] + kd_goomba_r[109] + kd_goomba_r[108] + kd_goomba_r[107] + kd_goomba_r[106] + kd_goomba_r[105] + kd_goomba_r[104] + kd_goomba_r[103] + kd_goomba_r[102] + kd_goomba_r[101] + kd_goomba_r[100] + kd_goomba_r[99] + kd_goomba_r[98] + kd_goomba_r[97] + kd_goomba_r[96] + kd_goomba_r[95] + kd_goomba_r[94] + kd_goomba_r[93] + kd_goomba_r[92] + kd_goomba_r[91] + kd_goomba_r[90] + kd_goomba_r[89] + kd_goomba_r[88] + kd_goomba_r[87] + kd_goomba_r[86] + kd_goomba_r[85] + kd_goomba_r[84] + kd_goomba_r[83] + kd_goomba_r[82] + kd_goomba_r[81] + kd_goomba_r[80] + kd_goomba_r[79] + kd_goomba_r[78] + kd_goomba_r[77] + kd_goomba_r[76] + kd_goomba_r[75] + kd_goomba_r[74] + kd_goomba_r[73] + kd_goomba_r[72] + kd_goomba_r[71] + kd_goomba_r[70] + kd_goomba_r[69] + kd_goomba_r[68] + kd_goomba_r[67] + kd_goomba_r[66] + kd_goomba_r[65] + kd_goomba_r[64] + kd_goomba_r[63] + kd_goomba_r[62] + kd_goomba_r[61] + kd_goomba_r[60] + kd_goomba_r[59] + kd_goomba_r[58] + kd_goomba_r[57] + kd_goomba_r[56] + kd_goomba_r[55] + kd_goomba_r[54] + kd_goomba_r[53] + kd_goomba_r[52] + kd_goomba_r[51] + kd_goomba_r[50] + kd_goomba_r[49] + kd_goomba_r[48] + kd_goomba_r[47] + kd_goomba_r[46] + kd_goomba_r[45] + kd_goomba_r[44] + kd_goomba_r[43] + kd_goomba_r[42] + kd_goomba_r[41] + kd_goomba_r[40] + kd_goomba_r[39] + kd_goomba_r[38] + kd_goomba_r[37] + kd_goomba_r[36] + kd_goomba_r[35] + kd_goomba_r[34] + kd_goomba_r[33] + kd_goomba_r[32] + kd_goomba_r[31] + kd_goomba_r[30] + kd_goomba_r[29] + kd_goomba_r[28] + kd_goomba_r[27] + kd_goomba_r[26] + kd_goomba_r[25] + kd_goomba_r[24] + kd_goomba_r[23] + kd_goomba_r[22] + kd_goomba_r[21] + kd_goomba_r[20] + kd_goomba_r[19] + kd_goomba_r[18] + kd_goomba_r[17] + kd_goomba_r[16] + kd_goomba_r[15] + kd_goomba_r[14] + kd_goomba_r[13] + kd_goomba_r[12] + kd_goomba_r[11] + kd_goomba_r[10] + kd_goomba_r[9] + kd_goomba_r[8] + kd_goomba_r[7] + kd_goomba_r[6] + kd_goomba_r[5] + kd_goomba_r[4] + kd_goomba_r[3] + kd_goomba_r[2] + kd_goomba_r[1] + kd_goomba_r[0];
@@ -816,13 +853,21 @@ module DE2_TV
 
   wire [9:0] kd_bar_sum = kd_bar_sum_r + kd_bar_sum_g + kd_bar_sum_b;
   
-  //wire det_goomba = (kd_goomba_sum < kd_thresh);
-  wire det_goomba = (kd_brick_edge_sum < (kd_thresh << 3));
+  wire [6:0] kd_goomba_color_sum = kd_goomba_color_r[120] + kd_goomba_color_r[119] + kd_goomba_color_r[118] + kd_goomba_color_r[117] + kd_goomba_color_r[116] + kd_goomba_color_r[115] + kd_goomba_color_r[114] + kd_goomba_color_r[113] + kd_goomba_color_r[112] + kd_goomba_color_r[111] + kd_goomba_color_r[110] + kd_goomba_color_r[109] + kd_goomba_color_r[108] + kd_goomba_color_r[107] + kd_goomba_color_r[106] + kd_goomba_color_r[105] + kd_goomba_color_r[104] + kd_goomba_color_r[103] + kd_goomba_color_r[102] + kd_goomba_color_r[101] + kd_goomba_color_r[100] + kd_goomba_color_r[99] + kd_goomba_color_r[98] + kd_goomba_color_r[97] + kd_goomba_color_r[96] + kd_goomba_color_r[95] + kd_goomba_color_r[94] + kd_goomba_color_r[93] + kd_goomba_color_r[92] + kd_goomba_color_r[91] + kd_goomba_color_r[90] + kd_goomba_color_r[89] + kd_goomba_color_r[88] + kd_goomba_color_r[87] + kd_goomba_color_r[86] + kd_goomba_color_r[85] + kd_goomba_color_r[84] + kd_goomba_color_r[83] + kd_goomba_color_r[82] + kd_goomba_color_r[81] + kd_goomba_color_r[80] + kd_goomba_color_r[79] + kd_goomba_color_r[78] + kd_goomba_color_r[77] + kd_goomba_color_r[76] + kd_goomba_color_r[75] + kd_goomba_color_r[74] + kd_goomba_color_r[73] + kd_goomba_color_r[72] + kd_goomba_color_r[71] + kd_goomba_color_r[70] + kd_goomba_color_r[69] + kd_goomba_color_r[68] + kd_goomba_color_r[67] + kd_goomba_color_r[66] + kd_goomba_color_r[65] + kd_goomba_color_r[64] + kd_goomba_color_r[63] + kd_goomba_color_r[62] + kd_goomba_color_r[61] + kd_goomba_color_r[60] + kd_goomba_color_r[59] + kd_goomba_color_r[58] + kd_goomba_color_r[57] + kd_goomba_color_r[56] + kd_goomba_color_r[55] + kd_goomba_color_r[54] + kd_goomba_color_r[53] + kd_goomba_color_r[52] + kd_goomba_color_r[51] + kd_goomba_color_r[50] + kd_goomba_color_r[49] + kd_goomba_color_r[48] + kd_goomba_color_r[47] + kd_goomba_color_r[46] + kd_goomba_color_r[45] + kd_goomba_color_r[44] + kd_goomba_color_r[43] + kd_goomba_color_r[42] + kd_goomba_color_r[41] + kd_goomba_color_r[40] + kd_goomba_color_r[39] + kd_goomba_color_r[38] + kd_goomba_color_r[37] + kd_goomba_color_r[36] + kd_goomba_color_r[35] + kd_goomba_color_r[34] + kd_goomba_color_r[33] + kd_goomba_color_r[32] + kd_goomba_color_r[31] + kd_goomba_color_r[30] + kd_goomba_color_r[29] + kd_goomba_color_r[28] + kd_goomba_color_r[27] + kd_goomba_color_r[26] + kd_goomba_color_r[25] + kd_goomba_color_r[24] + kd_goomba_color_r[23] + kd_goomba_color_r[22] + kd_goomba_color_r[21] + kd_goomba_color_r[20] + kd_goomba_color_r[19] + kd_goomba_color_r[18] + kd_goomba_color_r[17] + kd_goomba_color_r[16] + kd_goomba_color_r[15] + kd_goomba_color_r[14] + kd_goomba_color_r[13] + kd_goomba_color_r[12] + kd_goomba_color_r[11] + kd_goomba_color_r[10] + kd_goomba_color_r[9] + kd_goomba_color_r[8] + kd_goomba_color_r[7] + kd_goomba_color_r[6] + kd_goomba_color_r[5] + kd_goomba_color_r[4] + kd_goomba_color_r[3] + kd_goomba_color_r[2] + kd_goomba_color_r[1] + kd_goomba_color_r[0];
+  
+  //wire det_goomba = (kd_goomba_sum < (kd_thresh << 4));
+  
+  //wire det_goomba = (mVGA_R_int > 10'b1110000000) && (mVGA_G_int > 10'b0111111100) && (mVGA_G_int < 10'b1100000000) && (mVGA_B_int < 10'b0100000000) && (mVGA_B_int > 10'b0010000000);
+  wire goomba_color = (mVGA_G_int > 10'b0101111100) && (mVGA_G_int < 10'b1110000000) && (mVGA_B_int < 10'b1010000000) && (mVGA_B_int > 10'b0001100000) && (mVGA_R_int > 10'b1100000000);
+  wire det_goomba = (kd_goomba_color_sum > 6'b011100);
+  
   wire det_pipe_corner = (kd_pipe_corner_sum < 6'b110000);
-  wire det_brick_edge  = (kd_brick_edge_sum < (kd_thresh << 3));
+  wire det_brick_edge  = (kd_brick_edge_sum  < 8'b01011100);
   //wire det_mario       = (kd_mario_sum < (kd_thresh << 4));
   wire det_mario = 0;
   wire det_bar         = (kd_bar_sum == 0);
+  
+  
 	
 	wire [9:0] mVGA_gs_r;
    wire [9:0] mVGA_gs_g;
@@ -836,17 +881,24 @@ module DE2_TV
 	wire DISP_G_THRESH = (~DPDT_SW[4] && DPDT_SW[3]);
 	wire DISP_B_THRESH = (DPDT_SW[4] && ~DPDT_SW[3]);
 	wire DISP_A_THRESH = (DPDT_SW[4] && DPDT_SW[3]);
-	wire [9:0] BASE_R = (DPDT_SW[2]) ? mVGA_R_int : ((DISP_G_THRESH ? mVGA_g_th_full : (DISP_B_THRESH ? mVGA_b_th_full : mVGA_r_th_full)));
-	wire [9:0] BASE_G = (DPDT_SW[2]) ? mVGA_G_int : ((DISP_R_THRESH ? mVGA_r_th_full : (DISP_B_THRESH ? mVGA_b_th_full : mVGA_g_th_full)));
-	wire [9:0] BASE_B = (DPDT_SW[2]) ? mVGA_B_int : ((DISP_G_THRESH ? mVGA_g_th_full : (DISP_R_THRESH ? mVGA_r_th_full : mVGA_b_th_full)));
 	
+	wire DISP_CHANNELS = DPDT_SW[8];
 	
+	wire [9:0] BASE_R_T = (DPDT_SW[2]) ? mVGA_R_int : ((DISP_G_THRESH ? (DISP_CHANNELS ? mVGA_g_th_full : 10'b0000000000) : (DISP_B_THRESH ? (DISP_CHANNELS ? mVGA_b_th_full : 10'b0000000000) : (DISP_CHANNELS ? mVGA_r_th_full : mVGA_R_int))));
+	wire [9:0] BASE_G_T = (DPDT_SW[2]) ? mVGA_G_int : ((DISP_R_THRESH ? (DISP_CHANNELS ? mVGA_r_th_full : 10'b0000000000) : (DISP_B_THRESH ? (DISP_CHANNELS ? mVGA_b_th_full : 10'b0000000000) : (DISP_CHANNELS ? mVGA_g_th_full : mVGA_G_int))));
+	wire [9:0] BASE_B_T = (DPDT_SW[2]) ? mVGA_B_int : ((DISP_G_THRESH ? (DISP_CHANNELS ? mVGA_g_th_full : 10'b0000000000) : (DISP_R_THRESH ? (DISP_CHANNELS ? mVGA_r_th_full : 10'b0000000000) : (DISP_CHANNELS ? mVGA_b_th_full : mVGA_B_int))));
+	
+	wire [9:0] BASE_R = (DPDT_SW[9]) ? (goomba_color ? 10'b1111111111 : 10'b0000000000) : BASE_R_T;
+   wire [9:0] BASE_G = (DPDT_SW[9]) ? (goomba_color ? 10'b1111111111 : 10'b0000000000) : BASE_G_T;
+   wire [9:0] BASE_B = (DPDT_SW[9]) ? (goomba_color ? 10'b1111111111 : 10'b0000000000) : BASE_B_T;
 
-	//Toggle w/ Switch 6
-	assign mVGA_gs_r = det_goomba ? 10'b1111111111 : (det_mario ? 10'b1111111111 :(det_pipe_corner ? 10'b0000000000 : (det_brick_edge ? 10'b0000000000 : (DPDT_SW[7] ? BASE_R : 10'b0000000000))));
-	assign mVGA_gs_g = det_goomba ? 10'b0000000000 : (det_mario ? 10'b0000000000 :(det_pipe_corner ? 10'b1111111111 : (det_brick_edge ? 10'b0000000000 : (DPDT_SW[7] ? BASE_G : 10'b0000000000))));
-	assign mVGA_gs_b = det_goomba ? 10'b0000000000 : (det_mario ? 10'b1111111111 :(det_pipe_corner ? 10'b0000000000 : (det_brick_edge ? 10'b1111111111 : (DPDT_SW[7] ? BASE_B : 10'b0000000000))));
+	//Toggle w/ Switch 7
+	assign mVGA_gs_r = DPDT_SW[15] ? (det_goomba ? 10'b1111111111 : (det_mario ? 10'b1111111111 :(det_pipe_corner ? 10'b0000000000 : (det_brick_edge ? 10'b1111111111 : (DPDT_SW[7] ? BASE_R : 10'b0000000000))))) : BASE_R;
+	assign mVGA_gs_g = DPDT_SW[15] ? (det_goomba ? 10'b0000000000 : (det_mario ? 10'b0000000000 :(det_pipe_corner ? 10'b1111111111 : (det_brick_edge ? 10'b1111111111 : (DPDT_SW[7] ? BASE_G : 10'b0000000000))))) : BASE_G;
+	assign mVGA_gs_b = DPDT_SW[15] ? (det_goomba ? 10'b0000000000 : (det_mario ? 10'b1111111111 :(det_pipe_corner ? 10'b0000000000 : (det_brick_edge ? 10'b0000000000 : (DPDT_SW[7] ? BASE_B : 10'b0000000000))))) : BASE_B;
 
+	//Switch 15: display kernels
+	
 // --------------------------------------------------------------------
 // AI
 // --------------------------------------------------------------------	
@@ -872,9 +924,17 @@ module DE2_TV
 	reg [17:0] brick_edge_found_sum_frame;
 	reg brick_edge_found;
 	
+	reg [17:0] block_wall_found_sum;
+	reg [17:0] block_wall_found_sum_frame;
+	reg block_wall_found;
+	
 	reg [17:0] goomba_found_sum;
 	reg [17:0] goomba_found_sum_frame;
 	reg goomba_found;
+	
+	reg multi_goomba_found;
+	
+	reg [10:0] bar_y;
 	
 	reg det_set;
 	
@@ -892,7 +952,7 @@ module DE2_TV
 		if(Shift_En)
 		begin
 			//Sum up the info from this frame.
-			if (VGA_Y == 246 && VGA_X == 71) //NOT(0,0)!~!!!!
+			if (VGA_Y == 1 && VGA_X == 1) //NOT(0,0)!~!!!!
 			begin
 				//If enough pipe pixels were detected, say we found a pipe corner.
 
@@ -918,7 +978,7 @@ module DE2_TV
 				pipe_corner_found <= pipe_corner_found;
 				
 				//If we are not at the end of a frame, check each pixel (in range) for presence of pipe matrix
-				if (det_pipe_corner && (VGA_X < 400) && (VGA_X > 300) && (VGA_Y < 479))
+				if (det_pipe_corner && (VGA_X < PIPE_X_MAX_RANGE) && (VGA_X > PIPE_X_MIN_RANGE) && (VGA_Y < 479))
 				begin
 					pipe_corner_found_sum <= pipe_corner_found_sum + 1;
 					pipe_corner_x <= VGA_X;
@@ -941,26 +1001,68 @@ module DE2_TV
 	
 	////////////////////////////////
 	///////////////////////////////CORNER DETECTION///////////////////////////////////
+	
+	reg [10:0] lowest_brick_y;
+	reg [10:0] brick_to_bar;
+	
+	
+	
 	always @ (posedge OSC_27)
 	begin
 		if(Shift_En)
 		begin
 			//Sum up the info from this frame.
-			if (VGA_Y == 246 && VGA_X == 71) //NOT(0,0)!~!!!!
+			if (VGA_Y == 480 && VGA_X == 640) //Important that this checks at the end of the frame since it
+														 //uses the bar location
 			begin
-				//If enough pipe pixels were detected, say we found a pipe corner.
+				//If enough brick edge pixels detected.....
 				brick_edge_found_sum_frame <= brick_edge_found_sum;
 				
-				if (brick_edge_found_sum > 10)
+				brick_to_bar <= (bar_y > lowest_brick_y) ? (bar_y - lowest_brick_y) : ((480 - lowest_brick_y) + bar_y);
+				
+				if (brick_edge_found_sum > 15)
 				begin
-					brick_edge_found <= 1;
+					if (bar_y > lowest_brick_y)
+					begin
+						if ((bar_y - lowest_brick_y) < 20)
+						begin
+							brick_edge_found <= 1;
+						end
+						else
+						begin
+							brick_edge_found <= 0;
+						end
+					end
+					else
+					begin
+						if (((480 - lowest_brick_y) + bar_y) < 20)
+						begin
+							brick_edge_found <= 1;
+						end
+						else
+						begin
+							brick_edge_found <= 0;
+						end
+					end
 				end
 				else
 				begin
 					brick_edge_found <= 0;
 				end
 				
+				block_wall_found_sum_frame <= block_wall_found_sum;
+				
+				if (block_wall_found_sum > 20)
+				begin
+					block_wall_found <= 1;
+				end
+				else
+				begin
+					block_wall_found <= 0;
+				end
+				
 				brick_edge_found_sum <= 0;
+				block_wall_found_sum <= 0;
 				new_frame_ofcorner <= 1;
 			end
 			else
@@ -969,17 +1071,44 @@ module DE2_TV
 				new_frame_ofcorner <= 0;
 				brick_edge_found_sum_frame <= brick_edge_found_sum_frame;
 				brick_edge_found <= brick_edge_found;
+				block_wall_found_sum_frame <= block_wall_found_sum_frame;
+				block_wall_found <= block_wall_found;
 				
 				//If we are not at the end of a frame, check each pixel (in range) for presence of brick corner matrix	
-				if (det_brick_edge && (VGA_X < 400) && (VGA_X > 250) && (VGA_Y < 479))
+				if (det_brick_edge && (VGA_X < BRICK_X_MAX_RANGE) && (VGA_X > BRICK_X_MIN_RANGE) && (VGA_Y < 479))
 				begin
 					brick_edge_found_sum <= brick_edge_found_sum + 1;
 					//pipe_corner_x <= VGA_X;
 					//pipe_corner_y <= VGA_Y;
+					if (~det_set)
+					begin
+						lowest_brick_y <= VGA_Y;
+					end
+					else
+					begin
+						if (bar_y < 11)
+						begin
+							lowest_brick_y <= VGA_Y;
+						end
+						else
+						begin
+							lowest_brick_y <= lowest_brick_y;
+						end
+					end
 				end
 				else
 				begin
+					lowest_brick_y <= lowest_brick_y;
 					brick_edge_found_sum <= brick_edge_found_sum;
+				end
+				
+				if (det_brick_edge && (VGA_X < 335) && (VGA_X > 315) && (VGA_Y < 479))
+				begin
+					block_wall_found_sum <= brick_edge_found_sum + 1;
+				end
+				else
+				begin
+					block_wall_found_sum <= brick_edge_found_sum;
 				end
 			end
 		end
@@ -988,28 +1117,77 @@ module DE2_TV
 			new_frame_ofcorner <= new_frame_ofcorner;
 			brick_edge_found_sum <= brick_edge_found_sum;
 			brick_edge_found <= brick_edge_found;
+			block_wall_found_sum <= block_wall_found_sum;
+			block_wall_found <= block_wall_found;
+			lowest_brick_y <= lowest_brick_y;
 		end
 	end
 	/////////////////////////////////
 	///////////////////////////////GOOMBA DETECTION//////////////////////////////////////
+	reg [10:0] lowest_goomba_y;
+	reg [10:0] goomba_to_bar;
+	
 	always @ (posedge OSC_27)
 	begin
 		if(Shift_En)
 		begin
 			//Sum up the info from this frame.
-			if (VGA_Y == 246 && VGA_X == 71) //NOT(0,0)!~!!!!
+			if (VGA_Y == 1 && VGA_X == 1) //NOT(0,0)!~!!!!
 			begin
 				//If enough goomba pixels were detected, say we found a goomba.
 
 				goomba_found_sum_frame <= goomba_found_sum;
 				
-				if (goomba_found_sum > 5)
+				goomba_to_bar <= (bar_y > lowest_goomba_y) ? (bar_y - lowest_goomba_y) : ((480 - lowest_goomba_y) + bar_y);
+				
+				if (goomba_found_sum > 20)
 				begin
-					goomba_found <= 1;
+					if (bar_y > lowest_goomba_y)
+					begin
+						if ((bar_y - lowest_goomba_y) < 85)
+						begin
+							if (goomba_found_sum > 70)
+							begin
+								multi_goomba_found <= 1;
+							end
+							else
+							begin
+								multi_goomba_found <= 0;
+							end
+							goomba_found <= 1;
+						end
+						else
+						begin
+							goomba_found <= 0;
+							multi_goomba_found <= 0;
+						end
+					end
+					else
+					begin
+						if (((480 - lowest_goomba_y) + bar_y) < 85)
+						begin
+							if (goomba_found_sum > 70)
+							begin
+								multi_goomba_found <= 1;
+							end
+							else
+							begin
+								multi_goomba_found <= 0;
+							end
+							goomba_found <= 1;
+						end
+						else
+						begin
+							goomba_found <= 0;
+							multi_goomba_found <= 0;
+						end
+					end
+					
 				end
 				else
 				begin
 					goomba_found <= 0;
+					multi_goomba_found <= 0;
 				end
 				
 				goomba_found_sum <= 0;
@@ -1018,17 +1196,35 @@ module DE2_TV
 			else
 			begin
 //				det_set <= 0;
+	
 				new_frame_goomba <= 0;
 				goomba_found_sum_frame <= goomba_found_sum_frame;
 				goomba_found <= goomba_found;
 				
 				//If we are not at the end of a frame, check each pixel (in range) for presence of pipe matrix
-				if (det_goomba && (VGA_X < 450) && (VGA_X > 320) && (VGA_Y < 479))
+				if (det_goomba && (VGA_X < GOOMBA_X_MAX_RANGE) && (VGA_X > GOOMBA_X_MIN_RANGE) && (VGA_Y < 479))
 				begin
 					goomba_found_sum <= goomba_found_sum + 1;
+					
+					if (~det_set)
+					begin
+						lowest_goomba_y <= VGA_Y;
+					end
+					else
+					begin
+						if (bar_y < 11)
+						begin
+							lowest_goomba_y <= VGA_Y;
+						end
+						else
+						begin
+							lowest_goomba_y <= lowest_goomba_y;
+						end
+					end
 				end
 				else
 				begin
+					lowest_goomba_y <= lowest_goomba_y;
 					goomba_found_sum <= goomba_found_sum;
 				end
 			end
@@ -1036,9 +1232,36 @@ module DE2_TV
 		else
 		begin
 			//Otherwise, save the state
+			lowest_goomba_y <= lowest_goomba_y;
+			goomba_to_bar <= goomba_to_bar;
 			new_frame_goomba <= new_frame_goomba;
 			goomba_found_sum_frame <= goomba_found_sum_frame;
 			goomba_found <= goomba_found;
+		end
+	end
+	
+	///////////////////////////////BAR DETECTION//////////////////////////////////////
+	always @ (posedge OSC_27)
+	begin
+		if(Shift_En)
+		begin
+			//Sum up the info from this frame.
+			if (VGA_Y == 1 && VGA_X == 1) //NOT(0,0)!~!!!!
+			begin
+				bar_y <= 1;
+				det_set <= 0;
+			end
+			else if (det_bar && ~det_set)
+			begin
+				bar_y <= VGA_Y;
+				det_set <= 1;
+			end
+		end
+		else
+		begin
+			//Otherwise, save the state
+			bar_y <= bar_y;
+			det_set <= det_set;
 		end
 	end
 	

@@ -1,5 +1,5 @@
 Flow report for DE2_TV
-Sun May 05 22:56:05 2013
+Mon May 06 23:17:30 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -38,20 +38,20 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Flow Summary                                                                   ;
 +------------------------------------+-------------------------------------------+
-; Flow Status                        ; Analyzed - Sun May 05 22:56:05 2013       ;
+; Flow Status                        ; Analyzed - Mon May 06 23:17:30 2013       ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
 ; Device                             ; EP2C35F672C8                              ;
 ; Timing Models                      ; Final                                     ;
-; Total logic elements               ; 3,487 / 33,216 ( 10 % )                   ;
-;     Total combinational functions  ; 3,150 / 33,216 ( 9 % )                    ;
-;     Dedicated logic registers      ; 1,539 / 33,216 ( 5 % )                    ;
-; Total registers                    ; 1539                                      ;
+; Total logic elements               ; 4,474 / 33,216 ( 13 % )                   ;
+;     Total combinational functions  ; 4,041 / 33,216 ( 12 % )                   ;
+;     Dedicated logic registers      ; 1,736 / 33,216 ( 5 % )                    ;
+; Total registers                    ; 1736                                      ;
 ; Total pins                         ; 426 / 475 ( 90 % )                        ;
 ; Total virtual pins                 ; 0                                         ;
-; Total memory bits                  ; 73,842 / 483,840 ( 15 % )                 ;
+; Total memory bits                  ; 80,728 / 483,840 ( 17 % )                 ;
 ; Embedded Multiplier 9-bit elements ; 18 / 70 ( 26 % )                          ;
 ; Total PLLs                         ; 1 / 4 ( 25 % )                            ;
 +------------------------------------+-------------------------------------------+
@@ -62,7 +62,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/05/2013 22:54:00 ;
+; Start date & time ; 05/06/2013 23:15:10 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; DE2_TV              ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ applicable agreement for further details.
 ; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP     ; On                                    ; Off                            ; --          ; --         ;
 ; AUTO_ENABLE_SMART_COMPILE               ; On                                    ; --                             ; --          ; --         ;
 ; AUTO_PACKED_REGISTERS_STRATIXII         ; Normal                                ; Auto                           ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                   ; 132683363511549.136780884001712       ; --                             ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                   ; 132683363511549.136789650907052       ; --                             ; --          ; --         ;
 ; CYCLONEII_OPTIMIZATION_TECHNIQUE        ; Speed                                 ; Balanced                       ; --          ; --         ;
 ; ENABLE_DRC_SETTINGS                     ; On                                    ; Off                            ; --          ; --         ;
 ; ENABLE_SIGNALTAP                        ; Off                                   ; --                             ; --          ; --         ;
@@ -109,12 +109,12 @@ applicable agreement for further details.
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:32     ; 1.0                     ; 526 MB              ; 00:00:32                           ;
-; Fitter                    ; 00:01:17     ; 1.9                     ; 637 MB              ; 00:01:37                           ;
-; Assembler                 ; 00:00:03     ; 1.0                     ; 392 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:06     ; 1.0                     ; 376 MB              ; 00:00:04                           ;
-; Design Assistant          ; 00:00:04     ; 1.0                     ; 334 MB              ; 00:00:04                           ;
-; Total                     ; 00:02:02     ; --                      ; --                  ; 00:02:19                           ;
+; Analysis & Synthesis      ; 00:00:42     ; 1.0                     ; 565 MB              ; 00:00:41                           ;
+; Fitter                    ; 00:01:22     ; 1.9                     ; 629 MB              ; 00:01:40                           ;
+; Assembler                 ; 00:00:03     ; 1.0                     ; 395 MB              ; 00:00:03                           ;
+; TimeQuest Timing Analyzer ; 00:00:05     ; 1.0                     ; 386 MB              ; 00:00:04                           ;
+; Design Assistant          ; 00:00:05     ; 1.0                     ; 340 MB              ; 00:00:04                           ;
+; Total                     ; 00:02:17     ; --                      ; --                  ; 00:02:32                           ;
 +---------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
