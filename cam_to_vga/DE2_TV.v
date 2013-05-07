@@ -145,10 +145,10 @@ module DE2_TV
 // --------------------------------------------------------------------
 parameter PIPE_X_MAX_RANGE   = 400;
 parameter PIPE_X_MIN_RANGE   = 300;
-parameter GOOMBA_X_MAX_RANGE = 400;
+parameter GOOMBA_X_MAX_RANGE = 420; //390?
 parameter GOOMBA_X_MIN_RANGE = 320;
 parameter BRICK_X_MAX_RANGE  = 450;
-parameter BRICK_X_MIN_RANGE  = 305;
+parameter BRICK_X_MIN_RANGE  = 320;
   
 // --------------------------------------------------------------------
 // GPIO/NES Controller Setup
@@ -196,7 +196,7 @@ parameter BRICK_X_MIN_RANGE  = 305;
 	assign LED_RED[10] = goomba_found;
 	assign LED_RED[9]  = multi_goomba_found;
 	//assign LED_RED[9:0] = goomba_found_sum_frame >> 3;
-	assign LED_RED[8:0] = goomba_to_bar;
+	assign LED_RED[8:0] = brick_edge_found_sum;
 	
 	assign GPIO_1[5] = brick_edge_found || block_wall_found;
 	assign GPIO_1[7] = goomba_found;
@@ -303,12 +303,12 @@ parameter BRICK_X_MIN_RANGE  = 305;
 			end
 			//Release the A Button 17 - 8 [17:0] DPDT_SW
 			//moving to switches (DPDT_SW[17:13]<<19)
-			if(counter_jump == 3599999 && short_jumping)
+			if(counter_jump == 4199999 && short_jumping) //3599999 //3399999
 			begin
 				BTN_a <= 1;
 			end
 			
-			if(counter_jump == 3629999 && short_jumping)
+			if(counter_jump == 4219999 && short_jumping) //3629999 //3409999
 			begin
 				jump_flag_ctrl <= 1;
 			end
@@ -1012,7 +1012,7 @@ parameter BRICK_X_MIN_RANGE  = 305;
 		if(Shift_En)
 		begin
 			//Sum up the info from this frame.
-			if (VGA_Y == 480 && VGA_X == 640) //Important that this checks at the end of the frame since it
+			if (VGA_Y == 1 && VGA_X == 1) //Important that this checks at the end of the frame since it
 														 //uses the bar location
 			begin
 				//If enough brick edge pixels detected.....
@@ -1020,7 +1020,7 @@ parameter BRICK_X_MIN_RANGE  = 305;
 				
 				brick_to_bar <= (bar_y > lowest_brick_y) ? (bar_y - lowest_brick_y) : ((480 - lowest_brick_y) + bar_y);
 				
-				if (brick_edge_found_sum > 15)
+				if (brick_edge_found_sum > 80)
 				begin
 					if (bar_y > lowest_brick_y)
 					begin
@@ -1052,7 +1052,7 @@ parameter BRICK_X_MIN_RANGE  = 305;
 				
 				block_wall_found_sum_frame <= block_wall_found_sum;
 				
-				if (block_wall_found_sum > 20)
+				if (block_wall_found_sum > 80)
 				begin
 					block_wall_found <= 1;
 				end
@@ -1140,13 +1140,13 @@ parameter BRICK_X_MIN_RANGE  = 305;
 				
 				goomba_to_bar <= (bar_y > lowest_goomba_y) ? (bar_y - lowest_goomba_y) : ((480 - lowest_goomba_y) + bar_y);
 				
-				if (goomba_found_sum > 20)
+				if (goomba_found_sum > 15)
 				begin
 					if (bar_y > lowest_goomba_y)
 					begin
 						if ((bar_y - lowest_goomba_y) < 85)
 						begin
-							if (goomba_found_sum > 70)
+							if (goomba_found_sum > 30)
 							begin
 								multi_goomba_found <= 1;
 							end
@@ -1166,7 +1166,7 @@ parameter BRICK_X_MIN_RANGE  = 305;
 					begin
 						if (((480 - lowest_goomba_y) + bar_y) < 85)
 						begin
-							if (goomba_found_sum > 70)
+							if (goomba_found_sum > 30)
 							begin
 								multi_goomba_found <= 1;
 							end

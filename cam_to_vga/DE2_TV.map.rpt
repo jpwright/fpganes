@@ -1,5 +1,5 @@
 Analysis & Synthesis report for DE2_TV
-Mon May 06 23:15:52 2013
+Tue May 07 01:06:44 2013
 Quartus II 64-Bit Version 11.0 Build 157 04/27/2011 SJ Full Version
 
 
@@ -180,15 +180,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                   ;
 +------------------------------------+-------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon May 06 23:15:52 2013     ;
+; Analysis & Synthesis Status        ; Successful - Tue May 07 01:06:43 2013     ;
 ; Quartus II 64-Bit Version          ; 11.0 Build 157 04/27/2011 SJ Full Version ;
 ; Revision Name                      ; DE2_TV                                    ;
 ; Top-level Entity Name              ; DE2_TV                                    ;
 ; Family                             ; Cyclone II                                ;
-; Total logic elements               ; 4,894                                     ;
-;     Total combinational functions  ; 4,036                                     ;
-;     Dedicated logic registers      ; 1,772                                     ;
-; Total registers                    ; 1772                                      ;
+; Total logic elements               ; 4,879                                     ;
+;     Total combinational functions  ; 4,021                                     ;
+;     Dedicated logic registers      ; 1,763                                     ;
+; Total registers                    ; 1763                                      ;
 ; Total pins                         ; 426                                       ;
 ; Total virtual pins                 ; 0                                         ;
 ; Total memory bits                  ; 80,728                                    ;
@@ -395,20 +395,20 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 4,894  ;
+; Estimated Total logic elements              ; 4,879  ;
 ;                                             ;        ;
-; Total combinational functions               ; 4036   ;
+; Total combinational functions               ; 4021   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 1358   ;
-;     -- 3 input functions                    ; 1519   ;
-;     -- <=2 input functions                  ; 1159   ;
+;     -- 4 input functions                    ; 1367   ;
+;     -- 3 input functions                    ; 1513   ;
+;     -- <=2 input functions                  ; 1141   ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 2175   ;
-;     -- arithmetic mode                      ; 1861   ;
+;     -- normal mode                          ; 2166   ;
+;     -- arithmetic mode                      ; 1855   ;
 ;                                             ;        ;
-; Total registers                             ; 1772   ;
-;     -- Dedicated logic registers            ; 1772   ;
+; Total registers                             ; 1763   ;
+;     -- Dedicated logic registers            ; 1763   ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
 ; I/O pins                                    ; 426    ;
@@ -418,9 +418,9 @@ applicable agreement for further details.
 ;     -- PLLs                                 ; 1      ;
 ;                                             ;        ;
 ; Maximum fan-out node                        ; OSC_27 ;
-; Maximum fan-out                             ; 1134   ;
-; Total fan-out                               ; 20034  ;
-; Average fan-out                             ; 3.13   ;
+; Maximum fan-out                             ; 1125   ;
+; Total fan-out                               ; 19971  ;
+; Average fan-out                             ; 3.14   ;
 +---------------------------------------------+--------+
 
 
@@ -429,7 +429,7 @@ applicable agreement for further details.
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                       ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                               ; Library Name ;
 +--------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |DE2_TV                                          ; 4036 (2659)       ; 1772 (215)   ; 80728       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
+; |DE2_TV                                          ; 4021 (2640)       ; 1763 (206)   ; 80728       ; 18           ; 0       ; 9         ; 426  ; 0            ; |DE2_TV                                                                                                                                                           ;              ;
 ;    |AUDIO_DAC_ADC:u12|                           ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|AUDIO_DAC_ADC:u12                                                                                                                                         ;              ;
 ;    |DIV:u5|                                      ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5                                                                                                                                                    ;              ;
 ;       |lpm_divide:lpm_divide_component|          ; 60 (0)            ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|DIV:u5|lpm_divide:lpm_divide_component                                                                                                                    ;              ;
@@ -456,7 +456,7 @@ applicable agreement for further details.
 ;             |cntr_hpf:cntr1|                     ; 15 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1                                                        ;              ;
 ;                |cmpr_ldc:cmpr5|                  ; 3 (3)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Line_Buffer:u11|altshift_taps:altshift_taps_component|shift_taps_k0r:auto_generated|cntr_hpf:cntr1|cmpr_ldc:cmpr5                                         ;              ;
 ;    |Reset_Delay:u3|                              ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Reset_Delay:u3                                                                                                                                            ;              ;
-;    |Sdram_Control_4Port:u6|                      ; 589 (197)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
+;    |Sdram_Control_4Port:u6|                      ; 590 (198)         ; 569 (125)    ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6                                                                                                                                    ;              ;
 ;       |Sdram_PLL:sdram_pll1|                     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1                                                                                                               ;              ;
 ;          |altpll:altpll_component|               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_PLL:sdram_pll1|altpll:altpll_component                                                                                       ;              ;
 ;       |Sdram_RD_FIFO:read_fifo1|                 ; 80 (0)            ; 108 (0)      ; 8192        ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|Sdram_RD_FIFO:read_fifo1                                                                                                           ;              ;
@@ -523,7 +523,7 @@ applicable agreement for further details.
 ;       |command:command1|                         ; 61 (61)           ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|command:command1                                                                                                                   ;              ;
 ;       |control_interface:control1|               ; 66 (66)           ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1                                                                                                         ;              ;
 ;    |TD_Detect:u2|                                ; 12 (12)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|TD_Detect:u2                                                                                                                                              ;              ;
-;    |VGA_Ctrl:u9|                                 ; 86 (86)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|VGA_Ctrl:u9                                                                                                                                               ;              ;
+;    |VGA_Ctrl:u9|                                 ; 89 (89)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DE2_TV|VGA_Ctrl:u9                                                                                                                                               ;              ;
 ;    |YCbCr2RGB:u8|                                ; 281 (119)         ; 170 (90)     ; 0           ; 18           ; 0       ; 9         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8                                                                                                                                              ;              ;
 ;       |MAC_3:u0|                                 ; 54 (0)            ; 27 (0)       ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u0                                                                                                                                     ;              ;
 ;          |altmult_add:ALTMULT_ADD_component|     ; 54 (0)            ; 27 (0)       ; 0           ; 6            ; 0       ; 3         ; 0    ; 0            ; |DE2_TV|YCbCr2RGB:u8|MAC_3:u0|altmult_add:ALTMULT_ADD_component                                                                                                   ;              ;
@@ -803,12 +803,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 1772  ;
+; Total registers                              ; 1763  ;
 ; Number of registers using Synchronous Clear  ; 226   ;
-; Number of registers using Synchronous Load   ; 93    ;
+; Number of registers using Synchronous Load   ; 84    ;
 ; Number of registers using Asynchronous Clear ; 716   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 966   ;
+; Number of registers using Clock Enable       ; 957   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -894,36 +894,36 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------+--------------------------------+------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                    ;
-+--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                          ; Example Multiplexer Output ;
-+--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; |DE2_TV|short_jump_count[8]                                         ;                            ;
-; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; |DE2_TV|bar_y[2]                                                    ;                            ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; |DE2_TV|brick_edge_found_sum[0]                                     ;                            ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; |DE2_TV|block_wall_found_sum[9]                                     ;                            ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; |DE2_TV|jump_count[1]                                               ;                            ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[8]               ;                            ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[14] ;                            ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[3]    ;                            ;
-; 3:1                ; 22 bits   ; 44 LEs        ; 0 LEs                ; 44 LEs                 ; |DE2_TV|lowest_goomba_y[2]                                          ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[0]                                      ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[8]                                        ;                            ;
-; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[2]                                       ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[15]                            ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[16]                        ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[11]                        ;                            ;
-; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[8]                         ;                            ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_shift[2]         ;                            ;
-; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[4]                                 ;                            ;
-; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mRD                                  ;                            ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|CMD[0]                               ;                            ;
-; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[7]                                ;                            ;
-; 10:1               ; 10 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; |DE2_TV|mVGA_G[7]                                                   ;                            ;
-; 10:1               ; 10 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; |DE2_TV|mVGA_R[7]                                                   ;                            ;
-; 10:1               ; 10 bits   ; 60 LEs        ; 40 LEs               ; 20 LEs                 ; |DE2_TV|mVGA_B[1]                                                   ;                            ;
-+--------------------+-----------+---------------+----------------------+------------------------+---------------------------------------------------------------------+----------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                   ;
++--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered                                                         ; Example Multiplexer Output ;
++--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; |DE2_TV|short_jump_count[0]                                        ;                            ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; |DE2_TV|brick_edge_found_sum[15]                                   ;                            ;
+; 3:1                ; 11 bits   ; 22 LEs        ; 11 LEs               ; 11 LEs                 ; |DE2_TV|bar_y[3]                                                   ;                            ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; |DE2_TV|block_wall_found_sum[17]                                   ;                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; |DE2_TV|jump_count[7]                                              ;                            ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|SA[0]              ;                            ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|control_interface:control1|timer[5] ;                            ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 16 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|command_delay[0]   ;                            ;
+; 3:1                ; 22 bits   ; 44 LEs        ; 0 LEs                ; 44 LEs                 ; |DE2_TV|lowest_brick_y[7]                                          ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oGreen[4]                                     ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oRed[8]                                       ;                            ;
+; 4:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; |DE2_TV|YCbCr2RGB:u8|oBlue[1]                                      ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|mADDR[8]                            ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rWR1_ADDR[16]                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD2_ADDR[15]                       ;                            ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|rRD1_ADDR[16]                       ;                            ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|command:command1|rp_done            ;                            ;
+; 4:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; |DE2_TV|ITU_656_Decoder:u4|YCbCr[1]                                ;                            ;
+; 6:1                ; 3 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|RD_MASK[1]                          ;                            ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; |DE2_TV|Sdram_Control_4Port:u6|CMD[1]                              ;                            ;
+; 7:1                ; 10 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; |DE2_TV|Sdram_Control_4Port:u6|ST[8]                               ;                            ;
+; 10:1               ; 10 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; |DE2_TV|mVGA_G[4]                                                  ;                            ;
+; 10:1               ; 10 bits   ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; |DE2_TV|mVGA_R[9]                                                  ;                            ;
+; 10:1               ; 10 bits   ; 60 LEs        ; 40 LEs               ; 20 LEs                 ; |DE2_TV|mVGA_B[5]                                                  ;                            ;
++--------------------+-----------+---------------+----------------------+------------------------+--------------------------------------------------------------------+----------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1687,10 +1687,10 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-------+-------------------------------------------+
 ; PIPE_X_MAX_RANGE   ; 400   ; Signed Integer                            ;
 ; PIPE_X_MIN_RANGE   ; 300   ; Signed Integer                            ;
-; GOOMBA_X_MAX_RANGE ; 400   ; Signed Integer                            ;
+; GOOMBA_X_MAX_RANGE ; 380   ; Signed Integer                            ;
 ; GOOMBA_X_MIN_RANGE ; 320   ; Signed Integer                            ;
 ; BRICK_X_MAX_RANGE  ; 450   ; Signed Integer                            ;
-; BRICK_X_MIN_RANGE  ; 305   ; Signed Integer                            ;
+; BRICK_X_MIN_RANGE  ; 320   ; Signed Integer                            ;
 +--------------------+-------+-------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -3000,14 +3000,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; H_ACT          ; 640   ; Signed Integer                  ;
 ; H_BLANK        ; 160   ; Signed Integer                  ;
 ; H_TOTAL        ; 800   ; Signed Integer                  ;
-; H_DLY          ; 2     ; Signed Integer                  ;
+; H_DLY          ; 3     ; Signed Integer                  ;
 ; V_FRONT        ; 11    ; Signed Integer                  ;
 ; V_SYNC         ; 2     ; Signed Integer                  ;
 ; V_BACK         ; 31    ; Signed Integer                  ;
 ; V_ACT          ; 480   ; Signed Integer                  ;
 ; V_BLANK        ; 44    ; Signed Integer                  ;
 ; V_TOTAL        ; 524   ; Signed Integer                  ;
-; V_DLY          ; 2     ; Signed Integer                  ;
+; V_DLY          ; 3     ; Signed Integer                  ;
 +----------------+-------+---------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -3528,7 +3528,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:46     ;
+; Top            ; 00:00:45     ;
 +----------------+--------------+
 
 
@@ -3538,7 +3538,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 11.0 Build 157 04/27/2011 SJ Full Version
-    Info: Processing started: Mon May 06 23:15:08 2013
+    Info: Processing started: Tue May 07 01:06:00 2013
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DE2_TV -c DE2_TV
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info: Found 1 design units, including 1 entities, in source file buffer11.v
@@ -3624,7 +3624,7 @@ Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(883): object "DISP_A_TH
 Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(909): object "pipe_corner_x" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(910): object "pipe_corner_y" assigned a value but never read
 Warning (10036): Verilog HDL or VHDL warning at DE2_TV.v(1006): object "brick_to_bar" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at DE2_TV.v(199): truncated value with size 11 to match size of target (9)
+Warning (10230): Verilog HDL assignment warning at DE2_TV.v(199): truncated value with size 18 to match size of target (9)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(244): truncated value with size 32 to match size of target (10)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(255): truncated value with size 32 to match size of target (10)
 Warning (10230): Verilog HDL assignment warning at DE2_TV.v(329): truncated value with size 32 to match size of target (27)
@@ -4458,18 +4458,18 @@ Warning: Design contains 21 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PS2_CLK"
     Warning (15610): No output dependent on input pin "ENET_INT"
     Warning (15610): No output dependent on input pin "AUD_ADCDAT"
-Info: Implemented 5529 device resources after synthesis - the final resource count might be different
+Info: Implemented 5514 device resources after synthesis - the final resource count might be different
     Info: Implemented 49 input pins
     Info: Implemented 218 output pins
     Info: Implemented 159 bidirectional pins
-    Info: Implemented 4944 logic cells
+    Info: Implemented 4929 logic cells
     Info: Implemented 140 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 18 DSP elements
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 444 warnings
     Info: Peak virtual memory: 565 megabytes
-    Info: Processing ended: Mon May 06 23:15:52 2013
+    Info: Processing ended: Tue May 07 01:06:44 2013
     Info: Elapsed time: 00:00:44
-    Info: Total CPU time (on all processors): 00:00:43
+    Info: Total CPU time (on all processors): 00:00:42
 
 
