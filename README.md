@@ -1,44 +1,6 @@
 fpganes
 =======
 
-Click RAW to view this properly!
+An FPGA-based hardware AI for Super Mario Bros. See <a href="http://nintendoninja.com">nintendoninja.com</a> for more details.
 
-Controller mapping:
-
-_________
-| 5 6 7  \
-| 4 3 2 1 |
-|_________|
-
-1 -- Brown
-2 -- Orange
-3 -- Black
-4 -- Red
-5 -- Green
-6 -- Blue
-7 -- Yellow
-
-Breakout board mapping:
-
-From left to right
-1 (Yellow) +5V
-2 (Blue) NC
-3 (Green) NC
-4 (Black) LATCH
-5 (Orange) CLK
-6 (Red) DATA
-7 (Brown) GND
-
-Schematic: http://seb.riot.org/nescontr/ for the time being
-
-
-Confirmed GPIO pinout
-34
-32
-30
-28
-26
-VCC
-24
-22
-20
+The main system file is DE2_TV.v in the cam_2_vga folder. The MATLAB scripts are used for generating circular buffers of arbitrary size, and updating the references in the main system file accordingly. The Excel sprite generator is used to generate the Verilog for an arbitrary kernel.
